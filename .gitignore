@@ -1,0 +1,7 @@
+obj/
+bin/
+bw-outputs/
+sonar-build/
+.scannerwork/
+sonar-project.properties
+cmake-build-debug/*
