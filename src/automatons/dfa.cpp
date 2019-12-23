@@ -1,11 +1,8 @@
 #include <iostream>
 #include "dfa.hpp"
-#include "helpers.hpp"
+#include "../helpers/helpers.hpp"
 
-namespace dfa {
-
-    DFA::DFA() : alphabet(), states(), finals(), transitions(), start(0) {
-    }
+namespace automatons {
 
     void DFA::setAlphabet(const Alphabet &outAlphabet) {
         alphabet.clear();
@@ -29,7 +26,7 @@ namespace dfa {
         }
     }
 
-    void DFA::setTransitions(const TransitionMap &transitionMap) {
+    void DFA::setTransitions(const DFATransitionMap &transitionMap) {
         transitions.clear();
 
         for (const auto &entry : transitionMap) {
@@ -62,7 +59,7 @@ namespace dfa {
         return finals;
     }
 
-    const TransitionMap &DFA::getTransitions() const {
+    const DFATransitionMap &DFA::getTransitions() const {
         return transitions;
     }
 
@@ -94,15 +91,15 @@ namespace dfa {
                std::to_string(start) + '}';
     }
 
-    int DFA::doTransition(StateEventPair &currentPair) const {
+    int DFA::doTransition(const StateEventPair &currentPair) const {
         return transitions.at(currentPair);
     }
 
-    bool DFA::isAcceptingState(int &state) const {
+    bool DFA::isAcceptingState(const int &state) const {
         return finals.find(state) != finals.end();
     }
 
-    void DFA::printStartState(int &startState, bool isVerbose) const {
+    void DFA::printStartState(const int &startState, bool isVerbose) const {
         if (!isVerbose) {
             return;
         }
@@ -110,13 +107,13 @@ namespace dfa {
         std::cout << std::to_string(startState) << std::endl;
     }
 
-    void DFA::printSimulationStep(StateEventPair &currentPair, int &nextState, bool isVerbose) const {
+    void DFA::printSimulationStep(const StateEventPair &currentPair, const int &nextState, bool isVerbose) const {
         if (!isVerbose) {
             return;
         }
 
-        auto &state = std::get<0>(currentPair);
-        auto &event = std::get<1>(currentPair);
+        const auto &state = std::get<0>(currentPair);
+        const auto &event = std::get<1>(currentPair);
         std::string output = '[' + std::to_string(state) + ',' + event + "] -> " + std::to_string(nextState);
         std::cout << output << std::endl;
     }

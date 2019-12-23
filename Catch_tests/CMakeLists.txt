@@ -1,5 +1,5 @@
 add_executable(Catch_tests_run
-        dfa_test.cpp ../src/dfa.cpp
-        ../src/helpers.cpp
+        automatons/dfa_test.cpp ../src/automatons/dfa.cpp
+        ../src/helpers/helpers.cpp
         )
 target_link_libraries(Catch_tests_run)

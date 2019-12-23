@@ -1,19 +1,19 @@
 #define CATCH_CONFIG_MAIN
 
-#include "catch.hpp"
-#include "../src/dfa.hpp"
+#include "../catch.hpp"
+#include "../../src/automatons/dfa.hpp"
 
-using dfa::DFA;
-using dfa::Alphabet;
-using dfa::States;
-using dfa::TransitionMap;
+using automatons::DFA;
+using automatons::Alphabet;
+using automatons::States;
+using automatons::DFATransitionMap;
 
 TEST_CASE("dfa.hpp", "[dfa]") {
     SECTION("DFA.setters -> OK") {
         Alphabet alphabet = {'a', 'b', 'c'};
         States states = {0, 1, 2};
         States finals = {2};
-        TransitionMap transitionMap = {
+        DFATransitionMap transitionMap = {
                 {{0, 'a'}, 2},
                 {{0, 'b'}, 1},
                 {{0, 'c'}, 0},
@@ -44,7 +44,7 @@ TEST_CASE("dfa.hpp", "[dfa]") {
         Alphabet alphabet = {'a', 'b', 'c'};
         States states = {0, 1, 2};
         States finals = {2};
-        TransitionMap transitionMap = {
+        DFATransitionMap transitionMap = {
                 {{0, 'a'}, 2},
                 {{0, 'b'}, 1},
                 {{0, 'c'}, 0},
