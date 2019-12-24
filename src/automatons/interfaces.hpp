@@ -14,15 +14,11 @@ namespace automatons {
 
         virtual void setFinals(const States &outFinals) = 0;
 
-        virtual void setStart(int start) = 0;
-
         virtual const Alphabet &getAlphabet() const = 0;
 
         virtual const States &getStates() const = 0;
 
         virtual const States &getFinals() const = 0;
-
-        virtual int getStart() const = 0;
 
         virtual bool simulate(const std::string &input, bool isVerbose) = 0;
 
@@ -33,11 +29,28 @@ namespace automatons {
 
     class IDFA : public IAutomata {
     public:
+        virtual void setStart(int start) = 0;
+
+        virtual int getStart() const = 0;
+
         virtual void setTransitions(const DFATransitionMap &transitionMap) = 0;
 
         virtual const DFATransitionMap &getTransitions() const = 0;
 
         ~IDFA() override = default;
+    };
+
+    class INFA : public IAutomata {
+    public:
+        virtual void setStart(const States &start) = 0;
+
+        virtual const States &getStart() const = 0;
+
+        virtual void setTransitions(const NFATransitionMap &transitionMap) = 0;
+
+        virtual const NFATransitionMap &getTransitions() const = 0;
+
+        ~INFA() override = default;
     };
 
 }

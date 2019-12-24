@@ -57,7 +57,7 @@ TEST_CASE("dfa.hpp", "[dfa]") {
         };
         int start = 0;
         std::string input = "bccaaccbaaabb";
-        std::string expectedToString = "{[[a,b,c],[0,1,2],[2],<9>,0}";
+        std::string expectedToString = "{[a,b,c],[0,1,2],[2],<9>,0}";
         DFA dfa;
         dfa.setAlphabet(alphabet);
         dfa.setStates(states);

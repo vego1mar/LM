@@ -86,9 +86,7 @@ namespace automatons {
     }
 
     std::string DFA::toString() const {
-        return "{[" + helpers::toString(alphabet) + ',' + helpers::toString(states) + ',' +
-               helpers::toString(finals) + ",<" + std::to_string(transitions.size()) + ">," +
-               std::to_string(start) + '}';
+        return helpers::toString(*this);
     }
 
     int DFA::doTransition(const StateEventPair &currentPair) const {

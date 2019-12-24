@@ -6,6 +6,7 @@
 
 namespace automatons {
 
+    /// Deterministic Finite Automata
     class DFA : public IDFA {
 
     private:

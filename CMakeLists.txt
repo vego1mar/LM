@@ -8,5 +8,5 @@ add_executable(LM
         src/automatons/dfa.hpp src/automatons/dfa.cpp
         src/helpers/helpers.cpp src/automatons/definitions.hpp
         src/helpers/helpers.hpp
-        src/automatons/interfaces.hpp)
+        src/automatons/interfaces.hpp src/automatons/nfa.hpp src/automatons/nfa.cpp)
 add_subdirectory(Catch_tests)
