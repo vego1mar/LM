@@ -1,7 +1,7 @@
 #include <vector>
 #include <algorithm>
-#include <iostream>
 #include "nfa.hpp"
+#include "printers.hpp"
 #include "../helpers/helpers.hpp"
 
 namespace automatons {
@@ -78,10 +78,11 @@ namespace automatons {
         std::vector<bool> results;
         std::size_t slice;
         bool wasTransitionDefined = true;
-        std::size_t parallelBranch = recursionLevel;
+        NFAPrinter stdOut;
+        stdOut.setVerbosity(isVerbose);
 
         if (recursionLevel > 0) {
-            printNewLine(isVerbose);
+            stdOut.printNewLine();
         }
 
         for (const auto &startState : startingStates) {
@@ -93,26 +94,25 @@ namespace automatons {
                 wasTransitionDefined = true;
                 StateEventPair pair = std::make_pair(nextState, event);
                 nextStates = doTransition(pair);
-                printTransition(pair, nextStates, recursionLevel, isVerbose);
+                stdOut.printTransition(pair, nextStates, recursionLevel);
 
                 if (nextStates.empty()) {
                     results.push_back(false);
                     wasTransitionDefined = false;
-                    printDerivationResult(false, wasTransitionDefined, recursionLevel, isVerbose);
+                    stdOut.printDerivationResult(false, wasTransitionDefined, recursionLevel);
                     break;
                 }
 
                 if (nextStates.size() > 1) {
                     auto newInput = slicedInput.substr(slice, slicedInput.size());
-                    parallelBranch++;
-                    bool branchResult = simulate(newInput, isVerbose, parallelBranch, nextStates);
+                    bool branchResult = simulate(newInput, isVerbose, recursionLevel + 1, nextStates);
                     results.push_back(branchResult);
                     break;
                 }
 
                 auto it = nextStates.begin();
                 nextState = *it;
-                printNewLine(isVerbose);
+                stdOut.printNewLine();
             }
 
             if (isAcceptingState(nextState) && wasTransitionDefined) {
@@ -123,49 +123,10 @@ namespace automatons {
         bool isAnyStateAccepting = std::find(results.begin(), results.end(), true) != results.end();
 
         if (recursionLevel == 0) {
-            printDerivationResult(isAnyStateAccepting, wasTransitionDefined, recursionLevel, isVerbose);
+            stdOut.printDerivationResult(isAnyStateAccepting, wasTransitionDefined, recursionLevel);
         }
 
         return isAnyStateAccepting;
-    }
-
-    void NFA::printTransition(const StateEventPair &previous, const States &next, int level, bool verbose) const {
-        if (!verbose) {
-            return;
-        }
-
-        std::string strToPrint = '[' + std::to_string(level) + ']' +
-                                 " (" + std::to_string(previous.first) + ',' + previous.second + ')' +
-                                 " -> " + helpers::toString(next);
-        std::cout << strToPrint;
-    }
-
-    void NFA::printDerivationResult(bool isAcceptingState, bool wasTransitionDefined, int level, bool verbose) const {
-        if (!verbose) {
-            return;
-        }
-
-        if (!wasTransitionDefined) {
-            std::cout << " => STOP" << std::endl;
-            return;
-        }
-
-        std::string boolStr = (isAcceptingState) ? "ACCEPTED" : "REJECTED";
-
-        if (level == 0) {
-            std::cout << boolStr << std::endl;
-            return;
-        }
-
-        std::cout << " => " << boolStr << std::endl;
-    }
-
-    void NFA::printNewLine(bool verbose) const {
-        if (!verbose) {
-            return;
-        }
-
-        std::cout << std::endl;
     }
 
 }

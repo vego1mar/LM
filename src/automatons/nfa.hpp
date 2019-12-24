@@ -62,12 +62,6 @@ namespace automatons {
 
         bool simulate(const std::string &slicedInput, bool isVerbose, int recursionLevel, const States &starts) const;
 
-        void printTransition(const StateEventPair &previous, const States &next, int level, bool verbose) const;
-
-        void printDerivationResult(bool isAcceptingState, bool wasTransitionDefined, int level, bool verbose) const;
-
-        void printNewLine(bool verbose) const;
-
     };
 
 }
