@@ -69,7 +69,7 @@ namespace automatons {
 
         void handleNoNextStates(SimulationVariables &args, const NFAPrinter &stdOut) const;
 
-        void handleSingleNextState(SimulationVariables &args, const NFAPrinter &stdOut, int &nextState) const;
+        void handleSingleNextState(const SimulationVariables &args, const NFAPrinter &stdOut, int &nextState) const;
 
         void handleTransition(SimulationVariables &args, const NFAPrinter &stdOut, int level, const StateEventPair &pair) const;
 

@@ -58,12 +58,6 @@ namespace automatons {
 
         bool isAcceptingState(const int &state) const;
 
-        void printStartState(const int &startState, bool isVerbose) const;
-
-        void printSimulationStep(const StateEventPair &currentPair, const int &nextState, bool isVerbose) const;
-
-        void printSimulationResult(bool isAcceptingState, bool isVerbose) const;
-
     };
 
 }

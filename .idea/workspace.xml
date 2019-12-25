@@ -14,8 +14,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f866098f-8b34-4e58-9f59-2f8ec8e71fb5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Catch_tests/automatons/nfa_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/automatons/nfa_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automatons/definitions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/definitions.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sonar-build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/sonar-build.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automatons/dfa.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/dfa.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automatons/dfa.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/dfa.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/automatons/nfa.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/nfa.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/automatons/nfa.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/nfa.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/automatons/printers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/printers.cpp" afterDir="false" />
@@ -73,7 +74,7 @@
       <recent name="$PROJECT_DIR$/src/automatons" />
     </key>
   </component>
-  <component name="RunManager" selected="Catch.nfa_test.hpp">
+  <component name="RunManager" selected="Catch.dfa.hpp">
     <configuration name="All in dfa_test.cpp (1)" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run" TEST_PATTERN="[#dfa_test]" TEST_MODE="PATTERN">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -127,8 +128,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Catch.nfa_test.hpp" />
         <item itemvalue="Catch.dfa.hpp" />
+        <item itemvalue="Catch.nfa_test.hpp" />
         <item itemvalue="Catch.All in dfa_test.cpp (1)" />
         <item itemvalue="Catch.All in dfa_test.cpp" />
         <item itemvalue="Python tests.Unittests in Catch_tests" />
@@ -162,7 +163,7 @@
       <workItem from="1576998090738" duration="3151000" />
       <workItem from="1577125036702" duration="28726000" />
       <workItem from="1577216965265" duration="16000" />
-      <workItem from="1577264692202" duration="12238000" />
+      <workItem from="1577264692202" duration="14656000" />
     </task>
     <servers />
   </component>
@@ -207,26 +208,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="318" y="161" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1577001277160" />
-    <state width="1872" height="208" key="GridCell.Tab.0.bottom" timestamp="1577276955069">
+    <state width="1872" height="208" key="GridCell.Tab.0.bottom" timestamp="1577281217768">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577001335892" />
-    <state width="1872" height="208" key="GridCell.Tab.0.bottom/0.0.1920.896@0.0.1920.896" timestamp="1577276955069" />
-    <state width="1872" height="208" key="GridCell.Tab.0.center" timestamp="1577276955067">
+    <state width="1872" height="208" key="GridCell.Tab.0.bottom/0.0.1920.896@0.0.1920.896" timestamp="1577281217768" />
+    <state width="1872" height="208" key="GridCell.Tab.0.center" timestamp="1577281217765">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
-    <state width="1872" height="208" key="GridCell.Tab.0.center/0.0.1920.896@0.0.1920.896" timestamp="1577276955067" />
-    <state width="1872" height="208" key="GridCell.Tab.0.left" timestamp="1577276955067">
+    <state width="1872" height="208" key="GridCell.Tab.0.center/0.0.1920.896@0.0.1920.896" timestamp="1577281217765" />
+    <state width="1872" height="208" key="GridCell.Tab.0.left" timestamp="1577281217762">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
-    <state width="1872" height="208" key="GridCell.Tab.0.left/0.0.1920.896@0.0.1920.896" timestamp="1577276955067" />
-    <state width="1872" height="208" key="GridCell.Tab.0.right" timestamp="1577276955068">
+    <state width="1872" height="208" key="GridCell.Tab.0.left/0.0.1920.896@0.0.1920.896" timestamp="1577281217762" />
+    <state width="1872" height="208" key="GridCell.Tab.0.right" timestamp="1577281217767">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
-    <state width="1872" height="208" key="GridCell.Tab.0.right/0.0.1920.896@0.0.1920.896" timestamp="1577276955068" />
+    <state width="1872" height="208" key="GridCell.Tab.0.right/0.0.1920.896@0.0.1920.896" timestamp="1577281217767" />
     <state width="1872" height="274" key="GridCell.Tab.1.bottom" timestamp="1577268464609">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
@@ -248,10 +249,10 @@
     </state>
     <state x="279" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1577001299861" />
     <state x="349" y="63" key="SettingsEditor/0.0.1920.896@0.0.1920.896" timestamp="1577125367115" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1577272514394">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1577280664987">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.896@0.0.1920.896" timestamp="1577272514394" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.896@0.0.1920.896" timestamp="1577280664987" />
     <state x="596" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1577264696198">
       <screen x="0" y="0" width="1920" height="896" />
     </state>

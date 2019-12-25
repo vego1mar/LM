@@ -6,7 +6,7 @@
 namespace automatons {
 
     class IAutomataPrinter {
-    protected:
+    private:
         bool verbosity = true;
 
     public:
@@ -23,6 +23,9 @@ namespace automatons {
         virtual ~IAutomataPrinter() = default;
 
         void setVerbosity(bool verbose);
+
+    protected:
+        bool getVerbosity() const;
 
     };
 
@@ -45,6 +48,26 @@ namespace automatons {
         void printDerivationResult(bool isAcceptingState, bool wasTransitionDefined) const;
 
         void printNewLine() const;
+
+    };
+
+    class DFAPrinter : public IAutomataPrinter {
+    public:
+        DFAPrinter() = default;
+
+        DFAPrinter(const DFAPrinter &rhs) = delete;
+
+        DFAPrinter(DFAPrinter &&rvalue) = delete;
+
+        DFAPrinter &operator=(const DFAPrinter &rhs) = delete;
+
+        DFAPrinter &operator=(DFAPrinter &&rvalue) = delete;
+
+        ~DFAPrinter() override = default;
+
+        void printTransition(const StateEventPair &currentPair, const int &nextState) const;
+
+        void printDerivationResult(bool isAcceptingState) const;
 
     };
 

@@ -16,6 +16,8 @@ g++ -Wall -fexceptions -std=c++14 -g  -c src/helpers/helpers.cpp -o sonar-build/
 echo "./sonar-build/automatons"
 mkdir sonar-build/automatons
 g++ -Wall -fexceptions -std=c++14 -g  -c src/automatons/dfa.cpp -o sonar-build/automatons/dfa.o
+g++ -Wall -fexceptions -std=c++14 -g  -c src/automatons/nfa.cpp -o sonar-build/automatons/nfa.o
+g++ -Wall -fexceptions -std=c++14 -g  -c src/automatons/printers.cpp -o sonar-build/automatons/printers.o
 RC=$?
 
 if [ $RC -ne 0 ]; then

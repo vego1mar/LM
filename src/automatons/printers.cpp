@@ -8,8 +8,12 @@ namespace automatons {
         verbosity = verbose;
     }
 
+    bool IAutomataPrinter::getVerbosity() const {
+        return verbosity;
+    }
+
     void NFAPrinter::printTransition(const StateEventPair &previous, const States &next, int level) const {
-        if (!verbosity) {
+        if (!getVerbosity()) {
             return;
         }
 
@@ -20,7 +24,7 @@ namespace automatons {
     }
 
     void NFAPrinter::printDerivationResult(bool isAcceptingState, bool wasTransitionDefined) const {
-        if (!verbosity) {
+        if (!getVerbosity()) {
             return;
         }
 
@@ -34,11 +38,31 @@ namespace automatons {
     }
 
     void NFAPrinter::printNewLine() const {
-        if (!verbosity) {
+        if (!getVerbosity()) {
             return;
         }
 
         std::cout << std::endl;
+    }
+
+    void DFAPrinter::printTransition(const StateEventPair &currentPair, const int &nextState) const {
+        if (!getVerbosity()) {
+            return;
+        }
+
+        const auto &state = std::get<0>(currentPair);
+        const auto &event = std::get<1>(currentPair);
+        std::string output = '[' + std::to_string(state) + ',' + event + "] -> " + std::to_string(nextState);
+        std::cout << output << std::endl;
+    }
+
+    void DFAPrinter::printDerivationResult(bool isAcceptingState) const {
+        if (!getVerbosity()) {
+            return;
+        }
+
+        std::string output = (isAcceptingState) ? "ACCEPTED" : "REJECTED";
+        std::cout << output << std::endl;
     }
 
 }

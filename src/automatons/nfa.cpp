@@ -93,14 +93,19 @@ namespace automatons {
                 args.slicedInput = slicedInput;
                 StateEventPair decisionPair = std::make_pair(nextState, event);
                 handleTransition(args, stdOut, recursionLevel, decisionPair);
+                bool isNextInputValid = true;
 
                 if (args.nextStates.empty()) {
                     handleNoNextStates(args, stdOut);
-                    break;
+                    isNextInputValid = false;
                 }
 
                 if (args.nextStates.size() > 1) {
                     handleMultipleNextStates(args, stdOut, recursionLevel);
+                    isNextInputValid = false;
+                }
+
+                if (!isNextInputValid) {
                     break;
                 }
 
@@ -148,7 +153,7 @@ namespace automatons {
         stdOut.printDerivationResult(false, args.wasTransitionDefined);
     }
 
-    void NFA::handleSingleNextState(SimulationVariables &args, const NFAPrinter &stdOut, int &nextState) const {
+    void NFA::handleSingleNextState(const SimulationVariables &args, const NFAPrinter &stdOut, int &nextState) const {
         auto it = args.nextStates.begin();
         nextState = *it;
 

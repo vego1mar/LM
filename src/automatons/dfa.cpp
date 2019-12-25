@@ -1,6 +1,6 @@
-#include <iostream>
 #include "dfa.hpp"
 #include "../helpers/helpers.hpp"
+#include "printers.hpp"
 
 namespace automatons {
 
@@ -71,17 +71,18 @@ namespace automatons {
         int currentState = start;
         int nextState;
         StateEventPair pair;
-        printStartState(currentState, isVerbose);
+        DFAPrinter stdOut;
+        stdOut.setVerbosity(isVerbose);
 
         for (const char &event : input) {
             pair = std::make_pair(currentState, event);
             nextState = doTransition(pair);
             currentState = nextState;
-            printSimulationStep(pair, nextState, isVerbose);
+            stdOut.printTransition(pair, nextState);
         }
 
         bool isAccepted = isAcceptingState(currentState);
-        printSimulationResult(isAccepted, isVerbose);
+        stdOut.printDerivationResult(isAccepted);
         return isAccepted;
     }
 
@@ -95,34 +96,6 @@ namespace automatons {
 
     bool DFA::isAcceptingState(const int &state) const {
         return finals.find(state) != finals.end();
-    }
-
-    void DFA::printStartState(const int &startState, bool isVerbose) const {
-        if (!isVerbose) {
-            return;
-        }
-
-        std::cout << std::to_string(startState) << std::endl;
-    }
-
-    void DFA::printSimulationStep(const StateEventPair &currentPair, const int &nextState, bool isVerbose) const {
-        if (!isVerbose) {
-            return;
-        }
-
-        const auto &state = std::get<0>(currentPair);
-        const auto &event = std::get<1>(currentPair);
-        std::string output = '[' + std::to_string(state) + ',' + event + "] -> " + std::to_string(nextState);
-        std::cout << output << std::endl;
-    }
-
-    void DFA::printSimulationResult(bool isAcceptingState, bool isVerbose) const {
-        if (!isVerbose) {
-            return;
-        }
-
-        std::string output = (isAcceptingState) ? "ACCEPTED" : "REJECTED";
-        std::cout << output << std::endl;
     }
 
 }
