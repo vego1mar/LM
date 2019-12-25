@@ -19,7 +19,7 @@ namespace automatons {
         std::cout << strToPrint;
     }
 
-    void NFAPrinter::printDerivationResult(bool isAcceptingState, bool wasTransitionDefined, int level) const {
+    void NFAPrinter::printDerivationResult(bool isAcceptingState, bool wasTransitionDefined) const {
         if (!verbosity) {
             return;
         }
@@ -30,12 +30,6 @@ namespace automatons {
         }
 
         std::string boolStr = (isAcceptingState) ? "ACCEPTED" : "REJECTED";
-
-        if (level == 0) {
-            std::cout << boolStr << std::endl;
-            return;
-        }
-
         std::cout << " => " << boolStr << std::endl;
     }
 

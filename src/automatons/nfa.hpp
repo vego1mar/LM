@@ -3,6 +3,7 @@
 
 #include "definitions.hpp"
 #include "interfaces.hpp"
+#include "printers.hpp"
 
 namespace automatons {
 
@@ -60,7 +61,17 @@ namespace automatons {
 
         bool isAcceptingState(const int &state) const;
 
-        bool simulate(const std::string &slicedInput, bool isVerbose, int recursionLevel, const States &starts) const;
+        bool simulate(const std::string &slicedInput, const NFAPrinter &stdOut, int recursionLevel, const States &starts) const;
+
+        bool isAnyStateAccepting(const States &nextStates) const;
+
+        void handleMultipleNextStates(SimulationVariables &args, const NFAPrinter &stdOut, int level) const;
+
+        void handleNoNextStates(SimulationVariables &args, const NFAPrinter &stdOut) const;
+
+        void handleSingleNextState(SimulationVariables &args, const NFAPrinter &stdOut, int &nextState) const;
+
+        void handleTransition(SimulationVariables &args, const NFAPrinter &stdOut, int level, const StateEventPair &pair) const;
 
     };
 

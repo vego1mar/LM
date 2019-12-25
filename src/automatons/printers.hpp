@@ -42,7 +42,7 @@ namespace automatons {
 
         void printTransition(const StateEventPair &previous, const States &next, int level) const;
 
-        void printDerivationResult(bool isAcceptingState, bool wasTransitionDefined, int level) const;
+        void printDerivationResult(bool isAcceptingState, bool wasTransitionDefined) const;
 
         void printNewLine() const;
 

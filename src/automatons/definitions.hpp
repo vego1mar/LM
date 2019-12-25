@@ -3,6 +3,7 @@
 
 #include <set>
 #include <map>
+#include <vector>
 
 namespace automatons {
 
@@ -11,6 +12,14 @@ namespace automatons {
     typedef std::pair<int, char> StateEventPair;
     typedef std::map<StateEventPair, int> DFATransitionMap;
     typedef std::map<StateEventPair, States> NFATransitionMap;
+
+    struct SimulationVariables {
+        States nextStates;
+        std::vector<bool> results;
+        std::size_t slice;
+        bool wasTransitionDefined;
+        std::string slicedInput;
+    };
 
 }
 

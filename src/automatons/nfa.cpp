@@ -51,7 +51,11 @@ namespace automatons {
     }
 
     bool NFA::simulate(const std::string &input, bool isVerbose) {
-        return simulate(input, isVerbose, 0, start);
+        NFAPrinter stdOut;
+        stdOut.setVerbosity(isVerbose);
+        bool simulationResult = simulate(input, stdOut, 0, start);
+        stdOut.printDerivationResult(simulationResult, true);
+        return simulationResult;
     }
 
     std::string NFA::toString() const {
@@ -72,14 +76,10 @@ namespace automatons {
         return finals.find(state) != finals.end();
     }
 
-    bool NFA::simulate(const std::string &slicedInput, bool isVerbose, int recursionLevel, const States &starts) const {
+    bool NFA::simulate(const std::string &slicedInput, const NFAPrinter &stdOut, int recursionLevel, const States &starts) const {
         States startingStates = starts;
-        States nextStates;
-        std::vector<bool> results;
-        std::size_t slice;
-        bool wasTransitionDefined = true;
-        NFAPrinter stdOut;
-        stdOut.setVerbosity(isVerbose);
+        SimulationVariables args;
+        args.wasTransitionDefined = true;
 
         if (recursionLevel > 0) {
             stdOut.printNewLine();
@@ -87,46 +87,84 @@ namespace automatons {
 
         for (const auto &startState : startingStates) {
             int nextState = startState;
-            slice = 0;
+            args.slice = 0;
 
             for (const auto &event : slicedInput) {
-                slice++;
-                wasTransitionDefined = true;
-                StateEventPair pair = std::make_pair(nextState, event);
-                nextStates = doTransition(pair);
-                stdOut.printTransition(pair, nextStates, recursionLevel);
+                args.slicedInput = slicedInput;
+                StateEventPair decisionPair = std::make_pair(nextState, event);
+                handleTransition(args, stdOut, recursionLevel, decisionPair);
 
-                if (nextStates.empty()) {
-                    results.push_back(false);
-                    wasTransitionDefined = false;
-                    stdOut.printDerivationResult(false, wasTransitionDefined, recursionLevel);
+                if (args.nextStates.empty()) {
+                    handleNoNextStates(args, stdOut);
                     break;
                 }
 
-                if (nextStates.size() > 1) {
-                    auto newInput = slicedInput.substr(slice, slicedInput.size());
-                    bool branchResult = simulate(newInput, isVerbose, recursionLevel + 1, nextStates);
-                    results.push_back(branchResult);
+                if (args.nextStates.size() > 1) {
+                    handleMultipleNextStates(args, stdOut, recursionLevel);
                     break;
                 }
 
-                auto it = nextStates.begin();
-                nextState = *it;
-                stdOut.printNewLine();
+                handleSingleNextState(args, stdOut, nextState);
             }
 
-            if (isAcceptingState(nextState) && wasTransitionDefined) {
-                results.push_back(true);
+            if (isAcceptingState(nextState) && args.wasTransitionDefined) {
+                args.results.push_back(true);
             }
         }
 
-        bool isAnyStateAccepting = std::find(results.begin(), results.end(), true) != results.end();
-
-        if (recursionLevel == 0) {
-            stdOut.printDerivationResult(isAnyStateAccepting, wasTransitionDefined, recursionLevel);
-        }
-
+        bool isAnyStateAccepting = std::find(args.results.begin(), args.results.end(), true) != args.results.end();
         return isAnyStateAccepting;
+    }
+
+    bool NFA::isAnyStateAccepting(const States &nextStates) const {
+        for (const auto &state : nextStates) {
+            for (const auto &finalState : finals) {
+                if (state == finalState) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    void NFA::handleMultipleNextStates(SimulationVariables &args, const NFAPrinter &stdOut, int level) const {
+        auto newInput = args.slicedInput.substr(args.slice, args.slicedInput.size());
+
+        if (newInput.empty()) {
+            bool isAnyStateInFinals = isAnyStateAccepting(args.nextStates);
+            args.results.push_back(isAnyStateInFinals);
+            stdOut.printDerivationResult(isAnyStateInFinals, args.wasTransitionDefined);
+            return;
+        }
+
+        bool branchResult = simulate(newInput, stdOut, level + 1, args.nextStates);
+        args.results.push_back(branchResult);
+    }
+
+    void NFA::handleNoNextStates(SimulationVariables &args, const NFAPrinter &stdOut) const {
+        args.results.push_back(false);
+        args.wasTransitionDefined = false;
+        stdOut.printDerivationResult(false, args.wasTransitionDefined);
+    }
+
+    void NFA::handleSingleNextState(SimulationVariables &args, const NFAPrinter &stdOut, int &nextState) const {
+        auto it = args.nextStates.begin();
+        nextState = *it;
+
+        if (args.slice == args.slicedInput.size()) {
+            stdOut.printDerivationResult(isAcceptingState(nextState), true);
+            return;
+        }
+
+        stdOut.printNewLine();
+    }
+
+    void NFA::handleTransition(SimulationVariables &args, const NFAPrinter &stdOut, int level, const StateEventPair &pair) const {
+        args.slice++;
+        args.wasTransitionDefined = true;
+        args.nextStates = doTransition(pair);
+        stdOut.printTransition(pair, args.nextStates, level);
     }
 
 }
