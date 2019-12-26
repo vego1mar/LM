@@ -53,6 +53,23 @@ namespace automatons {
         ~INFA() override = default;
     };
 
+    class ITuringMachine : public IAutomata {
+    public:
+        virtual void setStart(int startState) = 0;
+
+        virtual int getStart() const = 0;
+
+        virtual void setTransitions(const TMTransitionMap &transitionMap) = 0;
+
+        virtual const TMTransitionMap &getTransitions() const = 0;
+
+        virtual void setInputTape(const std::string &input) = 0;
+
+        virtual const std::string &getInputTape() const = 0;
+
+        ~ITuringMachine() override = default;
+    };
+
 }
 
 #endif //INTERFACES_HPP

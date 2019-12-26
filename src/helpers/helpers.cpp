@@ -55,4 +55,23 @@ namespace helpers {
         return '{' + alphabetStr + ',' + statesStr + ',' + finalsStr + ",<" + transitionsStr + ">," + startStr + '}';
     }
 
+    std::string toString(const automatons::ITuringMachine &tm) {
+        auto statesStr = toString(tm.getStates());
+        auto tapeAlphabetStr = toString(tm.getAlphabet());
+        auto initialStateStr = std::to_string(tm.getStart());
+        auto finalsStr = toString(tm.getFinals());
+        return '{' + statesStr + ',' + tapeAlphabetStr + ',' + initialStateStr + ',' + finalsStr + '}';
+    }
+
+    std::string toString(const automatons::ShiftDirection &shiftType) {
+        switch (shiftType) {
+            case automatons::ShiftDirection::LEFT:
+                return "LEFT";
+            case automatons::ShiftDirection::RIGHT:
+                return "RIGHT";
+            case automatons::ShiftDirection::NO_SHIFT:
+                return "NO_SHIFT";
+        }
+    }
+
 }

@@ -21,6 +21,15 @@ namespace automatons {
         std::string slicedInput;
     };
 
+    enum class ShiftDirection {
+        LEFT,
+        RIGHT,
+        NO_SHIFT
+    };
+
+    typedef std::tuple<char, ShiftDirection, int> TMActionTuple;
+    typedef std::map<StateEventPair, TMActionTuple> TMTransitionMap;
+
 }
 
 #endif //DEFINITIONS_HPP

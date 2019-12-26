@@ -26,7 +26,6 @@ namespace automatons {
 
     protected:
         bool getVerbosity() const;
-
     };
 
     class NFAPrinter : public IAutomataPrinter {
@@ -48,7 +47,6 @@ namespace automatons {
         void printDerivationResult(bool isAcceptingState, bool wasTransitionDefined) const;
 
         void printNewLine() const;
-
     };
 
     class DFAPrinter : public IAutomataPrinter {
@@ -68,7 +66,23 @@ namespace automatons {
         void printTransition(const StateEventPair &currentPair, const int &nextState) const;
 
         void printDerivationResult(bool isAcceptingState) const;
+    };
 
+    class TMPrinter : public IAutomataPrinter {
+    public:
+        TMPrinter() = default;
+
+        TMPrinter(const TMPrinter &rhs) = delete;
+
+        TMPrinter(TMPrinter &&rvalue) noexcept = delete;
+
+        TMPrinter &operator=(const TMPrinter &rhs) = delete;
+
+        TMPrinter &operator=(TMPrinter &&rvalue) noexcept = delete;
+
+        ~TMPrinter() override = default;
+
+        void printEventActionShift(const StateEventPair &event, const TMActionTuple &action) const;
     };
 
 }

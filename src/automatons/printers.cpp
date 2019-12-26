@@ -65,4 +65,19 @@ namespace automatons {
         std::cout << output << std::endl;
     }
 
+    void TMPrinter::printEventActionShift(const StateEventPair &event, const TMActionTuple &action) const {
+        if (!getVerbosity()) {
+            return;
+        }
+
+        const auto &machineState = std::to_string(std::get<0>(event));
+        const auto &readSymbol = std::get<1>(event);
+        const auto &writeSymbol = std::get<0>(action);
+        const auto &shiftDirection = std::get<1>(action);
+        const auto &nextState = std::to_string(std::get<2>(action));
+        std::string output = '(' + machineState + ',' + readSymbol + ") -> (" +
+                             writeSymbol + ',' + helpers::toString(shiftDirection) + ',' + nextState + ')';
+        std::cout << output << std::endl;
+    }
+
 }

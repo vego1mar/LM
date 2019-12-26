@@ -2,6 +2,7 @@
 #define HELPERS_HPP
 
 #include "../automatons/interfaces.hpp"
+#include "../automatons/definitions.hpp"
 
 namespace helpers {
 
@@ -12,6 +13,10 @@ namespace helpers {
     std::string toString(const automatons::IDFA &dfa);
 
     std::string toString(const automatons::INFA &nfa);
+
+    std::string toString(const automatons::ITuringMachine &tm);
+
+    std::string toString(const automatons::ShiftDirection &shiftType);
 
 }
 
