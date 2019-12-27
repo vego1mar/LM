@@ -125,18 +125,47 @@ namespace automatons {
 
         inputTape = tape;
         bool isCurrentStateInFinals = finals.find(currentState) != finals.end();
+        stdOut.printResults(isCurrentStateInFinals, input, tape);
         return isCurrentStateInFinals;
     }
 
-    std::tuple<bool, std::string> TuringMachine::simulateStep(bool isVerbose) {
-        throw std::exception();
+    std::tuple<bool, std::string> TuringMachine::nextStep() {
+        auto &sd = stepperData;
+
+        if (!hasNextStep()) {
+            throw std::out_of_range("!hasNextStep()");
+        }
+
+        if (sd.wasNotUsed) {
+            sd.workingTape = getInputTape();
+            sd.wasNotUsed = false;
+            sd.previous = getEventActionTuple(sd, getStart());
+            determineIfStepsShouldBeContinued(sd, TMStepperContinuation::PREVIOUS);
+        }
+
+        if (!sd.hasNextStep) {
+            return getNextStepTuple(sd);
+        }
+
+        const auto &previousAction = std::get<1>(sd.previous);
+        writeIntoTape(sd.workingTape, sd.headPosition, previousAction);
+        shiftHeadPosition(sd.headPosition, previousAction);
+        auto nextState = std::get<2>(previousAction);
+        sd.next = getEventActionTuple(sd, nextState);
+        determineIfStepsShouldBeContinued(sd, TMStepperContinuation::NEXT);
+        sd.previous = sd.next;
+        return getNextStepTuple(sd);
+    }
+
+    bool TuringMachine::hasNextStep() const {
+        return stepperData.hasNextStep;
     }
 
     std::string TuringMachine::toString() const {
         return helpers::toString(*this);
     }
 
-    TMActionTuple TuringMachine::getNextTransition(const StateEventPair &event) const {
+    ActionTuple TuringMachine::getNextTransition(const StateEventPair &event) const {
         bool isEventDefined = transitions.find(event) != transitions.end();
 
         if (isEventDefined) {
@@ -146,12 +175,12 @@ namespace automatons {
         return {BLANK_SYMBOL, ShiftDirection::NO_SHIFT, HALT_STATE};
     }
 
-    void TuringMachine::writeIntoTape(std::string &tape, std::size_t position, const TMActionTuple &action) {
+    void TuringMachine::writeIntoTape(std::string &tape, std::size_t position, const ActionTuple &action) {
         auto symbolToOverride = std::get<0>(action);
         tape[position] = symbolToOverride;
     }
 
-    void TuringMachine::shiftHeadPosition(std::size_t &position, const TMActionTuple &action) {
+    void TuringMachine::shiftHeadPosition(std::size_t &position, const ActionTuple &action) {
         auto shiftType = std::get<1>(action);
 
         switch (shiftType) {
@@ -167,12 +196,41 @@ namespace automatons {
         }
     }
 
-    char TuringMachine::getTapeHeadSymbol(const std::string &tape, std::size_t &position) const {
+    char TuringMachine::getTapeHeadSymbol(const std::string &tape, const std::size_t &position) const {
         if (position < 0 || position >= tape.size()) {
             return TuringMachine::BLANK_SYMBOL;
         }
 
         return tape[position];
+    }
+
+    EventActionTuple TuringMachine::getEventActionTuple(const TMStepper &data, const int &machineState) const {
+        StateEventPair event = std::make_pair<>(machineState, getTapeHeadSymbol(data.workingTape, data.headPosition));
+        ActionTuple action = getNextTransition(event);
+        return std::make_tuple<>(event, action);
+    }
+
+    void TuringMachine::determineIfStepsShouldBeContinued(TMStepper &sd, const TMStepperContinuation &which) {
+        auto &currentTuple = sd.previous;
+        auto &currentState = std::get<0>(std::get<0>(currentTuple));
+
+        if (which == TMStepperContinuation::NEXT) {
+            currentTuple = sd.next;
+            currentState = std::get<2>(std::get<1>(currentTuple));
+        }
+
+        bool shouldMachineBeHalted = (currentState == HALT_STATE);
+        bool isHeadOutOfInput = (sd.headPosition < 0 || sd.headPosition >= sd.workingTape.size());
+
+        if (shouldMachineBeHalted || isHeadOutOfInput) {
+            sd.hasNextStep = false;
+        }
+    }
+
+    std::tuple<bool, std::string> TuringMachine::getNextStepTuple(const TMStepper &sd) const {
+        const auto &currentState = std::get<0>(std::get<0>(sd.previous));
+        bool isCurrentStateInFinals = finals.find(currentState) != finals.end();
+        return std::make_tuple<>(isCurrentStateInFinals, sd.workingTape);
     }
 
 }

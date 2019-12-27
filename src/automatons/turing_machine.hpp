@@ -18,6 +18,7 @@ namespace automatons {
         int initialState = 0;
         TMTransitionMap transitions;
         std::string inputTape;
+        TMStepper stepperData;
 
     public:
         TuringMachine() = default;
@@ -58,18 +59,26 @@ namespace automatons {
 
         bool simulate(const std::string &input, bool isVerbose) override;
 
-        std::tuple<bool, std::string> simulateStep(bool isVerbose);
+        std::tuple<bool, std::string> nextStep();
+
+        bool hasNextStep() const;
 
         std::string toString() const override;
 
     private:
-        TMActionTuple getNextTransition(const StateEventPair &event) const;
+        ActionTuple getNextTransition(const StateEventPair &event) const;
 
-        static void writeIntoTape(std::string &tape, std::size_t position, const TMActionTuple &action);
+        static void writeIntoTape(std::string &tape, std::size_t position, const ActionTuple &action);
 
-        static void shiftHeadPosition(std::size_t &position, const TMActionTuple &action);
+        static void shiftHeadPosition(std::size_t &position, const ActionTuple &action);
 
-        char getTapeHeadSymbol(const std::string &tape, std::size_t &position) const;
+        char getTapeHeadSymbol(const std::string &tape, const std::size_t &position) const;
+
+        EventActionTuple getEventActionTuple(const TMStepper &data, const int &machineState) const;
+
+        static void determineIfStepsShouldBeContinued(TMStepper &sd, const TMStepperContinuation &which);
+
+        std::tuple<bool, std::string> getNextStepTuple(const TMStepper &sd) const;
 
     };
 

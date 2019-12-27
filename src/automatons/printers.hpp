@@ -82,7 +82,9 @@ namespace automatons {
 
         ~TMPrinter() override = default;
 
-        void printEventActionShift(const StateEventPair &event, const TMActionTuple &action) const;
+        void printEventActionShift(const StateEventPair &event, const ActionTuple &action) const;
+
+        void printResults(bool isAcceptingState, const std::string &input, const std::string &tape) const;
     };
 
 }

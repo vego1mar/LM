@@ -27,8 +27,23 @@ namespace automatons {
         NO_SHIFT
     };
 
-    typedef std::tuple<char, ShiftDirection, int> TMActionTuple;
-    typedef std::map<StateEventPair, TMActionTuple> TMTransitionMap;
+    typedef std::tuple<char, ShiftDirection, int> ActionTuple;
+    typedef std::map<StateEventPair, ActionTuple> TMTransitionMap;
+    typedef std::tuple<StateEventPair, ActionTuple> EventActionTuple;
+
+    struct TMStepper {
+        std::size_t headPosition = 0;
+        std::string workingTape;
+        EventActionTuple previous;
+        EventActionTuple next;
+        bool hasNextStep = true;
+        bool wasNotUsed = true;
+    };
+
+    enum class TMStepperContinuation {
+        PREVIOUS,
+        NEXT
+    };
 
 }
 

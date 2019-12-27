@@ -65,7 +65,7 @@ namespace automatons {
         std::cout << output << std::endl;
     }
 
-    void TMPrinter::printEventActionShift(const StateEventPair &event, const TMActionTuple &action) const {
+    void TMPrinter::printEventActionShift(const StateEventPair &event, const ActionTuple &action) const {
         if (!getVerbosity()) {
             return;
         }
@@ -78,6 +78,16 @@ namespace automatons {
         std::string output = '(' + machineState + ',' + readSymbol + ") -> (" +
                              writeSymbol + ',' + helpers::toString(shiftDirection) + ',' + nextState + ')';
         std::cout << output << std::endl;
+    }
+
+    void TMPrinter::printResults(bool isAcceptingState, const std::string &input, const std::string &tape) const {
+        if (!getVerbosity()) {
+            return;
+        }
+
+        std::string resultingState = (isAcceptingState) ? "ACCEPTED" : "REJECTED";
+        std::string tapeShift = '\'' + input + "' -> '" + tape + '\'';
+        std::cout << resultingState << std::endl << tapeShift << std::endl;
     }
 
 }
