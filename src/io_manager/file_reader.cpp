@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <functional>
-#include "io_manager.hpp"
+#include "file_reader.hpp"
 
 namespace io_manager {
 
@@ -28,6 +28,7 @@ namespace io_manager {
             return false;
         }
 
+        fileName = std::string(path);
         file = std::ifstream(path, openModes);
 
         if (file.fail()) {
@@ -45,6 +46,7 @@ namespace io_manager {
         }
 
         file.close();
+        fileName = "";
         isTied = false;
         return true;
     }
@@ -67,12 +69,12 @@ namespace io_manager {
         return line;
     }
 
-    bool FileReader::hasNextLine() const {
+    bool FileReader::hasNextLine() {
         if (type != ReadType::LINE_BY_LINE || !isTied) {
             throw std::bad_function_call();
         }
 
-        return file.eof();
+        return !isEndOfFile();
     }
 
     std::vector<char> &FileReader::getContentBuffer() {
@@ -95,6 +97,10 @@ namespace io_manager {
         auto first = (std::istreambuf_iterator<char>(file));
         auto last = (std::istreambuf_iterator<char>());
         contentBuffer = std::vector<char>(first, last);
+    }
+
+    bool FileReader::isEndOfFile() {
+        return file.peek() == std::ifstream::traits_type::eof() && file.eof();
     }
 
 }

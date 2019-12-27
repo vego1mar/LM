@@ -49,11 +49,13 @@ namespace io_manager {
 
         std::string getNextLine();
 
-        bool hasNextLine() const;
+        bool hasNextLine();
 
         std::vector<char> &getContentBuffer();
 
         void readIntoBuffer();
+
+        bool isEndOfFile();
 
     };
 
