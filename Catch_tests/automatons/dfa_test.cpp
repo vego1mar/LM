@@ -71,4 +71,5 @@ TEST_CASE("dfa.hpp", "[dfa]") {
         REQUIRE(toString == expectedToString);
         REQUIRE(hasAcceptedInput);
     }
+
 }
