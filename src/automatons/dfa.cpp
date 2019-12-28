@@ -1,5 +1,5 @@
 #include "dfa.hpp"
-#include "../helpers/helpers.hpp"
+#include "../helpers/to_string.hpp"
 #include "printers.hpp"
 
 namespace automatons {

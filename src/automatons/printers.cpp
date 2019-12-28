@@ -1,6 +1,6 @@
 #include <iostream>
 #include "printers.hpp"
-#include "../helpers/helpers.hpp"
+#include "../helpers/to_string.hpp"
 
 namespace automatons {
 

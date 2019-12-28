@@ -1,8 +1,9 @@
-#ifndef HELPERS_HPP
-#define HELPERS_HPP
+#ifndef TO_STRING_HPP
+#define TO_STRING_HPP
 
 #include "../automatons/interfaces.hpp"
 #include "../automatons/definitions.hpp"
+#include "../io_manager/fsm_reader.hpp"
 
 namespace helpers {
 
@@ -20,4 +21,4 @@ namespace helpers {
 
 }
 
-#endif //HELPERS_HPP
+#endif //TO_STRING_HPP

@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "nfa.hpp"
 #include "printers.hpp"
-#include "../helpers/helpers.hpp"
+#include "../helpers/to_string.hpp"
 
 namespace automatons {
 

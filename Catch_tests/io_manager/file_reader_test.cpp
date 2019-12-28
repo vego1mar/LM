@@ -26,4 +26,18 @@ TEST_CASE("file_reader.hpp", "[file_reader]") {
         REQUIRE(reader.getFileSize() == -1);
         REQUIRE_THROWS_AS(reader.getContentBuffer(), std::bad_function_call);
     }
+
+    SECTION("read WHOLE_FILE -> OK") {
+        FileReader reader;
+        reader.setType(ReadType::WHOLE_FILE);
+        reader.link(DFA_1_PATH);
+        assert(reader.isBind());
+
+        reader.readIntoBuffer();
+
+        REQUIRE(reader.getContentBuffer().size() == DFA_1_SIZE);
+        reader.sever();
+        REQUIRE_THROWS_AS(reader.hasNextLine(), std::bad_function_call);
+    }
+
 }

@@ -1,5 +1,5 @@
-#ifndef IO_MANAGER_HPP
-#define IO_MANAGER_HPP
+#ifndef FILE_READER_HPP
+#define FILE_READER_HPP
 
 #include <string>
 #include <vector>
@@ -61,4 +61,4 @@ namespace io_manager {
 
 }
 
-#endif //IO_MANAGER_HPP
+#endif //FILE_READER_HPP
