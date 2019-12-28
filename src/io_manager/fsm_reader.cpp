@@ -16,19 +16,86 @@ namespace io_manager {
         reader->link(path);
         reader->readIntoBuffer();
 
-        //auto tokens = Strings::split(line);
-        //std::find('alphabet', fileContent) = A; std::find('states', A + fileContent) = B; substr(A, B) => parse()
+        const auto &fileContent = reader->getContentBuffer();
+        auto flattenedContent = std::make_unique<std::string>(Strings::flatten(fileContent));
+        auto alphabetDef = Strings::between(*flattenedContent, "alphabet", "states");
+        auto statesDef = Strings::between(*flattenedContent, "states", "start");
+        auto startDef = Strings::between(*flattenedContent, "start", "finals");
+        auto finalsDef = Strings::between(*flattenedContent, "finals", "transitions");
+        auto transitionsDef = Strings::between(*flattenedContent, "transitions", "%%");
+        flattenedContent.reset();
 
-        // TODO:
-        // read whole file
-        // substring('alphabet','states') -> parseAlphabet(tokens) : Alphabet
-        // substring('states','start') -> parseStates(tokens) : States
-        // substring('start','finals') -> parseStart(tokens) : int
-        // substring('finals','transitions') -> parseFinals(tokens) : States
-        // substring('transitions',file.end()) -> parseTransitions(tokens) : DFATransitionMap
+        parseAlphabetLine(Strings::split(alphabetDef));
+        parseStates(Strings::split(statesDef));
+        parseStart(Strings::split(startDef));
+        parseFinals(Strings::split(finalsDef));
+        parseTransitions(Strings::split(transitionsDef));
 
         reader->sever();
         return *dfa;
+    }
+
+    void FSMReader::parseAlphabetLine(const Tokens &tokens) {
+        Alphabet alphabet;
+
+        for (const auto &token : tokens) {
+            for (const auto &symbol : token) {
+                alphabet.insert(symbol);
+            }
+        }
+
+        dfa->setAlphabet(alphabet);
+    }
+
+    void FSMReader::parseStates(const Tokens &tokens) {
+        States states;
+
+        for (const auto &state : tokens) {
+            int parsedState = std::stoi(state);
+            states.insert(parsedState);
+        }
+
+        dfa->setStates(states);
+    }
+
+    void FSMReader::parseStart(const Tokens &tokens) {
+        if (tokens.empty()) {
+            dfa->setStart(-1);
+            return;
+        }
+
+        int parsedState = std::stoi(tokens[0]);
+        dfa->setStart(parsedState);
+    }
+
+    void FSMReader::parseFinals(const Tokens &tokens) {
+        States finals;
+
+        for (const auto &state : tokens) {
+            int parsedState = std::stoi(state);
+            finals.insert(parsedState);
+        }
+
+        dfa->setFinals(finals);
+    }
+
+    void FSMReader::parseTransitions(const Tokens &tokens) {
+        DFATransitionMap transitionMap;
+        auto it = tokens.begin();
+
+        // parse header
+
+        while (it != tokens.end()) {
+            while (*it != "\n" || it != tokens.end()) {
+                // parse next line
+                // build transition entry of (StateEventPair,int)
+                it++;
+            }
+
+            it++;
+        }
+
+        dfa->setTransitions(transitionMap);
     }
 
 }

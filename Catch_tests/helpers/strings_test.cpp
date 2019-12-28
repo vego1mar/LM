@@ -36,4 +36,17 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE(!result2);
     }
 
+    SECTION("between('<tag>tag_content</tag>', '<tag>', '</tag>') -> 'tag_content'") {
+        std::string caseStr1 = "aaaBB tok1 CDCC ddd";
+        std::string caseStr2 = "<tag>tag_content</tag>";
+        std::string expectedStr1 = "B tok1 CDC";
+        std::string expectedStr2 = "tag_content";
+
+        auto result1 = Strings::between(caseStr1, "B", "C");
+        auto result2 = Strings::between(caseStr2, "<tag>", "</tag>");
+
+        REQUIRE_THAT(result1, Catch::Equals(expectedStr1));
+        REQUIRE_THAT(result2, Catch::Equals(expectedStr2));
+    }
+
 }

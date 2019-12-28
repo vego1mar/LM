@@ -12,6 +12,9 @@ using automatons::DFATransitionMap;
 
 namespace io_manager {
 
+    typedef std::vector<std::string> Tokens;
+
+
     class FSMReader {
     private:
         std::unique_ptr<FileReader> reader;
@@ -33,6 +36,15 @@ namespace io_manager {
         DFA &parseAndGet(const std::string &path);
 
     private:
+        void parseAlphabetLine(const Tokens &tokens);
+
+        void parseStates(const Tokens &tokens);
+
+        void parseStart(const Tokens &tokens);
+
+        void parseFinals(const Tokens &tokens);
+
+        void parseTransitions(const Tokens &tokens);
 
     };
 

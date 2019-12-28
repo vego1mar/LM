@@ -26,6 +26,10 @@ namespace helpers {
 
         static bool startsWith(const std::string &source, const std::string &prefix);
 
+        static std::string between(const std::string &source, const std::string &lhs, const std::string &rhs);
+
+        static std::string flatten(const std::vector<char> &buffer);
+
     };
 
 }
