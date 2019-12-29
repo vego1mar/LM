@@ -21,6 +21,7 @@ add_executable(
         src/io_manager/fsm_reader.hpp src/io_manager/fsm_reader.cpp
 
         src/command_line/cla_parser.hpp src/command_line/cla_parser.cpp
+
         src/main_program/fsm_simulation_to_stdout.hpp src/main_program/fsm_simulation_to_stdout.cpp
 
 )

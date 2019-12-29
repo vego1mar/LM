@@ -189,7 +189,6 @@ namespace automatons {
             case ShiftDirection::RIGHT:
                 position++;
                 break;
-            case ShiftDirection::NO_SHIFT:
             default:
                 break;
         }

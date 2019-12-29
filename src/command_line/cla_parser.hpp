@@ -16,7 +16,7 @@ namespace command_line {
     public:
         CLAParser() = delete;
 
-        CLAParser(int &argc, char **argv);
+        CLAParser(const int &argc, char **argv);
 
         CLAParser(const CLAParser &rhs) = delete;
 

@@ -71,9 +71,9 @@ namespace io_manager {
     void FSMReader::parseFinals(const Tokens &tokens, DFA &outDfa) {
         States finals;
 
-        for (const auto &final : tokens) {
-            if (Strings::isNumber(final)) {
-                int parsedState = std::stoi(final);
+        for (const auto &finalState : tokens) {
+            if (Strings::isNumber(finalState)) {
+                int parsedState = std::stoi(finalState);
                 finals.insert(parsedState);
             }
         }
@@ -105,17 +105,18 @@ namespace io_manager {
     }
 
     void FSMReader::passThroughHeader(const Tokens &tokens, const Alphabet &alphabet, std::size_t &iter) {
-        auto isHeaderLine = [&alphabet](const Tokens &tokenized) -> bool {
+        auto checkIfItsHeaderLine = [&alphabet](const Tokens &tokenized, bool &itWasHeaderLine) {
             for (const auto &token : tokenized) {
                 bool isTokenCharacter = token.size() == 1;
                 bool isTokenCharInAlphabet = alphabet.find(token[0]) != alphabet.end();
 
                 if (!isTokenCharacter || !isTokenCharInAlphabet) {
-                    return false;
+                    itWasHeaderLine = false;
+                    return;
                 }
             }
 
-            return true;
+            itWasHeaderLine = true;
         };
 
         for (const auto &line : tokens) {
@@ -126,7 +127,10 @@ namespace io_manager {
                 continue;
             }
 
-            if (isHeaderLine(tokenized)) {
+            bool itWasHeaderLine;
+            checkIfItsHeaderLine(tokenized, itWasHeaderLine);
+
+            if (itWasHeaderLine) {
                 break;
             }
         }

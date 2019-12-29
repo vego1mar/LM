@@ -6,9 +6,7 @@ namespace command_line {
     const std::string CLAParser::EMPTY_STRING = std::string();
 
 
-    CLAParser::CLAParser(int &argc, char **argv) {
-        programName = std::string(argv[0]);
-
+    CLAParser::CLAParser(const int &argc, char **argv) : programName(argv[0]) {
         for (int i = 1; i < argc; i++) {
             tokens.emplace_back(std::string(argv[i]));
         }
