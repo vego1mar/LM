@@ -49,4 +49,52 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE_THAT(result2, Catch::Equals(expectedStr2));
     }
 
+    SECTION("between('\\nstr1_something_str2\\n') -> '_something_'") {
+        std::string caseStr3 = "\nstr1_something_str2\n";
+        std::string expectedStr3 = "_something_";
+
+        auto result3 = Strings::between(caseStr3, "str1", "str2");
+
+        REQUIRE_THAT(result3, Catch::Equals(expectedStr3));
+    }
+
+    SECTION("between('alphabet 125abrz\\nstates: 0') -> ' 125abrz\\n'") {
+        std::string caseStr4 = "alphabet 125abrz\\nstates: 0";
+        std::string caseStr5 = "alphabet 125abrz\nstates: 0";
+        std::string expectedStr4 = " 125abrz\\n";
+        std::string expectedStr5 = " 125abrz\n";
+
+        auto result4 = Strings::between(caseStr4, "alphabet", "states");
+        auto result5 = Strings::between(caseStr5, "alphabet", "states");
+
+        REQUIRE_THAT(result4, Catch::Equals(expectedStr4));
+        REQUIRE_THAT(result5, Catch::Equals(expectedStr5));
+    }
+
+    SECTION("isNumber('-12.70000') -> true") {
+        std::string caseStr1 = "-12.70000";
+        std::string caseStr2 = "11.23";
+        std::string caseStr3 = "5.";
+        std::string caseStr4 = "2";
+        std::string caseStr5 = "1-";
+        std::string caseStr6 = "1,3";
+        std::string caseStr7 = "-1.30o0";
+
+        auto result1 = Strings::isNumber(caseStr1);
+        auto result2 = Strings::isNumber(caseStr2);
+        auto result3 = Strings::isNumber(caseStr3);
+        auto result4 = Strings::isNumber(caseStr4);
+        auto result5 = Strings::isNumber(caseStr5);
+        auto result6 = Strings::isNumber(caseStr6);
+        auto result7 = Strings::isNumber(caseStr7);
+
+        REQUIRE(result1);
+        REQUIRE(result2);
+        REQUIRE(result3);
+        REQUIRE(result4);
+        REQUIRE(!result5);
+        REQUIRE(!result6);
+        REQUIRE(!result7);
+    }
+
 }

@@ -15,5 +15,5 @@ add_executable(LM
         src/helpers/strings.hpp src/helpers/strings.cpp
         src/io_manager/file_reader.hpp src/io_manager/file_reader.cpp
         src/io_manager/fsm_reader.hpp src/io_manager/fsm_reader.cpp
-        )
+        src/command_line/cla_parser.hpp src/command_line/cla_parser.cpp)
 add_subdirectory(Catch_tests)

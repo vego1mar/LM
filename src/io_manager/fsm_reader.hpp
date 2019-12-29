@@ -18,7 +18,6 @@ namespace io_manager {
     class FSMReader {
     private:
         std::unique_ptr<FileReader> reader;
-        std::unique_ptr<DFA> dfa;
 
     public:
         FSMReader() = default;
@@ -33,18 +32,20 @@ namespace io_manager {
 
         virtual ~FSMReader() = default;
 
-        DFA &parseAndGet(const std::string &path);
+        void parse(const std::string &path, DFA &outDfa);
 
     private:
-        void parseAlphabetLine(const Tokens &tokens);
+        static void parseAlphabetLine(const Tokens &tokens, DFA &outDfa);
 
-        void parseStates(const Tokens &tokens);
+        static void parseStates(const Tokens &tokens, DFA &outDfa);
 
-        void parseStart(const Tokens &tokens);
+        static void parseStart(const Tokens &tokens, DFA &outDfa);
 
-        void parseFinals(const Tokens &tokens);
+        static void parseFinals(const Tokens &tokens, DFA &outDfa);
 
-        void parseTransitions(const Tokens &tokens);
+        static void parseTransitions(const Tokens &tokens, DFA &outDfa);
+
+        static void passThroughHeader(const Tokens &tokens, const Alphabet &alphabet, std::size_t &iter);
 
     };
 

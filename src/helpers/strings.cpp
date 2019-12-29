@@ -1,4 +1,3 @@
-#include <sstream>
 #include <algorithm>
 #include <regex>
 #include "strings.hpp"
@@ -32,8 +31,8 @@ namespace helpers {
     }
 
     std::string Strings::between(const std::string &source, const std::string &lhs, const std::string &rhs) {
-        // lhs(.*)rhs
-        std::string regexStr = lhs + "(.*)" + rhs;
+        // "[\s\S]" => any whitespace or non-whitespace
+        std::string regexStr = lhs + "[\\s\\S]*(.*)" + rhs;
         std::regex contentBetween(regexStr);
         std::smatch baseMatch;
         std::regex_search(source, baseMatch, contentBetween);
@@ -57,6 +56,38 @@ namespace helpers {
         }
 
         return flatten;
+    }
+
+    std::string Strings::remove(const std::string &source, char match) {
+        std::string removed;
+
+        for (const auto &character : source) {
+            if (character != match) {
+                removed += character;
+            }
+        }
+
+        return removed;
+    }
+
+    std::string Strings::replace(const std::string &source, char match, const std::string &replace) {
+        std::string replaced;
+
+        for (const auto &character : source) {
+            if (character == match) {
+                replaced += replace;
+                continue;
+            }
+
+            replaced += character;
+        }
+
+        return replaced;
+    }
+
+    bool Strings::isNumber(const std::string &source) {
+        std::regex number("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?");
+        return std::regex_match(source, number);
     }
 
 }

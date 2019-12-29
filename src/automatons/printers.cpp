@@ -52,7 +52,7 @@ namespace automatons {
 
         const auto &state = std::get<0>(currentPair);
         const auto &event = std::get<1>(currentPair);
-        std::string output = '[' + std::to_string(state) + ',' + event + "] -> " + std::to_string(nextState);
+        std::string output = '(' + std::to_string(state) + ',' + event + ") -> " + std::to_string(nextState);
         std::cout << output << std::endl;
     }
 

@@ -30,6 +30,12 @@ namespace helpers {
 
         static std::string flatten(const std::vector<char> &buffer);
 
+        static std::string remove(const std::string &source, char match);
+
+        static std::string replace(const std::string &source, char match, const std::string &replace);
+
+        static bool isNumber(const std::string &source);
+
     };
 
 }
