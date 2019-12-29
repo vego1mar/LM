@@ -40,7 +40,6 @@ namespace automatons {
 
             const auto &actionTuple = entry.second;
             const auto &writeSymbol = std::get<0>(actionTuple);
-            const auto &shiftHead = std::get<1>(actionTuple);
             const auto &nextState = std::get<2>(actionTuple);
 
             bool isStateInStates = states.find(state) != states.end();

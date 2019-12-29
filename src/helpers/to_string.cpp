@@ -71,7 +71,11 @@ namespace helpers {
                 return "RIGHT";
             case automatons::ShiftDirection::NO_SHIFT:
                 return "NO_SHIFT";
+            default:
+                break;
         }
+
+        return "UNKNOWN";
     }
 
 }
