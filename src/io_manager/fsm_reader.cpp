@@ -11,6 +11,7 @@ namespace io_manager {
     using automatons::DFATransitionMap;
     using helpers::Strings;
 
+
     void FSMReader::parse(const std::string &path, DFA &outDfa) {
         reader = std::make_unique<FileReader>();
         reader->setType(ReadType::WHOLE_FILE);
@@ -270,21 +271,21 @@ namespace io_manager {
         std::size_t nextClosingParenthesis = 0;
         auto slice = symbolsColumn.substr(symbolsColumn.find('('));
 
-        // There may be many pairs of parentheses.
         while (nextClosingParenthesis != std::string::npos) {
-            auto subSymbols = slice.substr(nextClosingParenthesis);
-            auto symbol = Strings::betweenFirsts(subSymbols, "(", ")");
+            auto symbol = Strings::betweenFirsts(slice, "(", ")");
 
             if (symbol.size() != 1) {
                 throw std::length_error("symbol.size() != 1");
             }
 
-            nextClosingParenthesis = slice.find(')', 3);
+            slice = slice.substr(3);
+            nextClosingParenthesis = slice.find(')');
             auto pair = StateEventPair(currentState, symbol[0]);
             pairs.emplace_back(pair);
+            repetitions.emplace_back(std::vector<std::size_t>{1});
         }
 
-        repetitions.emplace_back(std::vector<std::size_t>{1});
+        //repetitions.emplace_back(std::vector<std::size_t>{1});
     }
 
     void FSMReader::processNFAEntryNextSingleBrackets(NFATransitionEntryPOD &pod) {
@@ -322,16 +323,30 @@ namespace io_manager {
     void FSMReader::processNFAEntryNextParentheses(NFATransitionEntryPOD &pod) {
         const std::string &nextStatesColumn = *pod.nextStatesColumn;
         auto &nextStates = *pod.nextStates;
-        auto statesStr = Strings::betweenFirsts(nextStatesColumn, "(", ")");
-        auto tokens = Strings::split(statesStr, ',');
-        States next;
+        auto slice = nextStatesColumn.substr(nextStatesColumn.find('('));
+        std::size_t nextClosingParenthesis = 0;
+        auto tokens = std::vector<Tokens>();
 
-        for (const auto &stateStr : tokens) {
-            int parsedState = std::stoi(stateStr);
-            next.insert(parsedState);
+        while (nextClosingParenthesis != std::string::npos) {
+            nextClosingParenthesis = slice.find(')');
+            const auto &between = Strings::betweenFirsts(slice, "(", ")");
+            slice = slice.substr(nextClosingParenthesis + 1);
+            const auto split = Strings::split(between, ',');
+            tokens.emplace_back(split);
+            nextClosingParenthesis = slice.find(')');
+            (*pod.isDoubleBracketed).push_back(false);
         }
 
-        nextStates.emplace_back(next);
+        for (const auto &statesList : tokens) {
+            States next;
+
+            for (const auto &stateStr : statesList) {
+                int parsedState = std::stoi(stateStr);
+                next.insert(parsedState);
+            }
+
+            nextStates.emplace_back(next);
+        }
     }
 
     void FSMReader::parseNFASymbolsColumn(NFATransitionEntryPOD &pod) {
@@ -374,7 +389,7 @@ namespace io_manager {
 
         if (containsParentheses) {
             processNFAEntryNextParentheses(pod);
-            (*pod.isDoubleBracketed).push_back(false);
+            //(*pod.isDoubleBracketed).push_back(false);
         }
     }
 

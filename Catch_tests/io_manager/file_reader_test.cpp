@@ -1,17 +1,20 @@
 #include "../catch.hpp"
 #include "../../src/io_manager/file_reader.hpp"
+#include "../../src/tests/definitions.hpp"
 
 using io_manager::FileReader;
 using io_manager::ReadType;
+using tests::Constants;
+
 
 TEST_CASE("file_reader.hpp", "[file_reader]") {
-    const std::string &DFA_1_PATH = "../../files/dfa_1.txt";
-    const long &DFA_1_SIZE = 1635;
+    Constants consts;
+
 
     SECTION("read LINE_BY_LINE -> OK") {
         std::vector<std::string> lines;
         FileReader reader;
-        reader.link(DFA_1_PATH);
+        reader.link(consts.DFA_1_PATH);
         REQUIRE(reader.isBind());
 
         while (reader.hasNextLine()) {
@@ -19,8 +22,8 @@ TEST_CASE("file_reader.hpp", "[file_reader]") {
         }
 
         REQUIRE(reader.getType() == ReadType::LINE_BY_LINE);
-        REQUIRE_THAT(reader.getFileName(), Catch::Equals(DFA_1_PATH));
-        REQUIRE(reader.getFileSize() == DFA_1_SIZE);
+        REQUIRE_THAT(reader.getFileName(), Catch::Equals(consts.DFA_1_PATH));
+        REQUIRE(reader.getFileSize() == consts.DFA_1_SIZE);
         reader.sever();
         REQUIRE(!reader.isBind());
         REQUIRE(reader.getFileSize() == -1);
@@ -30,12 +33,12 @@ TEST_CASE("file_reader.hpp", "[file_reader]") {
     SECTION("read WHOLE_FILE -> OK") {
         FileReader reader;
         reader.setType(ReadType::WHOLE_FILE);
-        reader.link(DFA_1_PATH);
+        reader.link(consts.DFA_1_PATH);
         assert(reader.isBind());
 
         reader.readIntoBuffer();
 
-        REQUIRE(reader.getContentBuffer().size() == DFA_1_SIZE);
+        REQUIRE(reader.getContentBuffer().size() == consts.DFA_1_SIZE);
         reader.sever();
         REQUIRE_THROWS_AS(reader.hasNextLine(), std::bad_function_call);
     }

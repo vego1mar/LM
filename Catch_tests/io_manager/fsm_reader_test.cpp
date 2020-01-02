@@ -2,21 +2,17 @@
 #include "../../src/io_manager/fsm_reader.hpp"
 #include "../../src/io_manager/file_reader.hpp"
 #include "../../src/helpers/strings.hpp"
+#include "../../src/tests/definitions.hpp"
 
 using io_manager::FSMReader;
 using io_manager::FileReader;
 using helpers::Strings;
 using automatons::DFATransitionMap;
+using tests::Constants;
+
 
 TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
-    const std::string &DFA_1_PATH = "../../files/dfa_1.txt";
-    const std::string &NFA_1_PATH = "../../files/nfa_1.txt";
-    const std::string &INPUT_1_PATH = "../../files/input_1.txt";
-    const std::string &INPUT_2_PATH = "../../files/input_2.txt";
-    const long &DFA_1_SIZE = 1637;
-    const long &NFA_1_SIZE = 2086;
-    const long &INPUT_1_SIZE = 19;
-    const long &INPUT_2_SIZE = 24;
+    Constants consts;
 
     SECTION("parse(DFA_1) -> dfa object OK") {
         Alphabet expectedAlphabet = {'1', '2', '5', 'a', 'b', 'r', 'z'};
@@ -331,7 +327,7 @@ TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
         FSMReader reader;
         DFA dfa;
 
-        reader.parse(DFA_1_PATH, dfa);
+        reader.parse(consts.DFA_1_PATH, dfa);
 
         REQUIRE(dfa.getAlphabet() == expectedAlphabet);
         REQUIRE(dfa.getStates() == expectedStates);
@@ -341,11 +337,11 @@ TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
         REQUIRE(dfa.getTransitions() == expectedTransitionMap);
     }
 
-    SECTION("simulate(DFA_1; '55b55z11111111a21r') -> accept") {
+    SECTION("simulate(DFA_1; input) -> ACCEPT") {
         FSMReader reader;
         DFA dfa;
 
-        reader.parse(DFA_1_PATH, dfa);
+        reader.parse(consts.DFA_1_PATH, dfa);
         REQUIRE(dfa.getAlphabet().size() == 7);
         REQUIRE(dfa.getStates().size() == 43);
         REQUIRE(dfa.getFinals().size() == 6);
@@ -356,59 +352,64 @@ TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
         REQUIRE(result);
     }
 
-    SECTION("simulate(DFA_1; DFA_1_INPUT) -> accept") {
+    SECTION("simulate(DFA_1; DFA_1_INPUT) -> ACCEPT") {
         FileReader fileReader;
         FSMReader fsmReader;
         DFA dfa;
 
-        fsmReader.parse(DFA_1_PATH, dfa);
-        assert(dfa.getAlphabet().size() == 7);
-        assert(dfa.getStates().size() == 43);
-        assert(dfa.getFinals().size() == 6);
-        assert(dfa.getTransitions().size() == 301);
+        fileReader.link(consts.DFA_1_PATH);
+        REQUIRE(fileReader.isBind());
+        REQUIRE(fileReader.getFileSize() == consts.DFA_1_SIZE);
+        fileReader.sever();
 
-        fileReader.link(INPUT_1_PATH);
-        assert(fileReader.isBind());
+        fsmReader.parse(consts.DFA_1_PATH, dfa);
+        REQUIRE(dfa.getAlphabet().size() == 7);
+        REQUIRE(dfa.getStates().size() == 43);
+        REQUIRE(dfa.getFinals().size() == 6);
+        REQUIRE(dfa.getTransitions().size() == 301);
+
+        fileReader.link(consts.INPUT_1_PATH);
+        REQUIRE(fileReader.isBind());
+        REQUIRE(fileReader.getFileSize() == consts.INPUT_1_SIZE);
         fileReader.setType(io_manager::ReadType::WHOLE_FILE);
         fileReader.readIntoBuffer();
         auto readInput = Strings::flatten(fileReader.getContentBuffer());
         auto validInput = Strings::remove(readInput, '\n');
         fileReader.sever();
-        assert(!fileReader.isBind());
+        REQUIRE(!fileReader.isBind());
 
         auto result = dfa.simulate(validInput, false);
 
         REQUIRE(result);
     }
 
-    SECTION("simulate(NFA_1; NFA_1_INPUT) -> [accept | reject]") {
+    SECTION("simulate(NFA_1; NFA_1_INPUT) -> [A,A,R,A]") {
         const auto &expectedAlphabet = Alphabet({'0', '1', '2', '3', '4', 'a', 'b', 'c', 'd', 'e'});
-        const auto &expectedStates = States({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 100, 101, 102, 103, 104,
+        const auto &expectedStates = States({1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 100, 101, 102, 103, 104,
                                              200, 201, 202, 203, 204});
         const auto &expectedFinals = States({100, 101, 102, 103, 104, 200, 201, 202, 203, 204});
-        const auto &expectedStart = States({0});
+        const auto &expectedStart = States({1, 2});
         const auto &expectedTransitions = NFATransitionMap({
-                                                                   {{0,   '0'}, {0}},
-                                                                   {{0,   '1'}, {0}},
-                                                                   {{0,   '2'}, {0}},
-                                                                   {{0,   '3'}, {0}},
-                                                                   {{0,   '4'}, {0}},
-                                                                   {{0,   'a'}, {0}},
-                                                                   {{0,   'b'}, {0}},
-                                                                   {{0,   'c'}, {0}},
-                                                                   {{0,   'd'}, {0}},
-                                                                   {{0,   'e'}, {0}},
-                                                                   {{0,   '!'}, {1, 2}},
-                                                                   {{1,   '0'}, {3}},
-                                                                   {{1,   '1'}, {4}},
-                                                                   {{1,   '2'}, {5}},
-                                                                   {{1,   '3'}, {6}},
-                                                                   {{1,   '4'}, {7}},
-                                                                   {{2,   'a'}, {8}},
-                                                                   {{2,   'b'}, {9}},
-                                                                   {{2,   'c'}, {10}},
-                                                                   {{2,   'd'}, {11}},
-                                                                   {{2,   'e'}, {12}},
+                                                                   {{1,   '0'}, {3,  1}},
+                                                                   {{1,   '1'}, {4,  1}},
+                                                                   {{1,   '2'}, {5,  1}},
+                                                                   {{1,   '3'}, {6,  1}},
+                                                                   {{1,   '4'}, {7,  1}},
+                                                                   {{1,   'a'}, {1}},
+                                                                   {{1,   'b'}, {1}},
+                                                                   {{1,   'c'}, {1}},
+                                                                   {{1,   'd'}, {1}},
+                                                                   {{1,   'e'}, {1}},
+                                                                   {{2,   '0'}, {2}},
+                                                                   {{2,   '1'}, {2}},
+                                                                   {{2,   '2'}, {2}},
+                                                                   {{2,   '3'}, {2}},
+                                                                   {{2,   '4'}, {2}},
+                                                                   {{2,   'a'}, {8,  2}},
+                                                                   {{2,   'b'}, {9,  2}},
+                                                                   {{2,   'c'}, {10, 2}},
+                                                                   {{2,   'd'}, {11, 2}},
+                                                                   {{2,   'e'}, {12, 2}},
                                                                    {{3,   '0'}, {100}},
                                                                    {{4,   '1'}, {101}},
                                                                    {{5,   '2'}, {102}},
@@ -524,20 +525,26 @@ TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
         FSMReader fsmReader;
         NFA nfa;
 
-        fsmReader.parse(NFA_1_PATH, nfa);
+        fileReader.link(consts.NFA_1_PATH);
+        REQUIRE(fileReader.isBind());
+        REQUIRE(fileReader.getFileSize() == consts.NFA_1_SIZE);
+        fileReader.sever();
+
+        fsmReader.parse(consts.NFA_1_PATH, nfa);
         REQUIRE(nfa.getAlphabet().size() == 10);
-        REQUIRE(nfa.getStates().size() == 23);
+        REQUIRE(nfa.getStates().size() == 22);
         REQUIRE(nfa.getFinals().size() == 10);
-        REQUIRE(nfa.getStart().size() == 1);
-        REQUIRE(nfa.getTransitions().size() == 131);
+        REQUIRE(nfa.getStart().size() == 2);
+        REQUIRE(nfa.getTransitions().size() == 130);
         REQUIRE(nfa.getAlphabet() == expectedAlphabet);
         REQUIRE(nfa.getStates() == expectedStates);
         REQUIRE(nfa.getFinals() == expectedFinals);
         REQUIRE(nfa.getStart() == expectedStart);
         REQUIRE(nfa.getTransitions() == expectedTransitions);
 
-        fileReader.link(INPUT_2_PATH);
+        fileReader.link(consts.INPUT_2_PATH);
         REQUIRE(fileReader.isBind());
+        REQUIRE(fileReader.getFileSize() == consts.INPUT_2_SIZE);
         fileReader.setType(io_manager::ReadType::WHOLE_FILE);
         fileReader.readIntoBuffer();
         auto readInput = Strings::flatten(fileReader.getContentBuffer());

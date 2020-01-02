@@ -7,10 +7,10 @@
 
 namespace automatons {
 
-    /// Non-deterministic Finite Automata with empty moves
+    /// Non-deterministic Finite Automata with oracle-oriented empty moves
     class NFA : public INFA {
     public:
-        static const char EMPTY_SYMBOL = '!';
+        static const char EMPTY_SYMBOL;
 
     private:
         Alphabet alphabet;

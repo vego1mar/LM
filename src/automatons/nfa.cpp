@@ -6,7 +6,10 @@
 
 namespace automatons {
 
-    void automatons::NFA::setAlphabet(const Alphabet &outAlphabet) {
+    const char NFA::EMPTY_SYMBOL = '!';
+
+
+    void NFA::setAlphabet(const Alphabet &outAlphabet) {
         alphabet.clear();
         alphabet = outAlphabet;
     }

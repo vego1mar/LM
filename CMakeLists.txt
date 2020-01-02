@@ -27,5 +27,7 @@ add_executable(
         src/io_manager/definitions.hpp
         src/helpers/collections.hpp src/helpers/collections.cpp
 
+        src/tests/definitions.hpp
+
 )
 add_subdirectory(Catch_tests)
