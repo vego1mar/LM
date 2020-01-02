@@ -1,5 +1,5 @@
-#ifndef DEFINITIONS_HPP
-#define DEFINITIONS_HPP
+#ifndef AUTOMATONS_DEFINITIONS_HPP
+#define AUTOMATONS_DEFINITIONS_HPP
 
 #include <set>
 #include <map>
@@ -47,4 +47,4 @@ namespace automatons {
 
 }
 
-#endif //DEFINITIONS_HPP
+#endif //AUTOMATONS_DEFINITIONS_HPP

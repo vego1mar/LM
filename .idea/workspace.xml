@@ -13,13 +13,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f866098f-8b34-4e58-9f59-2f8ec8e71fb5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Catch_tests/helpers/collections.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helpers/collections.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helpers/collections.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/io_manager/definitions.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/vm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/vm.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Catch_tests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automatons/turing_machine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/turing_machine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/command_line/cla_parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/command_line/cla_parser.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/command_line/cla_parser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/command_line/cla_parser.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Catch_tests/helpers/strings_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/helpers/strings_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Catch_tests/io_manager/fsm_reader_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/io_manager/fsm_reader_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/dfa_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/files/dfa_1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automatons/definitions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/definitions.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/strings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/strings.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/strings.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/strings.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/io_manager/fsm_reader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_manager/fsm_reader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io_manager/fsm_reader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_manager/fsm_reader.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +53,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="OCResolveContextSettings">
-    <option name="configuration" value="0-Debug-LM" />
+    <option name="configuration" value="0-Debug-Catch_tests_run" />
   </component>
   <component name="ProjectId" id="1UOLycUE7jxwXQuz2tRG14N6q7E" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -76,7 +85,7 @@
       <recent name="$PROJECT_DIR$/src/automatons" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.Catch_tests_run">
+  <component name="RunManager" selected="Catch.fsm_reader.hpp">
     <configuration name="cla_parser.hpp" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run" TEST_CLASS="[cla_parser]" TEST_METHOD="cla_parser.hpp" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -89,7 +98,7 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="fsm_reader.hpp" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PROGRAM_PARAMS="--fsm dfa --def dfa_1.txt --input input_1" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run" TEST_CLASS="[fsm_reader]" TEST_METHOD="fsm_reader.hpp" TEST_MODE="SUITE_TEST">
+    <configuration name="fsm_reader.hpp" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run" TEST_CLASS="[fsm_reader]" TEST_METHOD="fsm_reader.hpp" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -101,7 +110,7 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Catch_tests_run" type="CMakeRunConfiguration" factoryName="Application" temporary="true" PROGRAM_PARAMS="--fsm dfa --def ../../files/dfa_1.txt --input ../../files/input_1.txt" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run">
+    <configuration name="Catch_tests_run" type="CMakeRunConfiguration" factoryName="Application" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -121,11 +130,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.fsm_reader.hpp" />
         <item itemvalue="CMake Application.Catch_tests_run" />
         <item itemvalue="Catch.collections.hpp" />
-        <item itemvalue="Catch.cla_parser.hpp" />
-        <item itemvalue="Catch.fsm_reader.hpp" />
         <item itemvalue="Catch.strings.hpp" />
+        <item itemvalue="Catch.cla_parser.hpp" />
       </list>
     </recent_temporary>
   </component>
@@ -156,7 +165,8 @@
       <workItem from="1576998090738" duration="3151000" />
       <workItem from="1577125036702" duration="28726000" />
       <workItem from="1577216965265" duration="16000" />
-      <workItem from="1577264692202" duration="139637000" />
+      <workItem from="1577264692202" duration="139919000" />
+      <workItem from="1577790359904" duration="64899000" />
     </task>
     <servers />
   </component>
@@ -185,78 +195,78 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="503" y="38" key="#Unittests_in_Catch_tests/0.0.1536.824@0.0.1536.824" timestamp="1576998376668" />
-    <state x="441" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577656692014">
+    <state x="386" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577817720186">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state x="223" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1576999160166" />
-    <state x="441" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.896@0.0.1920.896" timestamp="1577656692014" />
+    <state x="386" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.896@0.0.1920.896" timestamp="1577817720186" />
     <state x="759" y="152" key="#com.intellij.ide.util.MemberChooser" timestamp="1577640329899">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state x="759" y="152" key="#com.intellij.ide.util.MemberChooser/0.0.1920.896@0.0.1920.896" timestamp="1577640329899" />
-    <state x="1104" y="166" key="#xdebugger.evaluate" timestamp="1577627359751">
+    <state x="1104" y="166" key="#xdebugger.evaluate" timestamp="1577927348612">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
-    <state x="1104" y="166" key="#xdebugger.evaluate/0.0.1920.896@0.0.1920.896" timestamp="1577627359751" />
+    <state x="1104" y="166" key="#xdebugger.evaluate/0.0.1920.896@0.0.1920.896" timestamp="1577927348612" />
     <state x="408" y="295" key="FileChooserDialogImpl" timestamp="1577481935235">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state x="318" y="161" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1577001277160" />
     <state x="408" y="295" key="FileChooserDialogImpl/0.0.1920.896@0.0.1920.896" timestamp="1577481935235" />
-    <state width="1872" height="198" key="GridCell.Tab.0.bottom" timestamp="1577660631224">
+    <state width="1872" height="195" key="GridCell.Tab.0.bottom" timestamp="1577928197694">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577001335892" />
-    <state width="1872" height="198" key="GridCell.Tab.0.bottom/0.0.1920.896@0.0.1920.896" timestamp="1577660631224" />
-    <state width="1872" height="198" key="GridCell.Tab.0.center" timestamp="1577660631223">
+    <state width="1872" height="195" key="GridCell.Tab.0.bottom/0.0.1920.896@0.0.1920.896" timestamp="1577928197694" />
+    <state width="1872" height="195" key="GridCell.Tab.0.center" timestamp="1577928197692">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
-    <state width="1872" height="198" key="GridCell.Tab.0.center/0.0.1920.896@0.0.1920.896" timestamp="1577660631223" />
-    <state width="1872" height="198" key="GridCell.Tab.0.left" timestamp="1577660631223">
+    <state width="1872" height="195" key="GridCell.Tab.0.center/0.0.1920.896@0.0.1920.896" timestamp="1577928197692" />
+    <state width="1872" height="195" key="GridCell.Tab.0.left" timestamp="1577928197691">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
-    <state width="1872" height="198" key="GridCell.Tab.0.left/0.0.1920.896@0.0.1920.896" timestamp="1577660631223" />
-    <state width="1872" height="198" key="GridCell.Tab.0.right" timestamp="1577660631224">
+    <state width="1872" height="195" key="GridCell.Tab.0.left/0.0.1920.896@0.0.1920.896" timestamp="1577928197691" />
+    <state width="1872" height="195" key="GridCell.Tab.0.right" timestamp="1577928197693">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
-    <state width="1872" height="198" key="GridCell.Tab.0.right/0.0.1920.896@0.0.1920.896" timestamp="1577660631224" />
-    <state width="1872" height="262" key="GridCell.Tab.1.bottom" timestamp="1577660630173">
+    <state width="1872" height="195" key="GridCell.Tab.0.right/0.0.1920.896@0.0.1920.896" timestamp="1577928197693" />
+    <state width="1872" height="256" key="GridCell.Tab.1.bottom" timestamp="1577927764439">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
-    <state width="1872" height="262" key="GridCell.Tab.1.bottom/0.0.1920.896@0.0.1920.896" timestamp="1577660630173" />
-    <state width="1872" height="262" key="GridCell.Tab.1.center" timestamp="1577660630172">
+    <state width="1872" height="256" key="GridCell.Tab.1.bottom/0.0.1920.896@0.0.1920.896" timestamp="1577927764439" />
+    <state width="1872" height="256" key="GridCell.Tab.1.center" timestamp="1577927764438">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
-    <state width="1872" height="262" key="GridCell.Tab.1.center/0.0.1920.896@0.0.1920.896" timestamp="1577660630172" />
-    <state width="1872" height="262" key="GridCell.Tab.1.left" timestamp="1577660630171">
+    <state width="1872" height="256" key="GridCell.Tab.1.center/0.0.1920.896@0.0.1920.896" timestamp="1577927764438" />
+    <state width="1872" height="256" key="GridCell.Tab.1.left" timestamp="1577927764438">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
-    <state width="1872" height="262" key="GridCell.Tab.1.left/0.0.1920.896@0.0.1920.896" timestamp="1577660630171" />
-    <state width="1872" height="262" key="GridCell.Tab.1.right" timestamp="1577660630172">
+    <state width="1872" height="256" key="GridCell.Tab.1.left/0.0.1920.896@0.0.1920.896" timestamp="1577927764438" />
+    <state width="1872" height="256" key="GridCell.Tab.1.right" timestamp="1577927764439">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
-    <state width="1872" height="262" key="GridCell.Tab.1.right/0.0.1920.896@0.0.1920.896" timestamp="1577660630172" />
+    <state width="1872" height="256" key="GridCell.Tab.1.right/0.0.1920.896@0.0.1920.896" timestamp="1577927764439" />
     <state x="349" y="63" key="SettingsEditor" timestamp="1577125367115">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state x="279" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1577001299861" />
     <state x="349" y="63" key="SettingsEditor/0.0.1920.896@0.0.1920.896" timestamp="1577125367115" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1577656639711">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1577924056944">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.896@0.0.1920.896" timestamp="1577656639711" />
-    <state width="960" height="448" key="XDebugger.FullValuePopup" timestamp="1577609916166">
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.896@0.0.1920.896" timestamp="1577924056944" />
+    <state width="960" height="448" key="XDebugger.FullValuePopup" timestamp="1577817963202">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
-    <state width="960" height="448" key="XDebugger.FullValuePopup/0.0.1920.896@0.0.1920.896" timestamp="1577609916165" />
-    <state x="596" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1577264696198">
+    <state width="960" height="448" key="XDebugger.FullValuePopup/0.0.1920.896@0.0.1920.896" timestamp="1577817963202" />
+    <state x="596" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1577790368075">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state x="477" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1576998092852" />
-    <state x="596" y="262" key="com.intellij.ide.util.TipDialog/0.0.1920.896@0.0.1920.896" timestamp="1577264696198" />
+    <state x="596" y="262" key="com.intellij.ide.util.TipDialog/0.0.1920.896@0.0.1920.896" timestamp="1577790368075" />
     <state x="708" y="82" key="refactoring.ChangeSignatureDialog" timestamp="1577129077041">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
@@ -266,9 +276,20 @@
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1576998483928" />
     <state x="531" y="203" key="run.anything.popup/0.0.1920.896@0.0.1920.896" timestamp="1577653948511" />
-    <state x="623" y="193" width="672" height="678" key="search.everywhere.popup" timestamp="1577647305363">
+    <state x="623" y="193" width="672" height="678" key="search.everywhere.popup" timestamp="1577823014071">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
-    <state x="623" y="193" width="672" height="678" key="search.everywhere.popup/0.0.1920.896@0.0.1920.896" timestamp="1577647305363" />
+    <state x="623" y="193" width="672" height="678" key="search.everywhere.popup/0.0.1920.896@0.0.1920.896" timestamp="1577823014071" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Catch_tests/io_manager/fsm_reader_test.cpp</url>
+          <line>551</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

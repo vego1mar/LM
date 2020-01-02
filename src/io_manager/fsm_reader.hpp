@@ -3,17 +3,20 @@
 
 #include <memory>
 #include "file_reader.hpp"
+#include "definitions.hpp"
 #include "../automatons/dfa.hpp"
+#include "../automatons/nfa.hpp"
+#include "../automatons/definitions.hpp"
 
+using io_manager::Tokens;
 using automatons::DFA;
+using automatons::NFA;
 using automatons::Alphabet;
 using automatons::States;
-using automatons::DFATransitionMap;
+using automatons::NFATransitionMap;
+using automatons::StateEventPair;
 
 namespace io_manager {
-
-    typedef std::vector<std::string> Tokens;
-
 
     class FSMReader {
     private:
@@ -34,18 +37,38 @@ namespace io_manager {
 
         void parse(const std::string &path, DFA &outDfa);
 
-    private:
-        static void parseAlphabetLine(const Tokens &tokens, DFA &outDfa);
+        void parse(const std::string &path, NFA &outNfa);
 
-        static void parseStates(const Tokens &tokens, DFA &outDfa);
+    private:
+        static Alphabet getParsedAlphabetLine(const Tokens &tokens);
+
+        static States getParsedStates(const Tokens &tokens);
 
         static void parseStart(const Tokens &tokens, DFA &outDfa);
 
-        static void parseFinals(const Tokens &tokens, DFA &outDfa);
+        static void parseDFATransitions(const Tokens &tokens, DFA &outDfa);
 
-        static void parseTransitions(const Tokens &tokens, DFA &outDfa);
+        static void parseNFATransitions(const Tokens &tokens, NFA &outNfa);
 
         static void passThroughHeader(const Tokens &tokens, const Alphabet &alphabet, std::size_t &iter);
+
+        static void parseNFATransitionEntry(NFATransitionMap &transitionMap, const Tokens &tokenized, NFATransitionEntryPOD &pod);
+
+        static void processNFAEntryPairsBrackets(const Tokens &symbolsTokens, NFATransitionEntryPOD &pod);
+
+        static void processNFAEntryPairParentheses(NFATransitionEntryPOD &pod);
+
+        static void processNFAEntryNextSingleBrackets(NFATransitionEntryPOD &pod);
+
+        static void processNFAEntryNextDoubleBrackets(NFATransitionEntryPOD &pod);
+
+        static void processNFAEntryNextParentheses(NFATransitionEntryPOD &pod);
+
+        static void parseNFASymbolsColumn(NFATransitionEntryPOD &pod);
+
+        static void parseNFANextStatesColumn(NFATransitionEntryPOD &pod);
+
+        static void makeNFATransitionEntries(NFATransitionMap &map, NFATransitionEntryPOD &pod, const std::size_t &no);
 
     };
 

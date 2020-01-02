@@ -4,7 +4,8 @@
 using helpers::Strings;
 
 TEST_CASE("strings.hpp", "[strings]") {
-    SECTION("split('token1 2 three 4th', ' ') -> [token1,2,three,4th]") {
+
+    SECTION("split(case1,case2) -> OK") {
         std::string caseStr1 = "token1   2 three  4th ";
         std::string caseStr2 = "a,b,,c,d,efi,,,";
         std::vector<std::string> expectedResult1 = {"token1", "2", "three", "4th"};
@@ -17,7 +18,7 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE_THAT(result2, Catch::Equals(expectedResult2));
     }
 
-    SECTION("toLower('MAKE mE lOwEr') -> 'make me lower'") {
+    SECTION("toLower(case1) -> OK") {
         std::string caseStr = "MAKE mE lOwEr";
         std::string expectedResult = "make me lower";
 
@@ -26,7 +27,7 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE_THAT(result, Catch::Equals(expectedResult));
     }
 
-    SECTION("startsWith('beta_012','beta') -> yes") {
+    SECTION("startsWith(case1) -> OK") {
         std::string caseStr1 = "beta_012";
 
         auto result1 = Strings::startsWith(caseStr1, "beta");
@@ -36,7 +37,7 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE(!result2);
     }
 
-    SECTION("between('<tag>tag_content</tag>', '<tag>', '</tag>') -> 'tag_content'") {
+    SECTION("between(case1,case2) -> OK") {
         std::string caseStr1 = "aaaBB tok1 CDCC ddd";
         std::string caseStr2 = "<tag>tag_content</tag>";
         std::string expectedStr1 = "B tok1 CDC";
@@ -49,7 +50,7 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE_THAT(result2, Catch::Equals(expectedStr2));
     }
 
-    SECTION("between('\\nstr1_something_str2\\n') -> '_something_'") {
+    SECTION("between(case3) -> OK") {
         std::string caseStr3 = "\nstr1_something_str2\n";
         std::string expectedStr3 = "_something_";
 
@@ -58,7 +59,7 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE_THAT(result3, Catch::Equals(expectedStr3));
     }
 
-    SECTION("between('alphabet 125abrz\\nstates: 0') -> ' 125abrz\\n'") {
+    SECTION("between(case4,case5) -> OK") {
         std::string caseStr4 = "alphabet 125abrz\\nstates: 0";
         std::string caseStr5 = "alphabet 125abrz\nstates: 0";
         std::string expectedStr4 = " 125abrz\\n";
@@ -71,7 +72,7 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE_THAT(result5, Catch::Equals(expectedStr5));
     }
 
-    SECTION("isNumber('-12.70000') -> true") {
+    SECTION("isNumber(case1-case7) -> OK") {
         std::string caseStr1 = "-12.70000";
         std::string caseStr2 = "11.23";
         std::string caseStr3 = "5.";
@@ -95,6 +96,23 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE(!result5);
         REQUIRE(!result6);
         REQUIRE(!result7);
+    }
+
+    SECTION("betweenFirsts(case1-case4) -> OK") {
+        std::string source1 = "alpha\tbet some strings then\nbeta";
+        std::string source2 = "alpha\tbet a some strings then\nbeta";
+        std::string source3 = "gamma 0123 delt abcd\ndelta";
+        std::string source4 = "\rtheta 0 \nksi 1 \tpsi 2 \fni\r";
+
+        auto result1 = Strings::betweenFirsts(source1, "alpha", "beta");
+        auto result2 = Strings::betweenFirsts(source2, "beta", "alpha");
+        auto result3 = Strings::betweenFirsts(source3, "gamma", "delta");
+        auto result4 = Strings::betweenFirsts(source4, "ksi", "psi");
+
+        REQUIRE_THAT(result1, Catch::Equals(source1.substr(5, 23)));
+        REQUIRE_THAT(result2, Catch::Equals(""));
+        REQUIRE_THAT(result3, Catch::Equals(source3.substr(5, 16)));
+        REQUIRE_THAT(result4, Catch::Equals(source4.substr(13, 4)));
     }
 
 }

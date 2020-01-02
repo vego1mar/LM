@@ -24,5 +24,8 @@ add_executable(
 
         src/main_program/fsm_simulation_to_stdout.hpp src/main_program/fsm_simulation_to_stdout.cpp
 
+        src/io_manager/definitions.hpp
+        src/helpers/collections.hpp src/helpers/collections.cpp
+
 )
 add_subdirectory(Catch_tests)

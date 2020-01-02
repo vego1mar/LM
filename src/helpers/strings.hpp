@@ -28,6 +28,8 @@ namespace helpers {
 
         static std::string between(const std::string &source, const std::string &lhs, const std::string &rhs);
 
+        static std::string betweenFirsts(const std::string &source, const std::string &lhs, const std::string &rhs);
+
         static std::string flatten(const std::vector<char> &buffer);
 
         static std::string remove(const std::string &source, char match);
@@ -35,6 +37,8 @@ namespace helpers {
         static std::string replace(const std::string &source, char match, const std::string &replace);
 
         static bool isNumber(const std::string &source);
+
+        static bool contains(const std::string &source, const std::string &matchStr);
 
     };
 

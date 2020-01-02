@@ -6,12 +6,17 @@
 using io_manager::FSMReader;
 using io_manager::FileReader;
 using helpers::Strings;
+using automatons::DFATransitionMap;
 
 TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
     const std::string &DFA_1_PATH = "../../files/dfa_1.txt";
+    const std::string &NFA_1_PATH = "../../files/nfa_1.txt";
     const std::string &INPUT_1_PATH = "../../files/input_1.txt";
-    const long &DFA_1_SIZE = 1635;
+    const std::string &INPUT_2_PATH = "../../files/input_2.txt";
+    const long &DFA_1_SIZE = 1637;
+    const long &NFA_1_SIZE = 2086;
     const long &INPUT_1_SIZE = 19;
+    const long &INPUT_2_SIZE = 24;
 
     SECTION("parse(DFA_1) -> dfa object OK") {
         Alphabet expectedAlphabet = {'1', '2', '5', 'a', 'b', 'r', 'z'};
@@ -147,9 +152,9 @@ TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
                 {{116, 'b'}, 216},
                 {{116, 'r'}, 112},
                 {{116, 'z'}, 100},
-                {{200, '1'}, 101},
-                {{200, '2'}, 102},
-                {{200, '5'}, 105},
+                {{200, '1'}, 201},
+                {{200, '2'}, 202},
+                {{200, '5'}, 205},
                 {{200, 'a'}, 100},
                 {{200, 'b'}, 200},
                 {{200, 'r'}, 200},
@@ -374,6 +379,181 @@ TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
         auto result = dfa.simulate(validInput, false);
 
         REQUIRE(result);
+    }
+
+    SECTION("simulate(NFA_1; NFA_1_INPUT) -> [accept | reject]") {
+        const auto &expectedAlphabet = Alphabet({'0', '1', '2', '3', '4', 'a', 'b', 'c', 'd', 'e'});
+        const auto &expectedStates = States({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 100, 101, 102, 103, 104,
+                                             200, 201, 202, 203, 204});
+        const auto &expectedFinals = States({100, 101, 102, 103, 104, 200, 201, 202, 203, 204});
+        const auto &expectedStart = States({0});
+        const auto &expectedTransitions = NFATransitionMap({
+                                                                   {{0,   '0'}, {0}},
+                                                                   {{0,   '1'}, {0}},
+                                                                   {{0,   '2'}, {0}},
+                                                                   {{0,   '3'}, {0}},
+                                                                   {{0,   '4'}, {0}},
+                                                                   {{0,   'a'}, {0}},
+                                                                   {{0,   'b'}, {0}},
+                                                                   {{0,   'c'}, {0}},
+                                                                   {{0,   'd'}, {0}},
+                                                                   {{0,   'e'}, {0}},
+                                                                   {{0,   '!'}, {1, 2}},
+                                                                   {{1,   '0'}, {3}},
+                                                                   {{1,   '1'}, {4}},
+                                                                   {{1,   '2'}, {5}},
+                                                                   {{1,   '3'}, {6}},
+                                                                   {{1,   '4'}, {7}},
+                                                                   {{2,   'a'}, {8}},
+                                                                   {{2,   'b'}, {9}},
+                                                                   {{2,   'c'}, {10}},
+                                                                   {{2,   'd'}, {11}},
+                                                                   {{2,   'e'}, {12}},
+                                                                   {{3,   '0'}, {100}},
+                                                                   {{4,   '1'}, {101}},
+                                                                   {{5,   '2'}, {102}},
+                                                                   {{6,   '3'}, {103}},
+                                                                   {{7,   '4'}, {104}},
+                                                                   {{8,   'a'}, {200}},
+                                                                   {{9,   'b'}, {201}},
+                                                                   {{10,  'c'}, {202}},
+                                                                   {{11,  'd'}, {203}},
+                                                                   {{12,  'e'}, {204}},
+                                                                   {{100, '0'}, {100}},
+                                                                   {{100, '1'}, {100}},
+                                                                   {{100, '2'}, {100}},
+                                                                   {{100, '3'}, {100}},
+                                                                   {{100, '4'}, {100}},
+                                                                   {{100, 'a'}, {100}},
+                                                                   {{100, 'b'}, {100}},
+                                                                   {{100, 'c'}, {100}},
+                                                                   {{100, 'd'}, {100}},
+                                                                   {{100, 'e'}, {100}},
+                                                                   {{101, '0'}, {101}},
+                                                                   {{101, '1'}, {101}},
+                                                                   {{101, '2'}, {101}},
+                                                                   {{101, '3'}, {101}},
+                                                                   {{101, '4'}, {101}},
+                                                                   {{101, 'a'}, {101}},
+                                                                   {{101, 'b'}, {101}},
+                                                                   {{101, 'c'}, {101}},
+                                                                   {{101, 'd'}, {101}},
+                                                                   {{101, 'e'}, {101}},
+                                                                   {{102, '0'}, {102}},
+                                                                   {{102, '1'}, {102}},
+                                                                   {{102, '2'}, {102}},
+                                                                   {{102, '3'}, {102}},
+                                                                   {{102, '4'}, {102}},
+                                                                   {{102, 'a'}, {102}},
+                                                                   {{102, 'b'}, {102}},
+                                                                   {{102, 'c'}, {102}},
+                                                                   {{102, 'd'}, {102}},
+                                                                   {{102, 'e'}, {102}},
+                                                                   {{103, '0'}, {103}},
+                                                                   {{103, '1'}, {103}},
+                                                                   {{103, '2'}, {103}},
+                                                                   {{103, '3'}, {103}},
+                                                                   {{103, '4'}, {103}},
+                                                                   {{103, 'a'}, {103}},
+                                                                   {{103, 'b'}, {103}},
+                                                                   {{103, 'c'}, {103}},
+                                                                   {{103, 'd'}, {103}},
+                                                                   {{103, 'e'}, {103}},
+                                                                   {{104, '0'}, {104}},
+                                                                   {{104, '1'}, {104}},
+                                                                   {{104, '2'}, {104}},
+                                                                   {{104, '3'}, {104}},
+                                                                   {{104, '4'}, {104}},
+                                                                   {{104, 'a'}, {104}},
+                                                                   {{104, 'b'}, {104}},
+                                                                   {{104, 'c'}, {104}},
+                                                                   {{104, 'd'}, {104}},
+                                                                   {{104, 'e'}, {104}},
+                                                                   {{200, '0'}, {200}},
+                                                                   {{200, '1'}, {200}},
+                                                                   {{200, '2'}, {200}},
+                                                                   {{200, '3'}, {200}},
+                                                                   {{200, '4'}, {200}},
+                                                                   {{200, 'a'}, {200}},
+                                                                   {{200, 'b'}, {200}},
+                                                                   {{200, 'c'}, {200}},
+                                                                   {{200, 'd'}, {200}},
+                                                                   {{200, 'e'}, {200}},
+                                                                   {{201, '0'}, {201}},
+                                                                   {{201, '1'}, {201}},
+                                                                   {{201, '2'}, {201}},
+                                                                   {{201, '3'}, {201}},
+                                                                   {{201, '4'}, {201}},
+                                                                   {{201, 'a'}, {201}},
+                                                                   {{201, 'b'}, {201}},
+                                                                   {{201, 'c'}, {201}},
+                                                                   {{201, 'd'}, {201}},
+                                                                   {{201, 'e'}, {201}},
+                                                                   {{202, '0'}, {202}},
+                                                                   {{202, '1'}, {202}},
+                                                                   {{202, '2'}, {202}},
+                                                                   {{202, '3'}, {202}},
+                                                                   {{202, '4'}, {202}},
+                                                                   {{202, 'a'}, {202}},
+                                                                   {{202, 'b'}, {202}},
+                                                                   {{202, 'c'}, {202}},
+                                                                   {{202, 'd'}, {202}},
+                                                                   {{202, 'e'}, {202}},
+                                                                   {{203, '0'}, {203}},
+                                                                   {{203, '1'}, {203}},
+                                                                   {{203, '2'}, {203}},
+                                                                   {{203, '3'}, {203}},
+                                                                   {{203, '4'}, {203}},
+                                                                   {{203, 'a'}, {203}},
+                                                                   {{203, 'b'}, {203}},
+                                                                   {{203, 'c'}, {203}},
+                                                                   {{203, 'd'}, {203}},
+                                                                   {{203, 'e'}, {203}},
+                                                                   {{204, '0'}, {204}},
+                                                                   {{204, '1'}, {204}},
+                                                                   {{204, '2'}, {204}},
+                                                                   {{204, '3'}, {204}},
+                                                                   {{204, '4'}, {204}},
+                                                                   {{204, 'a'}, {204}},
+                                                                   {{204, 'b'}, {204}},
+                                                                   {{204, 'c'}, {204}},
+                                                                   {{204, 'd'}, {204}},
+                                                                   {{204, 'e'}, {204}},
+                                                           });
+        FileReader fileReader;
+        FSMReader fsmReader;
+        NFA nfa;
+
+        fsmReader.parse(NFA_1_PATH, nfa);
+        REQUIRE(nfa.getAlphabet().size() == 10);
+        REQUIRE(nfa.getStates().size() == 23);
+        REQUIRE(nfa.getFinals().size() == 10);
+        REQUIRE(nfa.getStart().size() == 1);
+        REQUIRE(nfa.getTransitions().size() == 131);
+        REQUIRE(nfa.getAlphabet() == expectedAlphabet);
+        REQUIRE(nfa.getStates() == expectedStates);
+        REQUIRE(nfa.getFinals() == expectedFinals);
+        REQUIRE(nfa.getStart() == expectedStart);
+        REQUIRE(nfa.getTransitions() == expectedTransitions);
+
+        fileReader.link(INPUT_2_PATH);
+        REQUIRE(fileReader.isBind());
+        fileReader.setType(io_manager::ReadType::WHOLE_FILE);
+        fileReader.readIntoBuffer();
+        auto readInput = Strings::flatten(fileReader.getContentBuffer());
+        auto validInputs = Strings::split(readInput, '\n');
+        fileReader.sever();
+        REQUIRE(!fileReader.isBind());
+
+        std::vector<bool> results;
+        std::vector<bool> expectedResults = {true, true, false, true};
+
+        for (const auto &validInput : validInputs) {
+            auto result = nfa.simulate(validInput, false);
+            results.push_back(result);
+        }
+
+        REQUIRE_THAT(results, Catch::Equals(expectedResults));
     }
 
 }

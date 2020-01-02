@@ -16,5 +16,7 @@ add_executable(
 
         ../src/main_program/fsm_simulation_to_stdout.cpp
 
+        helpers/collections.cpp ../src/helpers/collections.cpp
+
 )
 target_link_libraries(Catch_tests_run)

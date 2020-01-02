@@ -48,6 +48,20 @@ namespace helpers {
         return result;
     }
 
+    std::string Strings::betweenFirsts(const std::string &source, const std::string &lhs, const std::string &rhs) {
+        auto left = source.find(lhs);
+        auto right = source.find(rhs, left + lhs.size());
+        bool isFirstStringFound = left != std::string::npos;
+        bool isLastStringFound = right != std::string::npos;
+
+        if (isFirstStringFound && isLastStringFound) {
+            auto subString = source.substr(left + lhs.size(), right - left - lhs.size());
+            return subString;
+        }
+
+        return std::string();
+    }
+
     std::string Strings::flatten(const std::vector<char> &buffer) {
         std::string flatten;
 
@@ -88,6 +102,10 @@ namespace helpers {
     bool Strings::isNumber(const std::string &source) {
         std::regex number("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?");
         return std::regex_match(source, number);
+    }
+
+    bool Strings::contains(const std::string &source, const std::string &matchStr) {
+        return source.find(matchStr) != std::string::npos;
     }
 
 }
