@@ -36,9 +36,15 @@ namespace main_program {
 
         const auto &nfaType = *it;
         it++;
+
+        if (fsmType == nfaType) {
+            simulateNFA();
+            return;
+        }
+
         const auto &tmType = *it;
 
-        if (fsmType == nfaType || fsmType == tmType) {
+        if (fsmType == tmType) {
             throw std::bad_function_call();
         }
     }
@@ -101,7 +107,12 @@ namespace main_program {
             return;
         }
 
-        if (fsmType == nfaType || fsmType == tmType) {
+        if (fsmType == nfaType) {
+            reader.parse(filePath, assemblies->nfa);
+            return;
+        }
+
+        if (fsmType == tmType) {
             throw std::bad_function_call();
         }
     }
@@ -131,6 +142,16 @@ namespace main_program {
             auto input = inputReader->getNextLine();
             auto validInput = Strings::remove(input, '\n');
             dfa.simulate(validInput, true);
+        }
+    }
+
+    void FSMSimulationToStdOut::simulateNFA() {
+        auto &nfa = assemblies->nfa;
+
+        while (inputReader->hasNextLine()) {
+            auto input = inputReader->getNextLine();
+            auto validInput = Strings::remove(input, '\n');
+            nfa.simulate(validInput, true);
         }
     }
 

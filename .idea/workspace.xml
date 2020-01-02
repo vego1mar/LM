@@ -13,15 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f866098f-8b34-4e58-9f59-2f8ec8e71fb5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/tests/definitions.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Catch_tests/io_manager/file_reader_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/io_manager/file_reader_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Catch_tests/io_manager/fsm_reader_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/io_manager/fsm_reader_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/nfa_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/files/nfa_1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automatons/nfa.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/nfa.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automatons/nfa.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/nfa.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io_manager/fsm_reader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_manager/fsm_reader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +155,7 @@
       <workItem from="1577216965265" duration="16000" />
       <workItem from="1577264692202" duration="139919000" />
       <workItem from="1577790359904" duration="66257000" />
-      <workItem from="1577981769000" duration="17751000" />
+      <workItem from="1577981769000" duration="18681000" />
     </task>
     <servers />
   </component>

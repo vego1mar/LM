@@ -7,10 +7,12 @@
 #include "../command_line/cla_parser.hpp"
 #include "../automatons/dfa.hpp"
 #include "../io_manager/file_reader.hpp"
+#include "../automatons/nfa.hpp"
 
 using command_line::CLAParser;
 using automatons::DFA;
 using io_manager::FileReader;
+using automatons::NFA;
 
 namespace main_program {
 
@@ -19,6 +21,7 @@ namespace main_program {
         const std::list<std::string> options = {"--fsm", "--def", "--input"};
         std::string fsmType;
         DFA dfa;
+        NFA nfa;
     };
 
 
@@ -58,6 +61,8 @@ namespace main_program {
         void assembleFromInputFile();
 
         void simulateDFA();
+
+        void simulateNFA();
 
     };
 
