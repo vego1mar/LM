@@ -4,6 +4,7 @@ int main(int argc, char *argv[]) {
     /*
      * Example of minimal command-line arguments:
      * programExecutable --fsm dfa --def ../../files/dfa_1.txt --input ../../files/input_1.txt
+     * programExecutable --fsm nfa --def ../../files/nfa_1.txt --input ../../files/input_2.txt
      *
      * Expected example of usage:
      * programExecutable > simulation_result.txt

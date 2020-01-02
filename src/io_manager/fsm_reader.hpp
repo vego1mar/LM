@@ -54,21 +54,21 @@ namespace io_manager {
 
         static void parseNFATransitionEntry(NFATransitionMap &transitionMap, const Tokens &tokenized, NFATransitionEntryPOD &pod);
 
-        static void processNFAEntryPairsBrackets(const Tokens &symbolsTokens, NFATransitionEntryPOD &pod);
+        static void processNFAEntryPairsBrackets(const Tokens &symbolsTokens, const NFATransitionEntryPOD &pod);
 
-        static void processNFAEntryPairParentheses(NFATransitionEntryPOD &pod);
+        static void processNFAEntryPairParentheses(const NFATransitionEntryPOD &pod);
 
-        static void processNFAEntryNextSingleBrackets(NFATransitionEntryPOD &pod);
+        static void processNFAEntryNextSingleBrackets(const NFATransitionEntryPOD &pod);
 
-        static void processNFAEntryNextDoubleBrackets(NFATransitionEntryPOD &pod);
+        static void processNFAEntryNextDoubleBrackets(const NFATransitionEntryPOD &pod);
 
-        static void processNFAEntryNextParentheses(NFATransitionEntryPOD &pod);
+        static void processNFAEntryNextParentheses(const NFATransitionEntryPOD &pod);
 
-        static void parseNFASymbolsColumn(NFATransitionEntryPOD &pod);
+        static void parseNFASymbolsColumn(const NFATransitionEntryPOD &pod);
 
-        static void parseNFANextStatesColumn(NFATransitionEntryPOD &pod);
+        static void parseNFANextStatesColumn(const NFATransitionEntryPOD &pod);
 
-        static void makeNFATransitionEntries(NFATransitionMap &map, NFATransitionEntryPOD &pod, const std::size_t &no);
+        static void makeNFATransitionEntries(NFATransitionMap &map, const NFATransitionEntryPOD &pod, const std::size_t &no);
 
     };
 

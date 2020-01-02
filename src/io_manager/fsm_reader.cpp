@@ -190,9 +190,9 @@ namespace io_manager {
         const auto &symbolsColumn = tokenized[1];
         const auto &nextStatesColumn = tokenized[2];
 
-        auto throwExceptionIfPalesAreNotPaired = [](const std::string &column, NFATransitionEntryPOD &pod) {
-            bool &containsBrackets = *pod.containsBrackets;
-            bool &containsParentheses = *pod.containsParentheses;
+        auto throwExceptionIfPalesAreNotPaired = [](const std::string &column, const NFATransitionEntryPOD &data) {
+            bool &containsBrackets = *data.containsBrackets;
+            bool &containsParentheses = *data.containsParentheses;
             containsBrackets = Strings::contains(column, "[") && Strings::contains(column, "]");
             containsParentheses = Strings::contains(column, "(") && Strings::contains(column, ")");
 
@@ -214,7 +214,6 @@ namespace io_manager {
 
         auto &containsBrackets = *pod.containsBrackets;
         auto &containsParentheses = *pod.containsParentheses;
-        auto &pairs = *pod.pairs;
         throwExceptionIfPalesAreNotPaired(symbolsColumn, pod);
         parseNFASymbolsColumn(pod);
 
@@ -230,10 +229,6 @@ namespace io_manager {
             throw std::length_error("sumOfEvents != stateEventVector.size() || sumOfEvents > nextStatesVector.size()");
         }
 
-        auto &its = (*pod.iterators);
-        typedef const NFATransitionEntryPOD &Param1;
-        typedef const std::size_t &Param2;
-
         if (repetitions.size() != (*pod.isDoubleBracketed).size()) {
             throw std::length_error("repetitions.size() != (*pod.isDoubleBracketed).size()");
         }
@@ -245,7 +240,7 @@ namespace io_manager {
         }
     }
 
-    void FSMReader::processNFAEntryPairsBrackets(const Tokens &symbolsTokens, NFATransitionEntryPOD &pod) {
+    void FSMReader::processNFAEntryPairsBrackets(const Tokens &symbolsTokens, const NFATransitionEntryPOD &pod) {
         const int &currentState = *pod.currentState;
         auto &pairs = *pod.pairs;
         std::size_t repetitives = 0;
@@ -263,7 +258,7 @@ namespace io_manager {
         (*pod.repetitions).emplace_back(std::vector<std::size_t>{repetitives});
     }
 
-    void FSMReader::processNFAEntryPairParentheses(NFATransitionEntryPOD &pod) {
+    void FSMReader::processNFAEntryPairParentheses(const NFATransitionEntryPOD &pod) {
         const std::string &symbolsColumn = *pod.symbolsColumn;
         const int &currentState = *pod.currentState;
         auto &pairs = *pod.pairs;
@@ -284,11 +279,9 @@ namespace io_manager {
             pairs.emplace_back(pair);
             repetitions.emplace_back(std::vector<std::size_t>{1});
         }
-
-        //repetitions.emplace_back(std::vector<std::size_t>{1});
     }
 
-    void FSMReader::processNFAEntryNextSingleBrackets(NFATransitionEntryPOD &pod) {
+    void FSMReader::processNFAEntryNextSingleBrackets(const NFATransitionEntryPOD &pod) {
         const std::string &nextStatesColumn = *pod.nextStatesColumn;
         auto &nextStates = *pod.nextStates;
         auto setsStr = Strings::betweenFirsts(nextStatesColumn, "[", "]");
@@ -298,7 +291,7 @@ namespace io_manager {
             auto tokens = Strings::split(setStr, ',');
             States currentNext = States();
 
-            std::for_each(tokens.begin(), tokens.end(), [&tokens, &currentNext](const std::string &setStates) {
+            std::for_each(tokens.begin(), tokens.end(), [&currentNext](const std::string &setStates) {
                 auto next = Strings::split(setStates, ',');
 
                 for (const auto &stateStr : next) {
@@ -311,7 +304,7 @@ namespace io_manager {
         }
     }
 
-    void FSMReader::processNFAEntryNextDoubleBrackets(NFATransitionEntryPOD &pod) {
+    void FSMReader::processNFAEntryNextDoubleBrackets(const NFATransitionEntryPOD &pod) {
         const std::string &nextStatesColumn = *pod.nextStatesColumn;
         NFAEntryNext &nextStates = *pod.nextStates;
         auto stateStr = Strings::betweenFirsts(nextStatesColumn, "[[", "]]");
@@ -320,7 +313,7 @@ namespace io_manager {
         nextStates.emplace_back(next);
     }
 
-    void FSMReader::processNFAEntryNextParentheses(NFATransitionEntryPOD &pod) {
+    void FSMReader::processNFAEntryNextParentheses(const NFATransitionEntryPOD &pod) {
         const std::string &nextStatesColumn = *pod.nextStatesColumn;
         auto &nextStates = *pod.nextStates;
         auto slice = nextStatesColumn.substr(nextStatesColumn.find('('));
@@ -349,9 +342,9 @@ namespace io_manager {
         }
     }
 
-    void FSMReader::parseNFASymbolsColumn(NFATransitionEntryPOD &pod) {
-        auto &containsBrackets = *pod.containsBrackets;
-        auto &containsParentheses = *pod.containsParentheses;
+    void FSMReader::parseNFASymbolsColumn(const NFATransitionEntryPOD &pod) {
+        const auto &containsBrackets = *pod.containsBrackets;
+        const auto &containsParentheses = *pod.containsParentheses;
 
         if (containsBrackets) {
             auto symbolsStr = Strings::betweenFirsts(*pod.symbolsColumn, "[", "]");
@@ -364,10 +357,10 @@ namespace io_manager {
         }
     }
 
-    void FSMReader::parseNFANextStatesColumn(NFATransitionEntryPOD &pod) {
+    void FSMReader::parseNFANextStatesColumn(const NFATransitionEntryPOD &pod) {
         const auto &nextStatesColumn = *pod.nextStatesColumn;
-        auto &containsBrackets = *pod.containsBrackets;
-        auto &containsParentheses = *pod.containsParentheses;
+        const auto &containsBrackets = *pod.containsBrackets;
+        const auto &containsParentheses = *pod.containsParentheses;
 
         if (containsBrackets) {
             bool containsSinglePair = Strings::contains(nextStatesColumn, "[") && Strings::contains(nextStatesColumn, "]");
@@ -389,11 +382,10 @@ namespace io_manager {
 
         if (containsParentheses) {
             processNFAEntryNextParentheses(pod);
-            //(*pod.isDoubleBracketed).push_back(false);
         }
     }
 
-    void FSMReader::makeNFATransitionEntries(NFATransitionMap &map, NFATransitionEntryPOD &pod, const std::size_t &no) {
+    void FSMReader::makeNFATransitionEntries(NFATransitionMap &map, const NFATransitionEntryPOD &pod, const std::size_t &no) {
         const auto &repetitionsNo = no;
         auto &its = *pod.iterators;
         auto &transitionMap = map;
