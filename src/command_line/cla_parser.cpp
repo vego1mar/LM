@@ -31,4 +31,8 @@ namespace command_line {
         return programName;
     }
 
+    bool CLAParser::hasArguments() const {
+        return !tokens.empty();
+    }
+
 }

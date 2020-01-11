@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <memory>
 #include <functional>
+#include <iostream>
 #include "fsm_simulation_to_stdout.hpp"
 #include "../io_manager/fsm_reader.hpp"
 #include "../helpers/strings.hpp"
@@ -19,6 +20,12 @@ namespace main_program {
     void FSMSimulationToStdOut::assembleCLI() {
         assemblies = std::make_unique<AssemblyData>();
         inputReader = std::make_unique<FileReader>();
+
+        if (!parser->hasArguments()) {
+            printHelp();
+            return;
+        }
+
         assembleFSMType();
         assembleFromDefinitionFile();
         assembleFromInputFile();
@@ -63,6 +70,20 @@ namespace main_program {
             inputReader->sever();
             inputReader.reset();
         }
+    }
+
+    void FSMSimulationToStdOut::printHelp() {
+        std::cout << "SYNOPSIS:" << std::endl <<
+                  "\tLM --fsm <FSM_OPTIONS> --def [DEF_FILE] --input [INPUT_FILE]" << std::endl <<
+                  std::endl <<
+                  "OPTIONS:" << std::endl <<
+                  "<FSM_OPTIONS> = [dfa | nfa | tm]" << std::endl <<
+                  "[DEF_FILE] - file path to definition file" << std::endl <<
+                  "[INPUT_FILE] - file path to input file" << std::endl <<
+                  std::endl <<
+                  "EXAMPLES:" << std::endl <<
+                  "LM --fsm dfa --def ../../files/dfa_1.txt --input ../../files/input_1.txt" << std::endl <<
+                  "LM --fsm nfa --def nfa.txt --input input.txt > output.txt" << std::endl;
     }
 
     void FSMSimulationToStdOut::assembleFSMType() {

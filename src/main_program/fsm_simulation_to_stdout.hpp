@@ -52,6 +52,8 @@ namespace main_program {
 
         void disposeHeap();
 
+        static void printHelp();
+
     private:
 
         void assembleFSMType();

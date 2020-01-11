@@ -34,6 +34,8 @@ namespace command_line {
 
         const std::string &getProgramName() const;
 
+        bool hasArguments() const;
+
     };
 
 }
