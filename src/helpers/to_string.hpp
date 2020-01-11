@@ -19,6 +19,10 @@ namespace helpers {
 
     std::string toString(const automatons::ShiftDirection &shiftType);
 
+    std::string toString(const bool &boolean);
+
+    std::string toString(const automatons::DFATransitionStep &transitionStep);
+
 }
 
 #endif //TO_STRING_HPP

@@ -5,6 +5,7 @@
 #include "fsm_simulation_to_stdout.hpp"
 #include "../io_manager/fsm_reader.hpp"
 #include "../helpers/strings.hpp"
+#include "../helpers/to_string.hpp"
 
 namespace main_program {
 
@@ -17,18 +18,24 @@ namespace main_program {
         parser = std::make_unique<CLAParser>(argc, argv);
     }
 
-    void FSMSimulationToStdOut::assembleCLI() {
+    bool FSMSimulationToStdOut::assembleCLI() {
         assemblies = std::make_unique<AssemblyData>();
         inputReader = std::make_unique<FileReader>();
 
         if (!parser->hasArguments()) {
             printHelp();
-            return;
+            return false;
+        }
+
+        if (hasDFAInteractiveModeBeenAcquired()) {
+            simulateDFAInteractive();
+            return false;
         }
 
         assembleFSMType();
         assembleFromDefinitionFile();
         assembleFromInputFile();
+        return true;
     }
 
     void FSMSimulationToStdOut::runMain() {
@@ -75,6 +82,7 @@ namespace main_program {
     void FSMSimulationToStdOut::printHelp() {
         std::cout << "SYNOPSIS:" << std::endl <<
                   "\tLM --fsm <FSM_OPTIONS> --def [DEF_FILE] --input [INPUT_FILE]" << std::endl <<
+                  "LM --dfa-interactive --def [DEF_FILE]" << std::endl <<
                   std::endl <<
                   "OPTIONS:" << std::endl <<
                   "<FSM_OPTIONS> = [dfa | nfa | tm]" << std::endl <<
@@ -82,8 +90,9 @@ namespace main_program {
                   "[INPUT_FILE] - file path to input file" << std::endl <<
                   std::endl <<
                   "EXAMPLES:" << std::endl <<
-                  "LM --fsm dfa --def ../../files/dfa_1.txt --input ../../files/input_1.txt" << std::endl <<
-                  "LM --fsm nfa --def nfa.txt --input input.txt > output.txt" << std::endl;
+                  "LM --fsm dfa --def ../../files/dfa1.txt --input ../../files/input1.txt" << std::endl <<
+                  "LM --dfa-interactive --def dfa2.txt" << std::endl <<
+                  "LM --fsm nfa --def nfa.txt --input input2.txt > output.txt" << std::endl;
     }
 
     void FSMSimulationToStdOut::assembleFSMType() {
@@ -175,6 +184,115 @@ namespace main_program {
             auto validInput = Strings::remove(input, '\n');
             nfa.simulate(validInput, true);
         }
+    }
+
+    bool FSMSimulationToStdOut::hasDFAInteractiveModeBeenAcquired() {
+        auto it = assemblies->singleOptions.begin();
+        const auto &singleOption = *it;
+        return parser->isOptionExists(singleOption);
+    }
+
+    void FSMSimulationToStdOut::simulateDFAInteractive() {
+        auto it = assemblies->options.begin();
+        std::advance(it, 1);
+        const std::string &defOption = *it;
+
+        if (!parser->isOptionExists(defOption)) {
+            throw std::invalid_argument("!parser->isOptionExists(defOption) => " + defOption);
+        }
+
+        auto filePath = parser->getOption(defOption);
+        FSMReader reader;
+        reader.parse(filePath, assemblies->dfa);
+        const auto &alphabet = assemblies->dfa.getAlphabet();
+        char event = '\0';
+        std::vector<StateEventPair> steps;
+        DFATransitionStep step;
+
+        std::cout << "<interactive> = " << helpers::toString(assemblies->dfa.getAlphabet()) << std::endl;
+        std::cout << "<exit> = [q]" << std::endl;
+        std::cout << std::endl;
+
+        while (event != 'q') {
+            std::cin >> event;
+            bool isInAlphabet = alphabet.find(event) != alphabet.end();
+
+            if (!isInAlphabet) {
+                std::cout << "Input ignored." << std::endl;
+                std::cout << std::endl;
+                continue;
+            }
+
+            step = assemblies->dfa.getNextStep(event);
+            std::cout << helpers::toString(step) << std::endl;
+            steps.push_back(std::get<1>(step));
+            __interpretEventForExercise1(step);
+            __interpretNextStateForExercise1(step);
+            std::cout << std::endl;
+        }
+
+        __printTraversedPathForExercise1(steps);
+        __printResultForExercise1(step);
+    }
+
+    void FSMSimulationToStdOut::__interpretNextStateForExercise1(const DFATransitionStep &step) {
+        const auto &nextState = std::get<2>(step);
+        std::string coinsStr = "0";
+
+        if (nextState > 100 && nextState != 200) {
+            const auto &nextStateStr = std::to_string(nextState);
+            coinsStr = nextStateStr.substr(1);
+
+            if (coinsStr[0] == '0') {
+                coinsStr = coinsStr.substr(1);
+            }
+        }
+
+        std::cout << "Worth: " << coinsStr << " zł." << std::endl;
+    }
+
+    void FSMSimulationToStdOut::__interpretEventForExercise1(const DFATransitionStep &step) {
+        const auto &event = std::get<1>(std::get<1>(step));
+
+        switch (event) {
+            case '1':
+                std::cout << "Thrown 1 zł." << std::endl;
+                break;
+            case '2':
+                std::cout << "Thrown 2 zł." << std::endl;
+                break;
+            case '5':
+                std::cout << "Thrown 5 zł." << std::endl;
+                break;
+            case 'a':
+                std::cout << "Selected route: pool/pool+sauna (regular)." << std::endl;
+                break;
+            case 'b':
+                std::cout << "Selected route: pool/pool+sauna (discounted, 2h)." << std::endl;
+                break;
+            case 'r':
+                std::cout << "Ticket acquired. Residue returned." << std::endl;
+                break;
+            case 'z':
+                std::cout << "Requested refund." << std::endl;
+                break;
+            default:
+                break;
+        }
+    }
+
+    void FSMSimulationToStdOut::__printTraversedPathForExercise1(const std::vector<StateEventPair> &steps) {
+        for (const auto &stepPair : steps) {
+            const auto &state = std::get<0>(stepPair);
+            const auto &event = std::get<1>(stepPair);
+            const std::string &traversedPath = '(' + std::to_string(state) + ',' + event + ") -> ";
+            std::cout << traversedPath;
+        }
+    }
+
+    void FSMSimulationToStdOut::__printResultForExercise1(const DFATransitionStep &lastStep) {
+        const auto &lastState = std::get<2>(lastStep);
+        std::cout << std::to_string(lastState) << std::endl;
     }
 
 }

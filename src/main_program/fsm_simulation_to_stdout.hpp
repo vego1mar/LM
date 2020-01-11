@@ -13,12 +13,16 @@ using command_line::CLAParser;
 using automatons::DFA;
 using io_manager::FileReader;
 using automatons::NFA;
+using automatons::DFATransitionStep;
+using automatons::StateEventPair;
+
 
 namespace main_program {
 
     struct AssemblyData {
         const std::list<std::string> types = {"dfa", "nfa", "tm"};
         const std::list<std::string> options = {"--fsm", "--def", "--input"};
+        const std::list<std::string> singleOptions = {"--dfa-interactive"};
         std::string fsmType;
         DFA dfa;
         NFA nfa;
@@ -46,7 +50,7 @@ namespace main_program {
 
         void joinCLI(int argc, char **argv);
 
-        void assembleCLI();
+        bool assembleCLI();
 
         void runMain();
 
@@ -65,6 +69,18 @@ namespace main_program {
         void simulateDFA();
 
         void simulateNFA();
+
+        bool hasDFAInteractiveModeBeenAcquired();
+
+        void simulateDFAInteractive();
+
+        static void __interpretNextStateForExercise1(const DFATransitionStep &step);
+
+        static void __interpretEventForExercise1(const DFATransitionStep &step);
+
+        static void __printTraversedPathForExercise1(const std::vector<StateEventPair> &steps);
+
+        static void __printResultForExercise1(const DFATransitionStep &lastStep);
 
     };
 

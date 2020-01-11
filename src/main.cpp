@@ -13,9 +13,12 @@ int main(int argc, char *argv[]) {
 
     FSMSimulationToStdOut program;
     program.joinCLI(argc, argv);
-    program.assembleCLI();
-    program.runMain();
-    program.disposeHeap();
+    const auto &shouldBeNonInteractive = program.assembleCLI();
 
+    if (shouldBeNonInteractive) {
+        program.runMain();
+    }
+
+    program.disposeHeap();
     return 0;
 }

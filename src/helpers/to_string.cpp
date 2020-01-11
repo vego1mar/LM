@@ -78,4 +78,19 @@ namespace helpers {
         return "UNKNOWN";
     }
 
+    std::string toString(const bool &boolean) {
+        return (boolean) ? "true" : "false";
+    }
+
+    std::string toString(const automatons::DFATransitionStep &transitionStep) {
+        const auto &isAcceptingState = std::get<0>(transitionStep);
+        const auto &previousState = std::get<0>(std::get<1>(transitionStep));
+        const auto &event = std::get<1>(std::get<1>(transitionStep));
+        const auto &nextState = std::get<2>(transitionStep);
+        std::string string = '(' + std::to_string(previousState) + ',' + event + ") -> " + std::to_string(nextState);
+        const std::string &status = (isAcceptingState) ? "ACCEPTED" : "REJECTED";
+        string += " <" + status + '>';
+        return string;
+    }
+
 }
