@@ -40,9 +40,16 @@ namespace automatons {
         bool wasNotUsed = true;
     };
 
-    enum class TMStepperContinuation {
+    enum class StepperContinuation {
         PREVIOUS,
         NEXT
+    };
+
+    typedef std::tuple<bool, StateEventPair, int> DFATransitionStep;
+
+    struct DFAStepper {
+        int currentState = 0;
+        bool wasUsed = false;
     };
 
 }

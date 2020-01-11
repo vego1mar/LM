@@ -1,3 +1,4 @@
+#include <functional>
 #include "dfa.hpp"
 #include "../helpers/to_string.hpp"
 #include "printers.hpp"
@@ -96,6 +97,21 @@ namespace automatons {
 
     bool DFA::isAcceptingState(const int &state) const {
         return finals.find(state) != finals.end();
+    }
+
+    DFATransitionStep DFA::getNextStep(const char &event) {
+        if (!stepper->wasUsed) {
+            stepper->wasUsed = true;
+            stepper->currentState = getStart();
+        }
+
+        auto pair = StateEventPair(stepper->currentState, event);
+        const auto nextState = doTransition(pair);
+
+        bool isAccepted = isAcceptingState(nextState);
+        const auto &currentPair = StateEventPair(stepper->currentState, event);
+        stepper->currentState = nextState;
+        return std::make_tuple<>(isAccepted, currentPair, nextState);
     }
 
 }

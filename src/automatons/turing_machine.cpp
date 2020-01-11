@@ -139,7 +139,7 @@ namespace automatons {
             sd.workingTape = getInputTape();
             sd.wasNotUsed = false;
             sd.previous = getEventActionTuple(sd, getStart());
-            determineIfStepsShouldBeContinued(sd, TMStepperContinuation::PREVIOUS);
+            determineIfStepsShouldBeContinued(sd, StepperContinuation::PREVIOUS);
         }
 
         if (!sd.hasNextStep) {
@@ -151,7 +151,7 @@ namespace automatons {
         shiftHeadPosition(sd.headPosition, previousAction);
         auto nextState = std::get<2>(previousAction);
         sd.next = getEventActionTuple(sd, nextState);
-        determineIfStepsShouldBeContinued(sd, TMStepperContinuation::NEXT);
+        determineIfStepsShouldBeContinued(sd, StepperContinuation::NEXT);
         sd.previous = sd.next;
         return getNextStepTuple(sd);
     }
@@ -208,11 +208,11 @@ namespace automatons {
         return std::make_tuple<>(event, action);
     }
 
-    void TuringMachine::determineIfStepsShouldBeContinued(TMStepper &sd, const TMStepperContinuation &which) {
+    void TuringMachine::determineIfStepsShouldBeContinued(TMStepper &sd, const StepperContinuation &which) {
         auto &currentTuple = sd.previous;
         auto &currentState = std::get<0>(std::get<0>(currentTuple));
 
-        if (which == TMStepperContinuation::NEXT) {
+        if (which == StepperContinuation::NEXT) {
             currentTuple = sd.next;
             currentState = std::get<2>(std::get<1>(currentTuple));
         }

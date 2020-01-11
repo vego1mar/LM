@@ -1,6 +1,7 @@
 #ifndef DFA_HPP
 #define DFA_HPP
 
+#include <memory>
 #include "definitions.hpp"
 #include "interfaces.hpp"
 
@@ -15,6 +16,7 @@ namespace automatons {
         States finals;
         DFATransitionMap transitions;
         int start = 0;
+        std::unique_ptr<DFAStepper> stepper = std::make_unique<DFAStepper>();
 
     public:
         DFA() = default;
@@ -52,6 +54,9 @@ namespace automatons {
         bool simulate(const std::string &input, bool isVerbose) override;
 
         std::string toString() const override;
+
+        DFATransitionStep getNextStep(const char &event);
+
 
     private:
         int doTransition(const StateEventPair &currentPair) const;

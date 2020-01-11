@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <memory>
+#include <functional>
 #include "fsm_simulation_to_stdout.hpp"
 #include "../io_manager/fsm_reader.hpp"
 #include "../helpers/strings.hpp"

@@ -76,7 +76,7 @@ namespace automatons {
 
         EventActionTuple getEventActionTuple(const TMStepper &data, const int &machineState) const;
 
-        static void determineIfStepsShouldBeContinued(TMStepper &sd, const TMStepperContinuation &which);
+        static void determineIfStepsShouldBeContinued(TMStepper &sd, const StepperContinuation &which);
 
         std::tuple<bool, std::string> getNextStepTuple(const TMStepper &sd) const;
 
