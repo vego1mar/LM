@@ -1,0 +1,14 @@
+alphabet ab
+states 0 1 2 3 4
+start 0
+finals 4
+
+transitions
+        a       b       -
+0   a,R,1   b,R,0   -,N,T
+1   a,R,2   b,R,0   -,N,T
+2   b,L,3   b,R,0   -,N,T
+3   b,L,4   b,R,0   -,N,T
+4   b,R,0   b,R,0   -,N,T
+
+%%

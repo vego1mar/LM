@@ -9,6 +9,9 @@ namespace io_manager {
     using automatons::Alphabet;
     using automatons::States;
     using automatons::DFATransitionMap;
+    using automatons::TMTransitionMap;
+    using automatons::EventActionTuple;
+    using automatons::ShiftDirection;
     using helpers::Strings;
 
 
@@ -64,6 +67,33 @@ namespace io_manager {
 
         auto transitionsTokens = Strings::split(Strings::replace(content, '\n', "%"), '%');
         parseNFATransitions(transitionsTokens, outNfa);
+        reader->sever();
+    }
+
+    void FSMReader::parse(const std::string &path, TuringMachine &outTm) {
+        reader = std::make_unique<FileReader>();
+        reader->setType(ReadType::WHOLE_FILE);
+        reader->link(path);
+        reader->readIntoBuffer();
+
+        const auto &fileContent = reader->getContentBuffer();
+        auto flattenedContent = std::make_unique<std::string>(Strings::flatten(fileContent));
+        auto content = Strings::betweenFirsts(*flattenedContent, "alphabet", "states");
+        auto alphabet = getParsedAlphabetLine(Strings::split(Strings::replace(content, '\n', " "), ' '));
+        outTm.setAlphabet(alphabet);
+        content = Strings::betweenFirsts(*flattenedContent, "states", "start");
+        auto states = getParsedStates(Strings::split(Strings::replace(content, '\n', " ")));
+        outTm.setStates(states);
+        content = Strings::betweenFirsts(*flattenedContent, "start", "finals");
+        parseStart(Strings::split(content), outTm);
+        content = Strings::betweenFirsts(*flattenedContent, "finals", "transitions");
+        auto finals = getParsedStates(Strings::split(Strings::replace(content, '\n', " ")));
+        outTm.setFinals(finals);
+        content = Strings::betweenFirsts(*flattenedContent, "transitions", "%%");
+        flattenedContent.reset();
+
+        auto transitionsTokens = Strings::split(Strings::replace(content, '\n', "#"), '#');
+        parseTMTransitions(transitionsTokens, outTm);
         reader->sever();
     }
 
@@ -412,6 +442,73 @@ namespace io_manager {
             its.itSymbols++;
             its.itNext++;
         }
+    }
+
+    void FSMReader::parseStart(const Tokens &tokens, TuringMachine &outTm) {
+        const auto &initialStr = tokens[0];
+        const auto initial = Strings::remove(initialStr, '\n');
+        int parsedState = std::stoi(initial);
+        outTm.setStart(parsedState);
+    }
+
+    void FSMReader::parseTMTransitions(const Tokens &tokens, TuringMachine &outTm) {
+        if (tokens.empty()) {
+            return;
+        }
+
+        const auto &headerSymbols = Strings::split(tokens[0], ' ');
+        Alphabet tapeAlphabet;
+
+        for (std::size_t i = 0; i < headerSymbols.size() - 1; i++) {
+            const auto &alphabetSymbol = headerSymbols[i];
+
+            if (alphabetSymbol.size() == 1) {
+                tapeAlphabet.insert(alphabetSymbol[0]);
+            }
+        }
+
+        outTm.setAlphabet(tapeAlphabet);
+        States states;
+        TMTransitionMap transitionMap;
+
+        for (std::size_t i = 1; i < tokens.size(); i++) {
+            const auto &lineTokens = Strings::split(tokens[i], ' ');
+            const auto &stateStr = lineTokens[0];
+            int currentState = std::stoi(stateStr);
+            states.insert(currentState);
+
+            for (std::size_t j = 0; j < headerSymbols.size(); j++) {
+                const auto &currentEvent = headerSymbols[j][0];
+                const auto &currentAction = lineTokens[j + 1];
+                ActionTuple outTuple;
+                parseTMTransitionActionTuple(currentAction, outTuple);
+                const auto eventTuple = StateEventPair(currentState, currentEvent);
+                transitionMap[eventTuple] = outTuple;
+            }
+        }
+
+        outTm.setStates(states);
+        outTm.setTransitions(transitionMap);
+    }
+
+    void FSMReader::parseTMTransitionActionTuple(const std::string &action, ActionTuple &outTuple) {
+        const auto actionTokens = Strings::split(action, ',');
+        const auto &writeSymbol = actionTokens[0][0];
+        const auto &moveDirection = Strings::toLower(actionTokens[1]);
+        const auto &nextState = actionTokens[2];
+
+        ShiftDirection move = ShiftDirection::NO_SHIFT;
+
+        if (moveDirection == "r" || moveDirection == "right") {
+            move = ShiftDirection::RIGHT;
+        }
+
+        if (moveDirection == "l" || moveDirection == "left") {
+            move = ShiftDirection::LEFT;
+        }
+
+        int next = (nextState == "T") ? TuringMachine::HALT_STATE : std::stoi(nextState);
+        outTuple = ActionTuple(writeSymbol, move, next);
     }
 
 }

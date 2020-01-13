@@ -34,8 +34,6 @@ transitions:
 
 
 %%
-Empty symbol is declared as NFA::EMPTY_SYMBOL constant.
-
 Separators:
 ,     for symbols from alphabet (2nd column)
 ,     for subsequent states from set of next states (3rd column)

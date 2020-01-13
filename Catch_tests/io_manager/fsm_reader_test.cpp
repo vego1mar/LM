@@ -8,6 +8,16 @@ using io_manager::FSMReader;
 using io_manager::FileReader;
 using helpers::Strings;
 using automatons::DFATransitionMap;
+using automatons::Alphabet;
+using automatons::States;
+using automatons::NFATransitionMap;
+using automatons::DFA;
+using automatons::NFA;
+using automatons::TuringMachine;
+using automatons::TMTransitionMap;
+using automatons::StateEventPair;
+using automatons::ActionTuple;
+using automatons::ShiftDirection;
 using tests::Constants;
 
 
@@ -561,6 +571,46 @@ TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
         }
 
         REQUIRE_THAT(results, Catch::Equals(expectedResults));
+    }
+
+    SECTION("simulate(TM_1; TM_1_INPUT) -> OK") {
+        const auto &EMPTY = automatons::TuringMachine::BLANK_SYMBOL;
+        const auto &HALT = automatons::TuringMachine::HALT_STATE;
+
+        Alphabet expectedAlphabet = {'a', 'b', EMPTY};
+        States expectedStates = {0, 1, 2, 3, 4, HALT};
+        int expectedStart = 0;
+        States expectedFinals = {4};
+        TMTransitionMap expectedTransitions = {
+                {StateEventPair(0, 'a'),   ActionTuple('a', ShiftDirection::RIGHT, 1)},
+                {StateEventPair(1, 'a'),   ActionTuple('a', ShiftDirection::RIGHT, 2)},
+                {StateEventPair(2, 'a'),   ActionTuple('b', ShiftDirection::LEFT, 3)},
+                {StateEventPair(3, 'a'),   ActionTuple('b', ShiftDirection::LEFT, 4)},
+                {StateEventPair(4, 'a'),   ActionTuple('b', ShiftDirection::RIGHT, 0)},
+                {StateEventPair(0, 'b'),   ActionTuple('b', ShiftDirection::RIGHT, 0)},
+                {StateEventPair(1, 'b'),   ActionTuple('b', ShiftDirection::RIGHT, 0)},
+                {StateEventPair(2, 'b'),   ActionTuple('b', ShiftDirection::RIGHT, 0)},
+                {StateEventPair(3, 'b'),   ActionTuple('b', ShiftDirection::RIGHT, 0)},
+                {StateEventPair(4, 'b'),   ActionTuple('b', ShiftDirection::RIGHT, 0)},
+                {StateEventPair(0, EMPTY), ActionTuple(EMPTY, ShiftDirection::NO_SHIFT, HALT)},
+                {StateEventPair(1, EMPTY), ActionTuple(EMPTY, ShiftDirection::NO_SHIFT, HALT)},
+                {StateEventPair(2, EMPTY), ActionTuple(EMPTY, ShiftDirection::NO_SHIFT, HALT)},
+                {StateEventPair(3, EMPTY), ActionTuple(EMPTY, ShiftDirection::NO_SHIFT, HALT)},
+                {StateEventPair(4, EMPTY), ActionTuple(EMPTY, ShiftDirection::NO_SHIFT, HALT)},
+        };
+        FSMReader reader;
+        TuringMachine tm;
+
+        reader.parse(consts.TM_1_PATH, tm);
+        REQUIRE(tm.getAlphabet() == expectedAlphabet);
+        REQUIRE(tm.getStates() == expectedStates);
+        REQUIRE(tm.getStart() == expectedStart);
+        REQUIRE(tm.getFinals() == expectedFinals);
+        REQUIRE(tm.getTransitions().size() == 15);
+        REQUIRE(tm.getTransitions() == expectedTransitions);
+
+        bool isAccepting = tm.simulate("bbaaabb", false);
+        REQUIRE(!isAccepting);
     }
 
 }

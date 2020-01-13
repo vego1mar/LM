@@ -6,17 +6,22 @@
 #include "definitions.hpp"
 #include "../automatons/dfa.hpp"
 #include "../automatons/nfa.hpp"
+#include "../automatons/turing_machine.hpp"
 #include "../automatons/definitions.hpp"
 
-using io_manager::Tokens;
-using automatons::DFA;
-using automatons::NFA;
-using automatons::Alphabet;
-using automatons::States;
-using automatons::NFATransitionMap;
-using automatons::StateEventPair;
 
 namespace io_manager {
+
+    using io_manager::Tokens;
+    using automatons::DFA;
+    using automatons::NFA;
+    using automatons::Alphabet;
+    using automatons::States;
+    using automatons::NFATransitionMap;
+    using automatons::StateEventPair;
+    using automatons::TuringMachine;
+    using automatons::ActionTuple;
+
 
     class FSMReader {
     private:
@@ -38,6 +43,9 @@ namespace io_manager {
         void parse(const std::string &path, DFA &outDfa);
 
         void parse(const std::string &path, NFA &outNfa);
+
+        void parse(const std::string &path, TuringMachine &outTm);
+
 
     private:
         static Alphabet getParsedAlphabetLine(const Tokens &tokens);
@@ -69,6 +77,12 @@ namespace io_manager {
         static void parseNFANextStatesColumn(const NFATransitionEntryPOD &pod);
 
         static void makeNFATransitionEntries(NFATransitionMap &map, const NFATransitionEntryPOD &pod, const std::size_t &no);
+
+        static void parseStart(const Tokens &tokens, TuringMachine &outTm);
+
+        static void parseTMTransitions(const Tokens &tokens, TuringMachine &outTm);
+
+        static void parseTMTransitionActionTuple(const std::string &action, ActionTuple &outTuple);
 
     };
 

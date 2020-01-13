@@ -248,7 +248,7 @@ namespace main_program {
             }
         }
 
-        std::cout << "Worth: " << coinsStr << " zł." << std::endl;
+        std::cout << "Worth: " << coinsStr << " zl." << std::endl;
     }
 
     void FSMSimulationToStdOut::__interpretEventForExercise1(const DFATransitionStep &step) {
@@ -256,19 +256,19 @@ namespace main_program {
 
         switch (event) {
             case '1':
-                std::cout << "Thrown 1 zł." << std::endl;
+                std::cout << "Thrown 1 zl." << std::endl;
                 break;
             case '2':
-                std::cout << "Thrown 2 zł." << std::endl;
+                std::cout << "Thrown 2 zl." << std::endl;
                 break;
             case '5':
-                std::cout << "Thrown 5 zł." << std::endl;
+                std::cout << "Thrown 5 zl." << std::endl;
                 break;
             case 'a':
                 std::cout << "Selected route: pool/pool+sauna (regular)." << std::endl;
                 break;
             case 'b':
-                std::cout << "Selected route: pool/pool+sauna (discounted, 2h)." << std::endl;
+                std::cout << "Selected route: pool/pool+sauna (discounted, valid for 2h)." << std::endl;
                 break;
             case 'r':
                 std::cout << "Ticket acquired. Residue returned." << std::endl;
