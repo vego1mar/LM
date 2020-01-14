@@ -38,6 +38,7 @@ namespace automatons {
         EventActionTuple next;
         bool hasNextStep = true;
         bool wasNotUsed = true;
+        EventActionTuple first;
     };
 
     enum class StepperContinuation {

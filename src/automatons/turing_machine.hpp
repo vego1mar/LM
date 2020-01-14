@@ -63,6 +63,8 @@ namespace automatons {
 
         bool hasNextStep() const;
 
+        const TMStepper &getStepperData() const;
+
         std::string toString() const override;
 
     private:

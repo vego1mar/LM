@@ -8,6 +8,7 @@
 #include "../automatons/dfa.hpp"
 #include "../io_manager/file_reader.hpp"
 #include "../automatons/nfa.hpp"
+#include "../automatons/turing_machine.hpp"
 
 using command_line::CLAParser;
 using automatons::DFA;
@@ -15,6 +16,8 @@ using io_manager::FileReader;
 using automatons::NFA;
 using automatons::DFATransitionStep;
 using automatons::StateEventPair;
+using automatons::TuringMachine;
+using automatons::EventActionTuple;
 
 
 namespace main_program {
@@ -26,6 +29,7 @@ namespace main_program {
         std::string fsmType;
         DFA dfa;
         NFA nfa;
+        TuringMachine tm;
     };
 
 
@@ -70,6 +74,8 @@ namespace main_program {
 
         void simulateNFA();
 
+        void simulateTM();
+
         bool hasDFAInteractiveModeBeenAcquired();
 
         void simulateDFAInteractive();
@@ -81,6 +87,8 @@ namespace main_program {
         static void __printTraversedPathForExercise1(const std::vector<StateEventPair> &steps);
 
         static void __printResultForExercise1(const DFATransitionStep &lastStep);
+
+        static void __printInfoForExercise3(const std::vector<EventActionTuple> &transitions);
 
     };
 

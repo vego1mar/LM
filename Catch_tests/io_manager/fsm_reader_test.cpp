@@ -573,14 +573,14 @@ TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
         REQUIRE_THAT(results, Catch::Equals(expectedResults));
     }
 
-    SECTION("simulate(TM_1; TM_1_INPUT) -> OK") {
+    SECTION("simulate(TM_1; input) -> OK") {
         const auto &EMPTY = automatons::TuringMachine::BLANK_SYMBOL;
         const auto &HALT = automatons::TuringMachine::HALT_STATE;
 
         Alphabet expectedAlphabet = {'a', 'b', EMPTY};
         States expectedStates = {0, 1, 2, 3, 4, HALT};
         int expectedStart = 0;
-        States expectedFinals = {4};
+        States expectedFinals = {0};
         TMTransitionMap expectedTransitions = {
                 {StateEventPair(0, 'a'),   ActionTuple('a', ShiftDirection::RIGHT, 1)},
                 {StateEventPair(1, 'a'),   ActionTuple('a', ShiftDirection::RIGHT, 2)},
@@ -609,7 +609,7 @@ TEST_CASE("fsm_reader.hpp", "[fsm_reader]") {
         REQUIRE(tm.getTransitions().size() == 15);
         REQUIRE(tm.getTransitions() == expectedTransitions);
 
-        bool isAccepting = tm.simulate("bbaaabb", false);
+        bool isAccepting = tm.simulate("bbaaabbabaabaaa-", false);
         REQUIRE(!isAccepting);
     }
 

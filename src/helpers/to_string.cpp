@@ -93,4 +93,30 @@ namespace helpers {
         return string;
     }
 
+    std::string toString(const automatons::EventActionTuple &eventAction) {
+        const auto &eventPair = std::get<0>(eventAction);
+        const auto &state = std::get<0>(eventPair);
+        const auto &event = std::get<1>(eventPair);
+        std::string eventStr = '(' + std::to_string(state) + ',' + event + ')';
+
+        const auto &actionTuple = std::get<1>(eventAction);
+        const auto &writeSymbol = std::get<0>(actionTuple);
+        const auto &moveDirection = std::get<1>(actionTuple);
+        const auto &nextState = std::get<2>(actionTuple);
+        std::string actionStr = "(";
+        actionStr += writeSymbol;
+        actionStr += ',' + toString(moveDirection);
+        actionStr += ',' + std::to_string(nextState) + ')';
+
+        std::string resultStr = eventStr + " -> " + actionStr;
+        return resultStr;
+    }
+
+    std::string toString(const std::size_t &headPos, const std::string &tape) {
+        auto tapeStr = tape.substr(0, headPos) + '[';
+        tapeStr += tape[headPos];
+        tapeStr += ']' + tape.substr(headPos + 1);
+        return tapeStr;
+    }
+
 }

@@ -60,7 +60,7 @@ namespace main_program {
         const auto &tmType = *it;
 
         if (fsmType == tmType) {
-            throw std::bad_function_call();
+            simulateTM();
         }
     }
 
@@ -92,7 +92,8 @@ namespace main_program {
                   "EXAMPLES:" << std::endl <<
                   "LM --fsm dfa --def ../../files/dfa1.txt --input ../../files/input1.txt" << std::endl <<
                   "LM --dfa-interactive --def dfa2.txt" << std::endl <<
-                  "LM --fsm nfa --def nfa.txt --input input2.txt > output.txt" << std::endl;
+                  "LM --fsm nfa --def nfa.txt --input input2.txt > output.txt" << std::endl <<
+                  "LM --fsm tm --def tm.txt --input input4.txt | less" << std::endl;
     }
 
     void FSMSimulationToStdOut::assembleFSMType() {
@@ -144,7 +145,7 @@ namespace main_program {
         }
 
         if (fsmType == tmType) {
-            throw std::bad_function_call();
+            reader.parse(filePath, assemblies->tm);
         }
     }
 
@@ -183,6 +184,43 @@ namespace main_program {
             auto input = inputReader->getNextLine();
             auto validInput = Strings::remove(input, '\n');
             nfa.simulate(validInput, true);
+        }
+    }
+
+    void FSMSimulationToStdOut::simulateTM() {
+        auto &tm = assemblies->tm;
+
+        while (inputReader->hasNextLine()) {
+            auto input = inputReader->getNextLine();
+            auto validInput = Strings::remove(input, '\n');
+            tm.setInputTape(validInput);
+            bool hasFirstBeenTouched = false;
+            std::vector<EventActionTuple> transitions;
+            bool isAccepting = false;
+
+            while (tm.hasNextStep()) {
+                const auto &step = tm.nextStep();
+                const auto &tape = std::get<1>(step);
+                const auto stepper = tm.getStepperData();
+                isAccepting = std::get<0>(step);
+
+                if (!hasFirstBeenTouched) {
+                    hasFirstBeenTouched = true;
+                    transitions.push_back(stepper.first);
+                    const auto tapeStr = helpers::toString(stepper.headPosition - 1, tape);
+                    const auto transitionStr = helpers::toString(stepper.first);
+                    std::cout << transitionStr << std::endl << tapeStr << std::endl << std::endl;
+                }
+
+                transitions.push_back(stepper.previous);
+                const auto tapeStr = helpers::toString(stepper.headPosition, tape);
+                const auto transitionStr = helpers::toString(stepper.previous);
+                std::cout << transitionStr << std::endl << tapeStr << std::endl;
+                std::cout << std::endl;
+            }
+
+            __printInfoForExercise3(transitions);
+            std::cout << ((isAccepting) ? "ACCEPTED" : "REJECTED") << std::endl;
         }
     }
 
@@ -293,6 +331,18 @@ namespace main_program {
     void FSMSimulationToStdOut::__printResultForExercise1(const DFATransitionStep &lastStep) {
         const auto &lastState = std::get<2>(lastStep);
         std::cout << std::to_string(lastState) << std::endl;
+    }
+
+    void FSMSimulationToStdOut::__printInfoForExercise3(const std::vector<EventActionTuple> &transitions) {
+        const auto &firstState = std::get<0>(std::get<0>(transitions[0]));
+        std::cout << '[' << std::to_string(firstState) << ',';
+
+        for (const auto &eventAction : transitions) {
+            const auto &currentState = std::get<2>(std::get<1>(eventAction));
+            std::cout << std::to_string(currentState) + ',';
+        }
+
+        std::cout << ']' << std::endl;
     }
 
 }

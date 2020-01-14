@@ -139,6 +139,7 @@ namespace automatons {
             sd.workingTape = getInputTape();
             sd.wasNotUsed = false;
             sd.previous = getEventActionTuple(sd, getStart());
+            sd.first = sd.previous;
             determineIfStepsShouldBeContinued(sd, StepperContinuation::PREVIOUS);
         }
 
@@ -158,6 +159,10 @@ namespace automatons {
 
     bool TuringMachine::hasNextStep() const {
         return stepperData.hasNextStep;
+    }
+
+    const TMStepper &TuringMachine::getStepperData() const {
+        return stepperData;
     }
 
     std::string TuringMachine::toString() const {

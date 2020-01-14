@@ -23,6 +23,10 @@ namespace helpers {
 
     std::string toString(const automatons::DFATransitionStep &transitionStep);
 
+    std::string toString(const automatons::EventActionTuple &eventAction);
+
+    std::string toString(const std::size_t &headPos, const std::string &tape);
+
 }
 
 #endif //TO_STRING_HPP

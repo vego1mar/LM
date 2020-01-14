@@ -1,7 +1,7 @@
 alphabet ab
 states 0 1 2 3 4
 start 0
-finals 4
+finals 0
 
 transitions
         a       b       -

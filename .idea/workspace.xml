@@ -15,12 +15,14 @@
     <list default="true" id="f866098f-8b34-4e58-9f59-2f8ec8e71fb5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Catch_tests/io_manager/fsm_reader_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/io_manager/fsm_reader_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/nfa_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/files/nfa_1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io_manager/fsm_reader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_manager/fsm_reader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io_manager/fsm_reader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_manager/fsm_reader.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/tm_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/files/tm_1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automatons/definitions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/definitions.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automatons/turing_machine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/turing_machine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automatons/turing_machine.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/turing_machine.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/to_string.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/to_string.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/to_string.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/to_string.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/definitions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/definitions.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +77,7 @@
       <recent name="$PROJECT_DIR$/src/automatons" />
     </key>
   </component>
-  <component name="RunManager" selected="Catch.fsm_reader.hpp">
+  <component name="RunManager" selected="CMake Application.LM">
     <configuration name="collections.hpp" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run" TEST_CLASS="[collections]" TEST_METHOD="collections.hpp" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -105,7 +107,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LM" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="--dfa-interactive --def ../files/dfa_2.txt" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="LM" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="LM">
+    <configuration name="LM" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="--fsm tm --def ../files/tm_1.txt --input ../files/input_4.txt" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="LM" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="LM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -161,7 +163,9 @@
       <workItem from="1578257485991" duration="7000" />
       <workItem from="1578424406822" duration="343000" />
       <workItem from="1578731649711" duration="21197000" />
-      <workItem from="1578934980120" duration="11039000" />
+      <workItem from="1578934980120" duration="11328000" />
+      <workItem from="1578983628378" duration="3771000" />
+      <workItem from="1579007345611" duration="6855000" />
     </task>
     <servers />
   </component>
@@ -190,79 +194,79 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="503" y="38" key="#Unittests_in_Catch_tests/0.0.1536.824@0.0.1536.824" timestamp="1576998376668" />
-    <state x="441" y="278" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578937576650">
+    <state x="441" y="278" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578987172029">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state x="223" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1576999160166" />
     <state x="386" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.896@0.0.1920.896" timestamp="1578001197405" />
     <state x="441" y="276" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1026@0.0.2560.1026" timestamp="1578746879032" />
-    <state x="441" y="278" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1035@0.0.2560.1035" timestamp="1578937576650" />
+    <state x="441" y="278" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1035@0.0.2560.1035" timestamp="1578987172029" />
     <state x="759" y="152" key="#com.intellij.ide.util.MemberChooser" timestamp="1577640329899">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state x="759" y="152" key="#com.intellij.ide.util.MemberChooser/0.0.1920.896@0.0.1920.896" timestamp="1577640329899" />
-    <state x="871" y="350" key="#xdebugger.evaluate" timestamp="1578946434993">
+    <state x="871" y="350" key="#xdebugger.evaluate" timestamp="1579018398827">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state x="1104" y="166" key="#xdebugger.evaluate/0.0.1920.896@0.0.1920.896" timestamp="1577927348612" />
-    <state x="871" y="350" key="#xdebugger.evaluate/0.0.2560.1035@0.0.2560.1035" timestamp="1578946434993" />
+    <state x="871" y="350" key="#xdebugger.evaluate/0.0.2560.1035@0.0.2560.1035" timestamp="1579018398827" />
     <state x="408" y="295" key="FileChooserDialogImpl" timestamp="1577481935235">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state x="318" y="161" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1577001277160" />
     <state x="408" y="295" key="FileChooserDialogImpl/0.0.1920.896@0.0.1920.896" timestamp="1577481935235" />
-    <state width="1609" height="267" key="GridCell.Tab.0.bottom" timestamp="1578948981699">
+    <state width="1609" height="267" key="GridCell.Tab.0.bottom" timestamp="1579023010766">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577001335892" />
     <state width="1872" height="189" key="GridCell.Tab.0.bottom/0.0.1920.896@0.0.1920.896" timestamp="1578003579066" />
     <state width="1609" height="267" key="GridCell.Tab.0.bottom/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483916" />
-    <state width="1609" height="267" key="GridCell.Tab.0.bottom/0.0.2560.1035@0.0.2560.1035" timestamp="1578948981699" />
-    <state width="1609" height="267" key="GridCell.Tab.0.center" timestamp="1578948981698">
+    <state width="1609" height="267" key="GridCell.Tab.0.bottom/0.0.2560.1035@0.0.2560.1035" timestamp="1579023010766" />
+    <state width="1609" height="267" key="GridCell.Tab.0.center" timestamp="1579023010765">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
     <state width="1872" height="189" key="GridCell.Tab.0.center/0.0.1920.896@0.0.1920.896" timestamp="1578003579064" />
     <state width="1609" height="267" key="GridCell.Tab.0.center/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483916" />
-    <state width="1609" height="267" key="GridCell.Tab.0.center/0.0.2560.1035@0.0.2560.1035" timestamp="1578948981698" />
-    <state width="1609" height="267" key="GridCell.Tab.0.left" timestamp="1578948981697">
+    <state width="1609" height="267" key="GridCell.Tab.0.center/0.0.2560.1035@0.0.2560.1035" timestamp="1579023010765" />
+    <state width="1609" height="267" key="GridCell.Tab.0.left" timestamp="1579023010765">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
     <state width="1872" height="189" key="GridCell.Tab.0.left/0.0.1920.896@0.0.1920.896" timestamp="1578003579062" />
     <state width="1609" height="267" key="GridCell.Tab.0.left/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483916" />
-    <state width="1609" height="267" key="GridCell.Tab.0.left/0.0.2560.1035@0.0.2560.1035" timestamp="1578948981697" />
-    <state width="1609" height="267" key="GridCell.Tab.0.right" timestamp="1578948981699">
+    <state width="1609" height="267" key="GridCell.Tab.0.left/0.0.2560.1035@0.0.2560.1035" timestamp="1579023010765" />
+    <state width="1609" height="267" key="GridCell.Tab.0.right" timestamp="1579023010765">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
     <state width="1872" height="189" key="GridCell.Tab.0.right/0.0.1920.896@0.0.1920.896" timestamp="1578003579065" />
     <state width="1609" height="267" key="GridCell.Tab.0.right/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483916" />
-    <state width="1609" height="267" key="GridCell.Tab.0.right/0.0.2560.1035@0.0.2560.1035" timestamp="1578948981699" />
-    <state width="1609" height="330" key="GridCell.Tab.1.bottom" timestamp="1578948502670">
+    <state width="1609" height="267" key="GridCell.Tab.0.right/0.0.2560.1035@0.0.2560.1035" timestamp="1579023010765" />
+    <state width="1609" height="330" key="GridCell.Tab.1.bottom" timestamp="1579020217294">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1872" height="255" key="GridCell.Tab.1.bottom/0.0.1920.896@0.0.1920.896" timestamp="1578003579049" />
     <state width="1609" height="330" key="GridCell.Tab.1.bottom/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483914" />
-    <state width="1609" height="330" key="GridCell.Tab.1.bottom/0.0.2560.1035@0.0.2560.1035" timestamp="1578948502670" />
-    <state width="1609" height="330" key="GridCell.Tab.1.center" timestamp="1578948502670">
+    <state width="1609" height="330" key="GridCell.Tab.1.bottom/0.0.2560.1035@0.0.2560.1035" timestamp="1579020217294" />
+    <state width="1609" height="330" key="GridCell.Tab.1.center" timestamp="1579020217293">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1872" height="255" key="GridCell.Tab.1.center/0.0.1920.896@0.0.1920.896" timestamp="1578003579046" />
     <state width="1609" height="330" key="GridCell.Tab.1.center/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483913" />
-    <state width="1609" height="330" key="GridCell.Tab.1.center/0.0.2560.1035@0.0.2560.1035" timestamp="1578948502670" />
-    <state width="1609" height="330" key="GridCell.Tab.1.left" timestamp="1578948502670">
+    <state width="1609" height="330" key="GridCell.Tab.1.center/0.0.2560.1035@0.0.2560.1035" timestamp="1579020217293" />
+    <state width="1609" height="330" key="GridCell.Tab.1.left" timestamp="1579020217293">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1872" height="255" key="GridCell.Tab.1.left/0.0.1920.896@0.0.1920.896" timestamp="1578003579044" />
     <state width="1609" height="330" key="GridCell.Tab.1.left/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483913" />
-    <state width="1609" height="330" key="GridCell.Tab.1.left/0.0.2560.1035@0.0.2560.1035" timestamp="1578948502670" />
-    <state width="1609" height="330" key="GridCell.Tab.1.right" timestamp="1578948502670">
+    <state width="1609" height="330" key="GridCell.Tab.1.left/0.0.2560.1035@0.0.2560.1035" timestamp="1579020217293" />
+    <state width="1609" height="330" key="GridCell.Tab.1.right" timestamp="1579020217294">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1872" height="255" key="GridCell.Tab.1.right/0.0.1920.896@0.0.1920.896" timestamp="1578003579047" />
     <state width="1609" height="330" key="GridCell.Tab.1.right/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483913" />
-    <state width="1609" height="330" key="GridCell.Tab.1.right/0.0.2560.1035@0.0.2560.1035" timestamp="1578948502670" />
+    <state width="1609" height="330" key="GridCell.Tab.1.right/0.0.2560.1035@0.0.2560.1035" timestamp="1579020217294" />
     <state x="465" y="72" width="977" height="740" key="SettingsEditor" timestamp="1578424602404">
       <screen x="0" y="0" width="2560" height="1026" />
     </state>
@@ -278,22 +282,22 @@
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="960" height="448" key="XDebugger.FullValuePopup/0.0.1920.896@0.0.1920.896" timestamp="1577817963202" />
-    <state x="795" y="303" key="com.intellij.ide.util.TipDialog" timestamp="1578935010944">
+    <state x="795" y="303" key="com.intellij.ide.util.TipDialog" timestamp="1579007356045">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state x="477" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1576998092852" />
     <state x="596" y="262" key="com.intellij.ide.util.TipDialog/0.0.1920.896@0.0.1920.896" timestamp="1577981776320" />
     <state x="795" y="300" key="com.intellij.ide.util.TipDialog/0.0.2560.1026@0.0.2560.1026" timestamp="1578731653001" />
-    <state x="795" y="303" key="com.intellij.ide.util.TipDialog/0.0.2560.1035@0.0.2560.1035" timestamp="1578935010944" />
+    <state x="795" y="303" key="com.intellij.ide.util.TipDialog/0.0.2560.1035@0.0.2560.1035" timestamp="1579007356045" />
     <state x="617" y="433" width="407" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1578747591522">
       <screen x="0" y="0" width="2560" height="1026" />
     </state>
     <state x="617" y="433" width="407" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1026@0.0.2560.1026" timestamp="1578747591522" />
-    <state width="628" height="332" key="javadoc.popup.new" timestamp="1578948628783">
+    <state width="628" height="332" key="javadoc.popup.new" timestamp="1579022873657">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="628" height="329" key="javadoc.popup.new/0.0.2560.1026@0.0.2560.1026" timestamp="1578753667842" />
-    <state width="628" height="332" key="javadoc.popup.new/0.0.2560.1035@0.0.2560.1035" timestamp="1578948628783" />
+    <state width="628" height="332" key="javadoc.popup.new/0.0.2560.1035@0.0.2560.1035" timestamp="1579022873657" />
     <state x="708" y="82" key="refactoring.ChangeSignatureDialog" timestamp="1577129077041">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
