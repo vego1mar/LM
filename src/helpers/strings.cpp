@@ -99,6 +99,22 @@ namespace helpers {
         return replaced;
     }
 
+    std::string Strings::replace(const std::string &source, const std::string &what, const std::string &into) {
+        if (source.empty()) {
+            return "";
+        }
+
+        auto str = std::string(source);
+        std::size_t position = 0;
+
+        while ((position = str.find(what, position)) != std::string::npos) {
+            str.replace(position, what.length(), into);
+            position += into.length();
+        }
+
+        return str;
+    }
+
     bool Strings::isNumber(const std::string &source) {
         std::regex number("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?");
         return std::regex_match(source, number);
@@ -106,6 +122,34 @@ namespace helpers {
 
     bool Strings::contains(const std::string &source, const std::string &matchStr) {
         return source.find(matchStr) != std::string::npos;
+    }
+
+    std::string Strings::trimLeft(const std::string &str) {
+        auto s = std::string(str);
+
+        auto findIfNotSpace = std::find_if(s.begin(), s.end(), [](int ch) {
+            return !std::isspace(ch);
+        });
+
+        s.erase(s.begin(), findIfNotSpace);
+        return s;
+    }
+
+    std::string Strings::trimRight(const std::string &str) {
+        auto s = std::string(str);
+
+        auto findIfNotSpace = std::find_if(s.rbegin(), s.rend(), [](int ch) {
+            return !std::isspace(ch);
+        });
+
+        s.erase(findIfNotSpace.base(), s.end());
+        return s;
+    }
+
+    std::string Strings::trim(const std::string &str) {
+        auto s = trimLeft(str);
+        s = trimRight(s);
+        return s;
     }
 
 }

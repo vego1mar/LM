@@ -36,9 +36,17 @@ namespace helpers {
 
         static std::string replace(const std::string &source, char match, const std::string &replace);
 
+        static std::string replace(const std::string &source, const std::string &what, const std::string &into);
+
         static bool isNumber(const std::string &source);
 
         static bool contains(const std::string &source, const std::string &matchStr);
+
+        static std::string trimLeft(const std::string &str);
+
+        static std::string trimRight(const std::string &str);
+
+        static std::string trim(const std::string &str);
 
     };
 

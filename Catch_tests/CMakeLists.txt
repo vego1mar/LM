@@ -18,5 +18,7 @@ add_executable(
 
         helpers/collections.cpp ../src/helpers/collections.cpp
 
+        grammatical/rpn_test.cpp ../src/grammatical/rpn.cpp
 )
+
 target_link_libraries(Catch_tests_run)

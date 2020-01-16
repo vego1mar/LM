@@ -22,6 +22,10 @@ echo "./sonar-build/command_line"
 mkdir sonar-build/command_line
 g++ -Wall -fexceptions -std=c++14 -g  -c src/command_line/cla_parser.cpp -o sonar-build/command_line/cla_parser.o
 
+echo "./sonar-build/grammatical"
+mkdir sonar-build/grammatical
+g++ -Wall -fexceptions -std=c++14 -g  -c src/grammatical/rpn.cpp -o sonar-build/grammatical/rpn.o
+
 echo "./sonar-build/helpers"
 mkdir sonar-build/helpers
 g++ -Wall -fexceptions -std=c++14 -g  -c src/helpers/strings.cpp -o sonar-build/helpers/strings.o

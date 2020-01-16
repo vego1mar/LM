@@ -3,6 +3,7 @@
 
 using helpers::Strings;
 
+
 TEST_CASE("strings.hpp", "[strings]") {
 
     SECTION("split(case1,case2) -> OK") {
@@ -113,6 +114,17 @@ TEST_CASE("strings.hpp", "[strings]") {
         REQUIRE_THAT(result2, Catch::Equals(""));
         REQUIRE_THAT(result3, Catch::Equals(source3.substr(5, 16)));
         REQUIRE_THAT(result4, Catch::Equals(source4.substr(13, 4)));
+    }
+
+    SECTION("replace(str into str) -> OK") {
+        const std::string source1 = " 4  5  ^  $ @  ! ";
+        const std::string what1 = "  ";
+        const std::string into1 = " ";
+        const std::string expectedResult1 = " 4 5 ^ $ @ ! ";
+
+        const auto result1 = Strings::replace(source1, what1, into1);
+
+        REQUIRE_THAT(result1, Catch::Equals(expectedResult1));
     }
 
 }
