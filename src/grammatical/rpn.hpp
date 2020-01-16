@@ -27,7 +27,7 @@ namespace grammatical {
 
         virtual ~RPN() = default;
 
-        std::string convert(const std::string &infix);
+        void convert(const std::string &infix);
 
         std::string getPostfix() const;
 

@@ -13,5 +13,5 @@ sonar.language=cpp
 
 # Settings for SonarQube UI Web
 sonar.host.url=https://sonarcloud.io
-sonar.organization=vego1mar-github
+sonar.organization=vego1mar-all
 sonar.login=74e590f1c11d4c58a8207f3eb79c9825f7ce90cd

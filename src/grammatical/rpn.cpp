@@ -7,11 +7,11 @@ using helpers::Strings;
 
 namespace grammatical {
 
-    std::string RPN::convert(const std::string &infix) {
+    void RPN::convert(const std::string &infix) {
         postfix.clear();
 
         if (infix.empty()) {
-            return postfix;
+            return;
         }
 
         for (const auto &symbol : infix) {
@@ -19,7 +19,6 @@ namespace grammatical {
         }
 
         doInfixToPostfixLastStep();
-        return postfix;
     }
 
     std::string RPN::getPostfix() const {

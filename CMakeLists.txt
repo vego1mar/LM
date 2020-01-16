@@ -29,5 +29,5 @@ add_executable(
 
         src/tests/definitions.hpp
 
-        src/grammatical/rpn.hpp src/grammatical/rpn.cpp)
+        src/grammatical/rpn.hpp src/grammatical/rpn.cpp src/main_program/rpn_to_stdout.hpp src/main_program/rpn_to_stdout.cpp)
 add_subdirectory(Catch_tests)

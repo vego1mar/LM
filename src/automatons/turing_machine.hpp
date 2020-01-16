@@ -72,9 +72,9 @@ namespace automatons {
 
         static void writeIntoTape(std::string &tape, std::size_t position, const ActionTuple &action);
 
-        static void shiftHeadPosition(std::size_t &position, const ActionTuple &action);
+        static void shiftHeadPosition(long &position, const ActionTuple &action);
 
-        char getTapeHeadSymbol(const std::string &tape, const std::size_t &position) const;
+        char getTapeHeadSymbol(const std::string &tape, const long &position) const;
 
         EventActionTuple getEventActionTuple(const TMStepper &data, const int &machineState) const;
 

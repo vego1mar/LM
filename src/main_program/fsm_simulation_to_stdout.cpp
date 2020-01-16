@@ -7,6 +7,7 @@
 #include "../helpers/strings.hpp"
 #include "../helpers/to_string.hpp"
 
+
 namespace main_program {
 
     using io_manager::FSMReader;
@@ -163,7 +164,7 @@ namespace main_program {
         inputReader->link(filePath);
 
         if (!inputReader->isBind()) {
-            throw std::invalid_argument("!inputReader->isBind() => " + inputReader->getFileName());
+            throw std::invalid_argument("!reader->isBind() => " + inputReader->getFileName());
         }
     }
 

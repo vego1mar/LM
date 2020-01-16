@@ -32,7 +32,7 @@ namespace automatons {
     typedef std::tuple<StateEventPair, ActionTuple> EventActionTuple;
 
     struct TMStepper {
-        std::size_t headPosition = 0;
+        long headPosition = 0;
         std::string workingTape;
         EventActionTuple previous;
         EventActionTuple next;

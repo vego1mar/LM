@@ -100,14 +100,15 @@ namespace automatons {
 
     bool TuringMachine::simulate(const std::string &input, bool isVerbose) {
         std::string tape(input);
-        std::size_t headPosition = 0;
+        long headPosition = 0;
         int currentState = initialState;
         TMPrinter stdOut;
         stdOut.setVerbosity(isVerbose);
 
         while (true) {
             bool shouldMachineBeHalted = (currentState == HALT_STATE);
-            bool isHeadOutOfInput = (headPosition < 0 || headPosition >= tape.size());
+            long tapeSize = tape.size();
+            bool isHeadOutOfInput = (headPosition < 0 || headPosition >= tapeSize);
 
             if (shouldMachineBeHalted || isHeadOutOfInput) {
                 break;
@@ -184,7 +185,7 @@ namespace automatons {
         tape[position] = symbolToOverride;
     }
 
-    void TuringMachine::shiftHeadPosition(std::size_t &position, const ActionTuple &action) {
+    void TuringMachine::shiftHeadPosition(long &position, const ActionTuple &action) {
         auto shiftType = std::get<1>(action);
 
         switch (shiftType) {
@@ -199,8 +200,8 @@ namespace automatons {
         }
     }
 
-    char TuringMachine::getTapeHeadSymbol(const std::string &tape, const std::size_t &position) const {
-        if (position < 0 || position >= tape.size()) {
+    char TuringMachine::getTapeHeadSymbol(const std::string &tape, const long &position) const {
+        if (position < 0 || position >= static_cast<long>(tape.size())) {
             return TuringMachine::BLANK_SYMBOL;
         }
 
@@ -223,7 +224,8 @@ namespace automatons {
         }
 
         bool shouldMachineBeHalted = (currentState == HALT_STATE);
-        bool isHeadOutOfInput = (sd.headPosition < 0 || sd.headPosition >= sd.workingTape.size());
+        long workingTapeSize = sd.workingTape.size();
+        bool isHeadOutOfInput = (sd.headPosition < 0 || sd.headPosition >= workingTapeSize);
 
         if (shouldMachineBeHalted || isHeadOutOfInput) {
             sd.hasNextStep = false;
