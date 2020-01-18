@@ -33,17 +33,17 @@ namespace grammatical {
 
 
     private:
-        void doInfixToPostfixStep(const char &symbol);
+        void performStep(const char &symbol);
 
-        static std::list<char> getHigherPriorityOperators(const char &symbol);
+        static int getOperatorPrecedence(const char &symbol);
 
         bool isOperator(const char &symbol);
 
-        void doInfixToPostfixOperatorStep(const char &symbol);
+        void performOperatorStep(const char &symbol);
 
-        void doInfixToPostfixClosingParenthesisStep();
+        void performClosingParenthesisStep();
 
-        void doInfixToPostfixLastStep();
+        void performLastStep();
 
     };
 

@@ -9,16 +9,17 @@ namespace grammatical {
 
     void RPN::convert(const std::string &infix) {
         postfix.clear();
+        stack = std::stack<char>();
 
         if (infix.empty()) {
             return;
         }
 
         for (const auto &symbol : infix) {
-            doInfixToPostfixStep(symbol);
+            performStep(symbol);
         }
 
-        doInfixToPostfixLastStep();
+        performLastStep();
     }
 
     std::string RPN::getPostfix() const {
@@ -27,7 +28,7 @@ namespace grammatical {
         return str;
     }
 
-    void RPN::doInfixToPostfixStep(const char &symbol) {
+    void RPN::performStep(const char &symbol) {
         if (std::isdigit(symbol)) {
             postfix += ' ';
             postfix += symbol;
@@ -36,7 +37,7 @@ namespace grammatical {
         }
 
         if (isOperator(symbol)) {
-            doInfixToPostfixOperatorStep(symbol);
+            performOperatorStep(symbol);
             return;
         }
 
@@ -46,33 +47,36 @@ namespace grammatical {
         }
 
         if (symbol == ')') {
-            doInfixToPostfixClosingParenthesisStep();
+            performClosingParenthesisStep();
         }
     }
 
-    std::list<char> RPN::getHigherPriorityOperators(const char &symbol) {
+    int RPN::getOperatorPrecedence(const char &symbol) {
+        if (symbol == '^') {
+            return 3;
+        }
+
         if (symbol == '*' || symbol == '/') {
-            return std::list<char>{'^'};
+            return 2;
         }
 
         if (symbol == '+' || symbol == '-') {
-            return std::list<char>{'^', '*', '/'};
+            return 1;
         }
 
-        return std::list<char>();
+        return -1;
     }
 
     bool RPN::isOperator(const char &symbol) {
         return std::find(operators.begin(), operators.end(), symbol) != operators.end();
     }
 
-    void RPN::doInfixToPostfixOperatorStep(const char &symbol) {
-        const auto prioritizedOperators = getHigherPriorityOperators(symbol);
-
+    void RPN::performOperatorStep(const char &symbol) {
         while (!stack.empty()) {
             bool isOperatorOnTop = isOperator(stack.top());
+            bool isHigherOrTheSamePrecedence = getOperatorPrecedence(stack.top()) >= getOperatorPrecedence(symbol);
 
-            if (isOperatorOnTop) {
+            if (isOperatorOnTop && isHigherOrTheSamePrecedence) {
                 postfix += ' ';
                 postfix += stack.top();
                 postfix += ' ';
@@ -86,9 +90,10 @@ namespace grammatical {
         stack.push(symbol);
     }
 
-    void RPN::doInfixToPostfixClosingParenthesisStep() {
+    void RPN::performClosingParenthesisStep() {
         while (!stack.empty()) {
             if (stack.top() == '(') {
+                stack.pop();
                 break;
             }
 
@@ -100,11 +105,9 @@ namespace grammatical {
 
             stack.pop();
         }
-
-        stack.pop();
     }
 
-    void RPN::doInfixToPostfixLastStep() {
+    void RPN::performLastStep() {
         while (!stack.empty()) {
             if (isOperator(stack.top())) {
                 postfix += ' ';
