@@ -3,6 +3,10 @@
 #include "nfa.hpp"
 #include "printers.hpp"
 #include "../helpers/to_string.hpp"
+#include "../helpers/collections.hpp"
+
+using helpers::Collections;
+
 
 namespace automatons {
 
@@ -67,12 +71,27 @@ namespace automatons {
 
     States NFA::doTransition(const StateEventPair &currentPair) const {
         bool isTransitionDefined = transitions.find(currentPair) != transitions.end();
+        const auto &currentState = std::get<0>(currentPair);
 
         if (!isTransitionDefined) {
-            return States();
+            auto noStates = States();
+            joinEmptyTransition(currentState, noStates);
+            return noStates;
         }
 
-        return transitions.at(currentPair);
+        auto newStates = transitions.at(currentPair);
+        joinEmptyTransition(currentState, newStates);
+        return newStates;
+    }
+
+    void NFA::joinEmptyTransition(const int &currentState, States &newStates) const {
+        const auto emptyPair = StateEventPair(currentState, EMPTY_SYMBOL);
+        bool isEmptyTransitionDefined = transitions.find(emptyPair) != transitions.end();
+
+        if (isEmptyTransitionDefined) {
+            const auto emptyStates = transitions.at(emptyPair);
+            Collections::join(newStates, emptyStates);
+        }
     }
 
     bool NFA::isAcceptingState(const int &state) const {

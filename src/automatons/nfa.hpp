@@ -5,9 +5,10 @@
 #include "interfaces.hpp"
 #include "printers.hpp"
 
+
 namespace automatons {
 
-    /// Non-deterministic Finite Automata with oracle-oriented empty moves
+    /// Non-deterministic Finite Automata with empty moves
     class NFA : public INFA {
     public:
         static const char EMPTY_SYMBOL;
@@ -58,6 +59,8 @@ namespace automatons {
 
     private:
         States doTransition(const StateEventPair &currentPair) const;
+
+        void joinEmptyTransition(const int &currentState, States &newStates) const;
 
         bool isAcceptingState(const int &state) const;
 

@@ -13,6 +13,7 @@ namespace tests {
         const long INPUT_1_SIZE = 19;
 
         const std::string DFA_2_PATH = "../../files/dfa_2.txt";
+        const std::string NFA_2_PATH = "../../files/nfa_2.txt";
 
         const std::string NFA_1_PATH = "../../files/nfa_1.txt";
         const std::string INPUT_2_PATH = "../../files/input_2.txt";

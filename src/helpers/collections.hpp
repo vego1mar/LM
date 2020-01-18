@@ -2,6 +2,8 @@
 #define COLLECTIONS_HPP
 
 #include <vector>
+#include <set>
+
 
 namespace helpers {
 
@@ -20,6 +22,8 @@ namespace helpers {
         virtual ~Collections() = delete;
 
         static unsigned long long sum(const std::vector<std::vector<std::size_t>> &superList);
+
+        static void join(std::set<int> &base, const std::set<int> &source);
 
     };
 

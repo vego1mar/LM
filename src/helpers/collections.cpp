@@ -15,4 +15,11 @@ namespace helpers {
         return sum;
     }
 
+    void Collections::join(std::set<int> &base, const std::set<int> &source) {
+        for (const auto &v : source) {
+            base.insert(v);
+        }
+    }
+
+
 }

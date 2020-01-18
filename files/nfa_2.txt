@@ -1,0 +1,44 @@
+alphabet 01234 abcde
+
+states:
+0 
+1 2 3 4 5 6 7 8 9 10 11 12 
+100 101 102 103 104
+200 201 202 203 204
+
+start 0
+finals 100 101 102 103 104 200 201 202 203 204
+
+transitions:
+0      [a,b,c,d,e,0,1,2,3,4](!)      [[0]](1,2)
+1      [0,1,2,3,4]                   [3;4;5;6;7]
+2      (a)(b)(c)(d)(e)               (8)(9)(10)(11)(12)
+3      (0)                           (100)
+4      (1)                           (101)
+5      (2)                           (102)
+6      (3)                           (103)
+7      (4)                           (104)
+8      (a)                           (200)
+9      (b)                           (201)
+10     (c)                           (202)
+11     (d)                           (203)
+12     (e)                           (204)
+100    [0,1,2,3,4,a,b,c,d,e]         [[100]]
+101    [0,1,2,3,4,a,b,c,d,e]         [[101]]
+102    [0,1,2,3,4,a,b,c,d,e]         [[102]]
+103    [0,1,2,3,4,a,b,c,d,e]         [[103]]
+104    [0,1,2,3,4,a,b,c,d,e]         [[104]]
+200    [0,1,2,3,4,a,b,c,d,e]         [[200]]
+201    [0,1,2,3,4,a,b,c,d,e]         [[201]]
+202    [0,1,2,3,4,a,b,c,d,e]         [[202]]
+203    [0,1,2,3,4,a,b,c,d,e]         [[203]]
+204    [0,1,2,3,4,a,b,c,d,e]         [[204]]
+
+
+%%
+Separators:
+,     for symbols from alphabet (2nd column)
+,     for subsequent states from set of next states (3rd column)
+;     for sets of next states (3rd column)
+\t    for line entry between its elements (between columns)
+\n    for line entry (at the end of the 3rd column)

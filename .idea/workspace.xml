@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="LM" targetName="LM" />
       <config projectName="LM" targetName="Catch_tests_run" />
+      <config projectName="LM" targetName="LM" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -13,19 +13,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f866098f-8b34-4e58-9f59-2f8ec8e71fb5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main_program/rpn_to_stdout.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main_program/rpn_to_stdout.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Catch_tests/grammatical/rpn_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/grammatical/rpn_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sonar-project.properties.no_token" beforeDir="false" afterPath="$PROJECT_DIR$/sonar-project.properties.no_token" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automatons/definitions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/definitions.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automatons/turing_machine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/turing_machine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automatons/turing_machine.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/turing_machine.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/grammatical/rpn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/grammatical/rpn.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/grammatical/rpn.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/grammatical/rpn.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_program/fsm_simulation_to_stdout.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Catch_tests/automatons/nfa_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/automatons/nfa_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Catch_tests/helpers/collections.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catch_tests/helpers/collections.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automatons/nfa.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/nfa.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automatons/nfa.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/automatons/nfa.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/collections.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/collections.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/collections.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/collections.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/definitions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/definitions.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,14 +76,20 @@
       <recent name="$PROJECT_DIR$/src/automatons" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.LM">
-    <configuration name="dfa.hpp" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run" TEST_CLASS="[dfa]" TEST_METHOD="dfa.hpp" TEST_MODE="SUITE_TEST">
+  <component name="RunManager" selected="Catch.nfa_test.hpp">
+    <configuration name="collections.hpp" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run" TEST_CLASS="[collections]" TEST_METHOD="collections.hpp" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="fsm_reader.hpp" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run" TEST_CLASS="[fsm_reader]" TEST_METHOD="fsm_reader.hpp" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="nfa_test.hpp" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run" TEST_CLASS="[nfa]" TEST_METHOD="nfa_test.hpp" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -105,11 +107,6 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Catch_tests_run" type="CMakeRunConfiguration" factoryName="Application" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="Catch_tests_run" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="Catch_tests_run">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="LM" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="--file ../files/input_5.txt" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LM" TARGET_NAME="LM" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LM" RUN_TARGET_NAME="LM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -117,19 +114,19 @@
     </configuration>
     <list>
       <item itemvalue="Catch.fsm_reader.hpp" />
-      <item itemvalue="Catch.dfa.hpp" />
       <item itemvalue="Catch.rpn.hpp" />
       <item itemvalue="Catch.strings.hpp" />
       <item itemvalue="CMake Application.LM" />
-      <item itemvalue="CMake Application.Catch_tests_run" />
+      <item itemvalue="Catch.collections.hpp" />
+      <item itemvalue="Catch.nfa_test.hpp" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.nfa_test.hpp" />
+        <item itemvalue="Catch.collections.hpp" />
         <item itemvalue="Catch.rpn.hpp" />
         <item itemvalue="Catch.strings.hpp" />
         <item itemvalue="Catch.fsm_reader.hpp" />
-        <item itemvalue="Catch.dfa.hpp" />
-        <item itemvalue="CMake Application.Catch_tests_run" />
       </list>
     </recent_temporary>
   </component>
@@ -170,7 +167,9 @@
       <workItem from="1578983628378" duration="3771000" />
       <workItem from="1579007345611" duration="7485000" />
       <workItem from="1579151622619" duration="1959000" />
-      <workItem from="1579187275459" duration="13253000" />
+      <workItem from="1579187275459" duration="13351000" />
+      <workItem from="1579202448967" duration="228000" />
+      <workItem from="1579340817028" duration="4731000" />
     </task>
     <servers />
   </component>
@@ -220,58 +219,58 @@
     </state>
     <state x="318" y="161" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1577001277160" />
     <state x="408" y="295" key="FileChooserDialogImpl/0.0.1920.896@0.0.1920.896" timestamp="1577481935235" />
-    <state width="1609" height="267" key="GridCell.Tab.0.bottom" timestamp="1579197795473">
+    <state width="1609" height="233" key="GridCell.Tab.0.bottom" timestamp="1579345299929">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577001335892" />
     <state width="1872" height="189" key="GridCell.Tab.0.bottom/0.0.1920.896@0.0.1920.896" timestamp="1578003579066" />
     <state width="1609" height="267" key="GridCell.Tab.0.bottom/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483916" />
-    <state width="1609" height="267" key="GridCell.Tab.0.bottom/0.0.2560.1035@0.0.2560.1035" timestamp="1579197795473" />
-    <state width="1609" height="267" key="GridCell.Tab.0.center" timestamp="1579197795472">
+    <state width="1609" height="233" key="GridCell.Tab.0.bottom/0.0.2560.1035@0.0.2560.1035" timestamp="1579345299929" />
+    <state width="1609" height="233" key="GridCell.Tab.0.center" timestamp="1579345299929">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
     <state width="1872" height="189" key="GridCell.Tab.0.center/0.0.1920.896@0.0.1920.896" timestamp="1578003579064" />
     <state width="1609" height="267" key="GridCell.Tab.0.center/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483916" />
-    <state width="1609" height="267" key="GridCell.Tab.0.center/0.0.2560.1035@0.0.2560.1035" timestamp="1579197795472" />
-    <state width="1609" height="267" key="GridCell.Tab.0.left" timestamp="1579197795472">
+    <state width="1609" height="233" key="GridCell.Tab.0.center/0.0.2560.1035@0.0.2560.1035" timestamp="1579345299929" />
+    <state width="1609" height="233" key="GridCell.Tab.0.left" timestamp="1579345299929">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
     <state width="1872" height="189" key="GridCell.Tab.0.left/0.0.1920.896@0.0.1920.896" timestamp="1578003579062" />
     <state width="1609" height="267" key="GridCell.Tab.0.left/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483916" />
-    <state width="1609" height="267" key="GridCell.Tab.0.left/0.0.2560.1035@0.0.2560.1035" timestamp="1579197795472" />
-    <state width="1609" height="267" key="GridCell.Tab.0.right" timestamp="1579197795472">
+    <state width="1609" height="233" key="GridCell.Tab.0.left/0.0.2560.1035@0.0.2560.1035" timestamp="1579345299929" />
+    <state width="1609" height="233" key="GridCell.Tab.0.right" timestamp="1579345299929">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1577001335891" />
     <state width="1872" height="189" key="GridCell.Tab.0.right/0.0.1920.896@0.0.1920.896" timestamp="1578003579065" />
     <state width="1609" height="267" key="GridCell.Tab.0.right/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483916" />
-    <state width="1609" height="267" key="GridCell.Tab.0.right/0.0.2560.1035@0.0.2560.1035" timestamp="1579197795472" />
-    <state width="1609" height="330" key="GridCell.Tab.1.bottom" timestamp="1579190966547">
+    <state width="1609" height="233" key="GridCell.Tab.0.right/0.0.2560.1035@0.0.2560.1035" timestamp="1579345299929" />
+    <state width="1609" height="330" key="GridCell.Tab.1.bottom" timestamp="1579199906957">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1872" height="255" key="GridCell.Tab.1.bottom/0.0.1920.896@0.0.1920.896" timestamp="1578003579049" />
     <state width="1609" height="330" key="GridCell.Tab.1.bottom/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483914" />
-    <state width="1609" height="330" key="GridCell.Tab.1.bottom/0.0.2560.1035@0.0.2560.1035" timestamp="1579190966547" />
-    <state width="1609" height="330" key="GridCell.Tab.1.center" timestamp="1579190966546">
+    <state width="1609" height="330" key="GridCell.Tab.1.bottom/0.0.2560.1035@0.0.2560.1035" timestamp="1579199906957" />
+    <state width="1609" height="330" key="GridCell.Tab.1.center" timestamp="1579199906956">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1872" height="255" key="GridCell.Tab.1.center/0.0.1920.896@0.0.1920.896" timestamp="1578003579046" />
     <state width="1609" height="330" key="GridCell.Tab.1.center/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483913" />
-    <state width="1609" height="330" key="GridCell.Tab.1.center/0.0.2560.1035@0.0.2560.1035" timestamp="1579190966546" />
-    <state width="1609" height="330" key="GridCell.Tab.1.left" timestamp="1579190966546">
+    <state width="1609" height="330" key="GridCell.Tab.1.center/0.0.2560.1035@0.0.2560.1035" timestamp="1579199906956" />
+    <state width="1609" height="330" key="GridCell.Tab.1.left" timestamp="1579199906956">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1872" height="255" key="GridCell.Tab.1.left/0.0.1920.896@0.0.1920.896" timestamp="1578003579044" />
     <state width="1609" height="330" key="GridCell.Tab.1.left/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483913" />
-    <state width="1609" height="330" key="GridCell.Tab.1.left/0.0.2560.1035@0.0.2560.1035" timestamp="1579190966546" />
-    <state width="1609" height="330" key="GridCell.Tab.1.right" timestamp="1579190966547">
+    <state width="1609" height="330" key="GridCell.Tab.1.left/0.0.2560.1035@0.0.2560.1035" timestamp="1579199906956" />
+    <state width="1609" height="330" key="GridCell.Tab.1.right" timestamp="1579199906956">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="1872" height="255" key="GridCell.Tab.1.right/0.0.1920.896@0.0.1920.896" timestamp="1578003579047" />
     <state width="1609" height="330" key="GridCell.Tab.1.right/0.0.2560.1026@0.0.2560.1026" timestamp="1578754483913" />
-    <state width="1609" height="330" key="GridCell.Tab.1.right/0.0.2560.1035@0.0.2560.1035" timestamp="1579190966547" />
+    <state width="1609" height="330" key="GridCell.Tab.1.right/0.0.2560.1035@0.0.2560.1035" timestamp="1579199906956" />
     <state x="465" y="72" width="977" height="740" key="SettingsEditor" timestamp="1578424602404">
       <screen x="0" y="0" width="2560" height="1026" />
     </state>
@@ -287,23 +286,23 @@
       <screen x="0" y="0" width="1920" height="896" />
     </state>
     <state width="960" height="448" key="XDebugger.FullValuePopup/0.0.1920.896@0.0.1920.896" timestamp="1577817963202" />
-    <state x="795" y="303" key="com.intellij.ide.util.TipDialog" timestamp="1579187287375">
+    <state x="795" y="303" key="com.intellij.ide.util.TipDialog" timestamp="1579340819649">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state x="477" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1576998092852" />
     <state x="596" y="262" key="com.intellij.ide.util.TipDialog/0.0.1920.896@0.0.1920.896" timestamp="1577981776320" />
     <state x="795" y="300" key="com.intellij.ide.util.TipDialog/0.0.2560.1026@0.0.2560.1026" timestamp="1578731653001" />
-    <state x="795" y="303" key="com.intellij.ide.util.TipDialog/0.0.2560.1035@0.0.2560.1035" timestamp="1579187287375" />
+    <state x="795" y="303" key="com.intellij.ide.util.TipDialog/0.0.2560.1035@0.0.2560.1035" timestamp="1579340819649" />
     <state x="617" y="437" width="417" height="172" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579190227430">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state x="617" y="433" width="407" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1026@0.0.2560.1026" timestamp="1578747591522" />
     <state x="617" y="437" width="417" height="172" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1035@0.0.2560.1035" timestamp="1579190227430" />
-    <state width="628" height="332" key="javadoc.popup.new" timestamp="1579199057113">
+    <state width="628" height="332" key="javadoc.popup.new" timestamp="1579344700280">
       <screen x="0" y="0" width="2560" height="1035" />
     </state>
     <state width="628" height="329" key="javadoc.popup.new/0.0.2560.1026@0.0.2560.1026" timestamp="1578753667842" />
-    <state width="628" height="332" key="javadoc.popup.new/0.0.2560.1035@0.0.2560.1035" timestamp="1579199057113" />
+    <state width="628" height="332" key="javadoc.popup.new/0.0.2560.1035@0.0.2560.1035" timestamp="1579344700280" />
     <state x="708" y="82" key="refactoring.ChangeSignatureDialog" timestamp="1577129077041">
       <screen x="0" y="0" width="1920" height="896" />
     </state>
