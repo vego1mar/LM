@@ -51,4 +51,13 @@ TEST_CASE("rpn.hpp", "[rpn]") {
         REQUIRE_THAT(rpn.getPostfix(), Catch::Equals(expectedResult4));
     }
 
+    SECTION("convert5 -> OK") {
+        RPN rpn;
+        const std::string expectedResult3 = "3 2 ^ 5 * 3 2 * 3 + / 5 + 1 /";
+
+        rpn.convert("((3^2*5)/(3*2+3)+5)/1");
+
+        REQUIRE_THAT(rpn.getPostfix(), Catch::Equals(expectedResult3));
+    }
+
 }
