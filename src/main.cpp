@@ -1,27 +1,13 @@
 #include "main_program/fsm_simulation_to_stdout.hpp"
+#include "main_program/regular_expression_info.hpp"
 #include "main_program/rpn_to_stdout.hpp"
-
-
-namespace programs {
-
-    void runProgram1(int argc, char *argv[]);
-
-    void runProgram2(int argc, char *argv[]);
-
-}
-
-
-int main(int argc, char *argv[]) {
-    //programs::runProgram1(argc, argv);
-    programs::runProgram2(argc, argv);
-    return 0;
-}
 
 
 namespace programs {
 
     using main_program::FSMSimulationToStdOut;
     using main_program::RPNToStdOut;
+    using main_program::RegularExpressionInfo;
 
 
     void runProgram1(int argc, char *argv[]) {
@@ -43,4 +29,19 @@ namespace programs {
         program.dispose();
     }
 
+    void runProgram3(int argc, char *argv[]) {
+        RegularExpressionInfo program;
+        program.prepare(argc, argv);
+        program.run();
+        program.dispose();
+    }
+
+}
+
+
+int main(int argc, char *argv[]) {
+    //programs::runProgram1(argc, argv);
+    //programs::runProgram2(argc, argv);
+    programs::runProgram3(argc, argv);
+    return 0;
 }

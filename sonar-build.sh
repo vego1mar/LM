@@ -28,6 +28,7 @@ g++ -Wall -fexceptions -std=c++14 -g  -c src/grammatical/rpn.cpp -o sonar-build/
 
 echo "./sonar-build/helpers"
 mkdir sonar-build/helpers
+g++ -Wall -fexceptions -std=c++14 -g  -c src/helpers/collections.cpp -o sonar-build/helpers/collections.o
 g++ -Wall -fexceptions -std=c++14 -g  -c src/helpers/strings.cpp -o sonar-build/helpers/strings.o
 g++ -Wall -fexceptions -std=c++14 -g  -c src/helpers/to_string.cpp -o sonar-build/helpers/to_string.o
 
@@ -39,6 +40,8 @@ g++ -Wall -fexceptions -std=c++14 -g  -c src/io_manager/fsm_reader.cpp -o sonar-
 echo "./sonar-build/main_program"
 mkdir sonar-build/main_program
 g++ -Wall -fexceptions -std=c++14 -g  -c src/main_program/fsm_simulation_to_stdout.cpp -o sonar-build/main_program/fsm_simulation_to_stdout.o
+g++ -Wall -fexceptions -std=c++14 -g  -c src/main_program/regular_expression_info.cpp -o sonar-build/main_program/regular_expression_info.o
+g++ -Wall -fexceptions -std=c++14 -g  -c src/main_program/rpn_to_stdout.cpp -o sonar-build/main_program/rpn_to_stdout.o
 
 RC=$?
 
