@@ -22,7 +22,6 @@ namespace main_program {
         bool isRegexOptionExists = parser->isOptionExists(regexOption);
 
         if (!isInputOptionExists || !isRegexOptionExists) {
-            std::cerr << "Command-line argument is missing." << std::endl;
             printHelp();
             return;
         }
@@ -115,7 +114,9 @@ namespace main_program {
             text = match.suffix().str();
         }
 
+        std::cout << matchStr << std::endl;
         std::cout << (matchStr == input ? "compliant" : "incompliant") << std::endl;
+        std::cout << std::endl;
     }
 
 }
