@@ -24,6 +24,9 @@ namespace main_program {
         INPUT_FILE_PROCESSING
     };
 
+    typedef std::vector<std::string> Production;
+    typedef std::vector<char> Firsts;
+
 }
 
 #endif //MAIN_PROGRAM_DEFINITIONS_HPP

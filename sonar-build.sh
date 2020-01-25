@@ -40,6 +40,7 @@ g++ -Wall -fexceptions -std=c++14 -g  -c src/io_manager/fsm_reader.cpp -o sonar-
 echo "./sonar-build/main_program"
 mkdir sonar-build/main_program
 g++ -Wall -fexceptions -std=c++14 -g  -c src/main_program/fsm_simulation_to_stdout.cpp -o sonar-build/main_program/fsm_simulation_to_stdout.o
+g++ -Wall -fexceptions -std=c++14 -g  -c src/main_program/grammar_syntax_analyzer.cpp -o sonar-build/main_program/grammar_syntax_analyzer.o
 g++ -Wall -fexceptions -std=c++14 -g  -c src/main_program/regular_expression_info.cpp -o sonar-build/main_program/regular_expression_info.o
 g++ -Wall -fexceptions -std=c++14 -g  -c src/main_program/rpn_to_stdout.cpp -o sonar-build/main_program/rpn_to_stdout.o
 
